@@ -1,19 +1,8 @@
-# Usbong's ENTRY to GAME OFF 2022
+# Usbong TIME
 
-# Cliché: "Just reconnect."
+Set of reusable instructions that execute on multiple web browsers
 
-<a href="http://store.usbong.ph/gameoff" target="_blank"><img src="https://github.com/usbong/game-off-2022/blob/main/screenshots/actual/usbongGameoff2022ItchDotIoTitle.jpg" width="40%"></a>
-
-## PLAY ON WEB BROWSER:</b>
-http://store.usbong.ph/gameoff
-
-
-## GAME OFF 2022:
-https://itch.io/jam/game-off-2022
-
-## ITCH.IO Project Page:
-https://masarapmabuhay.itch.io/just-reconnect
-
+--> adds: executable by WORKERS even @office, clinic, et cetera
 
 #### OBJECTIVES
 
@@ -25,59 +14,14 @@ https://masarapmabuhay.itch.io/just-reconnect
 
 ## 
 
-<a href="http://store.usbong.ph/gameoff" target="_blank"><img src="https://github.com/usbong/game-off-2022/blob/main/notes/actual/gameOff2022HowToPlay.png" width="40%"></a>
-   
-## DESKTOP
 
-### 1) CLASSIC
+## Select References
 
-<img src="https://github.com/usbong/game-off-2022/blob/main/screenshots/actual/gameoff2022Stage2DuckArmyV20221129.png" width="80%">
+1) [GAME OFF 2022 Cliché: "Just reconnect."](https://github.com/usbong/game-off-2022)
 
-### 2) CHALLENGE (via Web Browser's ZOOM Tool)
+2) [ALL I NEED IS ONE DREAM: NIGHTWING AND HIS DUCK ARMY](https://www.redbubble.com/i/sticker/Nightwing-and-his-duck-Army-by-one-dream/103360727.EJUG5#&gid=1&pid=3)
 
-<img src="https://github.com/usbong/game-off-2022/blob/main/screenshots/actual/gameoff2022Stage2DuckArmyChallengeV20221129.png" width="80%">
-
-
-## MOBILE
-
-<img src="https://github.com/usbong/game-off-2022/blob/main/screenshots/actual/usbongGameoff2022MobileV20221130T0611NoteMSPAINT.png" width="80%">
-
-
-# SPECIAL PROMO!
-includes: BONUS MINI ACTION GAME INSIDE!
-
-<img src="https://github.com/usbong/game-off-2022/blob/main/screenshots/actual/gameoff2022ACTION0-V20221201T1319.png" width="40%">
-
-# DEVELOPMENT NOTES:
-
-finished: WHOLE GAME in ONE (1) Month<br/>
-
-## <b>Operating Systems:</b>
-Windows, macOS, Linux Ubuntu, Android<br/>
-
-## <b>Select Tools:</b><br/>
-<b>Image:</b> GIMP, MSPAINT, Android Camera<br/>
-<br/>
-<b>Audio:</b> GarageBand, Audacity, Android Recorder<br/>
-<br/>
-<b>Text:</b> Notepad, Notepad++, Featherpad<br/>
---> Computer Languages: HTML, CSS, Javascript (as ActionScript 2.0),<br/>
---> PHP (+CodeIgniter (version 3))<br/>
-<br/>
-<b>Network:</b> WinSCP (Windows to Linux Server)
-<br/>
-<b>Server:</b> Amazon Web Services
-
-
-# Select References
-
-1) [GAME OFF 2021: TUGON](https://github.com/usbong/tugon)
-
-2) [USBONG 囲碁](https://github.com/usbong/IGO)
-
-3) [ALL I NEED IS ONE DREAM: NIGHTWING AND HIS DUCK ARMY](https://www.redbubble.com/i/sticker/Nightwing-and-his-duck-Army-by-one-dream/103360727.EJUG5#&gid=1&pid=3)
-
-4) BLUEBLADE Technologies: MAJIKA PICTURE SLIDING PUZZLE GAME (J2ME)<br/>
+3) BLUEBLADE Technologies: MAJIKA PICTURE SLIDING PUZZLE GAME (J2ME)<br/>
 --> notes: auto-generate PUZZLE from finished OUTPUT,<br/>
 --> to be certain that CORRECT sequence exists;<br/>
 --> learns: in FF1, TILE SLIDING PUZZLE GAME to also exist<br/>
