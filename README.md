@@ -4,7 +4,21 @@ Set of reusable instructions that execute on multiple web browsers
 
 --> adds: executable by WORKERS even @office, clinic, et cetera
 
-#### OBJECTIVES
+### Keyphrase:
+
+1) numbers, words, 
+
+2) no noticeable sound as that observed when playing games,
+
+3) no noticeable photographs/illustrations 
+as those viewable @select social networking services,
+classified as Entertainment
+
+4) WORKERS @WORKPLACE as intended MARKET
+
+5) 情報・INFORMATION
+
+### OBJECTIVES
 
 1) increase: know-how of MAJORITY
 
