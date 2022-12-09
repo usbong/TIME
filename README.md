@@ -43,9 +43,11 @@ classified as Entertainment
 
 4) [WORDLE @New York Times](https://www.nytimes.com/games/wordle/index.html)
 
-5) [GAME OFF 2022: You're the BOSS](https://itch.io/jam/game-off-2022/rate/1786544)<br/>
+5) [GAME OFF 2022: "You're the BOSS"](https://itch.io/jam/game-off-2022/rate/1786544)<br/>
 --> keyphrase: Polyomino Puzzle<br/>
 --> remembers: [The Island of Dr. Brain gameplay (PC Game, 1992)](https://www.youtube.com/watch?v=pvslw2aD8c8;)
+
+6) [ほぼ日刊イトイ新聞](https://www.1101.com/home.html)
 
 ## Open Source Software License
 Copyright 2022 SYSON, MICHAEL B.
