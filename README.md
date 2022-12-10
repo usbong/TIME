@@ -6,7 +6,7 @@ Set of reusable instructions that execute on multiple web browsers
 
 ## PLAY ON WEB BROWSER:
 
-http://store.usbong.ph/timeoff
+http://store.usbong.ph/timeoff (work-in-progress)
 
 
 <a href="http://store.usbong.ph/timeoff" target="_blank"><img src="https://github.com/usbong/TIME/blob/main/screenshots/usbongTIMEV20221210T1438.jpg" width="50%"></a>
