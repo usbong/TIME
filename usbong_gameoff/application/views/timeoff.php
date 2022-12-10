@@ -41,7 +41,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <!-- "Always force latest IE rendering engine or request Chrome Frame" -->
     <meta content="IE=edge,chrome=1" http-equiv="X-UA-Compatible">
     <meta name="viewport" content="width=device-width, initial-scale=1.0 user-scalable=yes" />
-	
     <style type="text/css">
 	/**/
 	                    html, body
@@ -54,7 +53,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							*/
 							width: 100%; /*90%; 80%;*/
 							height: 100%;
-														
+							
+							/*//added by Mike, 20221210*/
+							background-color: #ffffff; /* white */
+																					
 							padding: 0;
 							margin: 0;
 							
@@ -104,12 +106,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							answer by: Marco Luglio, 20111016T0357
 							*/
 							
+							/*//added by Mike, 20221210*/
+							background-color: #ffffff; /* white */
+							visible: hidden;
+							
 							padding: 0;
 							margin: auto;							
 							display: block;
 							
 							width: 320px;
 							height: 288px;	
+							
 
 /*
 							transform: scale(1.0,0.9);	
@@ -123,7 +130,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							position: absolute;
 											
 							padding: 0;
-							margin: auto;							
+							margin: auto;					
 							display: block;
 					
 							visibility: hidden;
@@ -861,7 +868,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							position: absolute;
 
 							text-align: center;
-							line-height: 32px;							
+							line-height: 32px;			
+/*							
+							box-shadow: 0 0 50px 15px grey;
+*/							
+							opacity: 60%;
 
   							/*clip: rect(0px,64px,64px,0px);*/
 																								visibility: hidden;
@@ -893,7 +904,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 							text-align: center;
 							line-height: 32px;							
-																								visibility: hidden;
+																																visibility: hidden;
 							
 							/*transform: scale(0.5,0.8);	
 							*/
@@ -1562,8 +1573,9 @@ const sImagePuzzleStage2="assets/images/cambodia1024x1024-20141225T0958.jpg";
 //added by Mike, 20221127
 //"assets/images/mtPinatubo20150115T1415.jpg"
 //edited by Mike, 20221210
-const sImagePuzzleBg="assets/images/mtPinatubo512x512-20150115T1415.jpg";
+//const sImagePuzzleBg="assets/images/mtPinatubo512x512-20150115T1415.jpg";
 //const sImagePuzzleBg="assets/images/blankTime.png";
+const sImagePuzzleBg="assets/images/buhangin512x512-20170422T0257.jpg";
 
 //assets/images/assets/images/bgImageCave.png
 const sImageActionBg="assets/images/bgImageCave512x512.png";
@@ -2781,7 +2793,9 @@ function miniGamePuzzleUpdate() {
     //edited by Mike, 20221121; 
     //reverify: if solves noticeable DELAY in loading image file			
 	//alert(imgPuzzle.src);	
-	if (!imgPuzzle.src.toLowerCase().includes("pinatubo")) {
+	//edited by Mike, 20221210
+//	if (!imgPuzzle.src.toLowerCase().includes("pinatubo")) {
+	if (!imgPuzzle.src.toLowerCase().includes("buhangin")) {
 		//added by Mike, 2022118
 		imgPuzzle.setAttribute("src", getBaseURL()+sImagePuzzleBg);
 		imgPuzzle.setAttribute("class", "ImageBackgroundOfPuzzle");	
@@ -2829,7 +2843,10 @@ function miniGamePuzzleUpdate() {
 	var myCanvasContext = myCanvas.getContext("2d");
 	//TO-DO: -add: center align of bigger window 
 	//TO-DO: -reverify: this
-	myCanvasContext.fillRect(0, 0, iStageMaxWidth, iStageMaxHeight);	
+
+	//removed by Mike, 20221210
+	//myCanvasContext.fillRect(0, 0, iStageMaxWidth, iStageMaxHeight);	
+
 
 //alert (iHorizontalOffset);
 
@@ -2947,16 +2964,6 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 /*	
 	alert(screen.width);
 	alert(screen.height);
-*/
-/*	//removed by Mike, 20221126
-	//added by Mike, 20220911
-	let iHumanTileWidth = 64;
-	let iHumanTileHeight = 64;
-*/	
-	//edited by Mike, 20220823; edited again by Mike, 20221019
-/*
-	let iHumanStepX=10; //4;
-	let iHumanStepY=10; //4;
 */
 	let iHumanStepX=5; //4;
 	let iHumanStepY=5; //4;
