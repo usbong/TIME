@@ -4,6 +4,14 @@ Set of reusable instructions that execute on multiple web browsers
 
 --> adds: executable by WORKERS even @office, clinic, et cetera
 
+## PLAY ON WEB BROWSER:
+
+http://store.usbong.ph/timeoff
+
+
+<a href="http://store.usbong.ph/timeoff" target="_blank"><img src="https://github.com/usbong/TIME/blob/main/screenshots/usbongTIMEV20221210T1438.jpg" width="50%"></a>
+
+
 ### Keyphrase:
 
 1) numbers, words, shapes
