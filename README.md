@@ -4,6 +4,9 @@ Set of reusable instructions that execute on multiple web browsers
 
 --> adds: executable by WORKERS even @office, clinic, et cetera
 
+<b>Keyphrase:</b> VALUE of gained TIME via system efficiency
+
+
 ## PLAY ON WEB BROWSER:
 
 http://store.usbong.ph/timeoff (work-in-progress)
@@ -23,11 +26,11 @@ http://store.usbong.ph/timeoff (work-in-progress)
 </table>
 
 
-### Keyphrase:
+### Additional Notes:
 
 1) numbers, words, shapes
 
-2) no noticeable sound as that observed when playing games,
+2) no noticeable sound as that observed when playing games
 
 3) no noticeable photographs/illustrations 
 as those viewable @select social networking services,
@@ -44,10 +47,6 @@ classified as Entertainment
 2) share: know-how with MAJORITY<br/>
 
 --> where: know-how : COMPUTER SERVICES<br/>
---> adds: as know-how, VALUE of gained TIME via system efficiency
-
-## 
-
 
 ## Select References
 
