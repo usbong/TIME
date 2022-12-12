@@ -8,8 +8,19 @@ Set of reusable instructions that execute on multiple web browsers
 
 http://store.usbong.ph/timeoff (work-in-progress)
 
+<table>
+<tr>
+<td width="40%">
 
-<a href="http://store.usbong.ph/timeoff" target="_blank"><img src="https://github.com/usbong/TIME/blob/main/screenshots/usbongTIMEV20221210T1438.jpg" width="50%"></a>
+<a href="http://store.usbong.ph/timeoff" target="_blank"><img src="https://github.com/usbong/TIME/blob/main/screenshots/usbongTIMEV20221210T1438.jpg" width="100%"></a>
+</td>
+<td width="40%">
+<a href="http://store.usbong.ph/gameoff" target="_blank"><img src="https://github.com/usbong/game-off-2022/blob/main/notes/actual/gameOff2022HowToPlay.png" width="100%"></a>
+
+</td>
+
+</tr>
+</table>
 
 
 ### Keyphrase:
@@ -32,7 +43,8 @@ classified as Entertainment
 
 2) share: know-how with MAJORITY<br/>
 
---> where: know-how : COMPUTER SERVICES
+--> where: know-how : COMPUTER SERVICES<br/>
+--> adds: as know-how, VALUE of gained TIME via system efficiency
 
 ## 
 
