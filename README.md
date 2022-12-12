@@ -15,7 +15,7 @@ http://store.usbong.ph/timeoff (work-in-progress)
 <a href="http://store.usbong.ph/timeoff" target="_blank"><img src="https://github.com/usbong/TIME/blob/main/screenshots/usbongTIMEV20221210T1438.jpg" width="100%"></a>
 </td>
 <td width="40%">
-<a href="http://store.usbong.ph/gameoff" target="_blank"><img src="https://github.com/usbong/game-off-2022/blob/main/notes/actual/gameOff2022HowToPlay.png" width="100%"></a>
+<a href="http://store.usbong.ph/timeoff" target="_blank"><img src="https://github.com/usbong/game-off-2022/blob/main/notes/actual/gameOff2022HowToPlay.png" width="100%"></a>
 
 </td>
 
