@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20221210; from 20221130
+' @date updated: 20221213; from 20221210
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -58,7 +58,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							background-color: #ffffff; /* white */
 																					
 							padding: 0;
-							margin: 0;
+							marginstepCountStatusShadowDiv: 0;
 							
 							/* //added by Mike, 20221002
 							//reference: https://www.w3schools.com/howto/howto_css_disable_text_selection.asp;
@@ -154,8 +154,16 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						div.DivTextStatus
 						{
 							position: absolute;
+/*	//edited by Mike, 20221213							
 							background-color: #000000aa;
-							color: #ffbd00; /* gold */
+*/							
+							background-color: #00000099;
+							color: #ffffff; /*#ffbd00;*/ /* gold */
+
+							border: 3px solid #ffffff;
+							border-radius: 4px;		
+							
+
 
 							/*opacity: 50%;*/
 
@@ -166,6 +174,43 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 							visibility: hidden;							
 						}
+						
+						div.DivStepCountStatus
+						{
+							position: absolute;
+/*							
+							background-color: #000000aa;
+*/							
+							/*color: #6d4e22;*/ /* brown */
+							color: #ffffff; /* white */
+
+							/*opacity: 50%;*/
+
+							font-size: 42px;
+							font-weight: bold;
+							
+							padding: 10px;
+
+							visibility: hidden;							
+						}	
+						
+						div.DivStepCountStatusShadow
+						{
+							position: absolute;
+/*							
+							background-color: #000000aa;
+*/							
+							color: #000000; /* black */
+
+							/*opacity: 50%;*/
+
+							font-size: 42px;
+							font-weight: bold;
+							
+							padding: 10px;
+
+							visibility: hidden;							
+						}												
 						
 						div.DivTextEnter
 						{
@@ -1439,12 +1484,17 @@ border: none;
   </head>
 	  <script>
 	  
+/*	  
 //added by Mike, 20220910
 //notes:	  
 --> verifying: Gameboy Control Scheme as executed on Mobile, e.g. ANDROID
 --> "Keep the original GameBoy screen resolution of 160px x 144px."
 --> https://itch.io/jam/gbjam-9; last accessed: 20220909	  
-	  
+
+//added by Mike, 20221213
+//TO-DO: -verify: adding ELAPSED TIME;
+--> notes: SONIC#1 SEGA GAMEGEAR
+*/	  
 	  
 //added by Mike, 20220912
 //note: landscape screen size in SUPER FANTASY ZONE, DEFENDER ARCADE
@@ -1497,6 +1547,9 @@ const MINI_GAME_ACTION=1;
 
 //added by Mike, 20221118
 var imgPuzzle;
+
+//added by Mike, 20221213
+var iStepCountStatus=0;
 
 
 //added by Mike, 20221012; edited by Mike, 2022115
@@ -1603,7 +1656,11 @@ const iTileBgCountMax=iRowCountMax*iColumnCountMax;
 
 //added by Mike, 20221108
 var iCountMovementStep=0;
-const iCountMovementStepMax=100;
+
+//added by Mike, 20221213
+const iCountInitMovementStepMax=15;
+const iCountMovementStepMax=100-iCountInitMovementStepMax;
+
 var bIsInitAutoGeneratePuzzleFromEnd=false;
 var iDelayAnimationCountMovementStep=0;
 const iDelayAnimationCountMovementStepMax=6;
@@ -1883,375 +1940,6 @@ function removeFromPuzzleStageExcessTiles() {
 	puzzleTileImageSpaceBorder.style.visibility="hidden";	
 }
 
-//added by Mike, 20221121
-function executeMonsterAttackAI() {
-	//removed by Mike, 20221126
-//	let iMax = 4;	
-
-	//added by Mike, 20221126
-	if (bHasDefeatedMonster) {
-		return;
-	}
-
-	//added by Mike, 20221126
-	var humanTile = document.getElementById("humanTileImageId");
-	
-	//added by Mike, 20221128
-	var imgPuzzle = document.getElementById("puzzleImageId");
-
-	//Monster Artificial Intelligence
-//	if (iNoKeyPressCount>iNoKeyPressCountMax) {		
-		if (bIsMonsterExecutingAttack) {	
-		
-			//added by Mike, 20221128
-			imgPuzzle.style.visibility="visible";
-
-		
-//alert("iMonsterAttackIndex: "+iMonsterAttackIndex);		
-			switch (iMonsterAttackIndex) {
-				case iMonsterAttackIndexFromTopToBottom:
-				
-					if (iMonsterTileY+iImgMonsterTileHeight>iStageMaxHeight) {
-						iNoKeyPressCount=0;
-						bIsMonsterExecutingAttack=false;
-					}
-					else {						
-						iMonsterTileY+=iMonsterStepY;
-					}
-					break;
-				case iMonsterAttackIndexFromBottomToTop:
-					if (iMonsterTileY<0) {
-						iNoKeyPressCount=0;
-						bIsMonsterExecutingAttack=false;
-					}
-					else {						
-						iMonsterTileY-=iMonsterStepY;
-					}
-					break;
-				case iMonsterAttackIndexFromLeftToRight:
-					if (iMonsterTileX+iImgMonsterTileWidth>(iStageMaxWidth)) {
-						iNoKeyPressCount=0;
-						bIsMonsterExecutingAttack=false;
-					}
-					else {						
-						iMonsterTileX+=iMonsterStepX;
-					}
-					break;
-				case iMonsterAttackIndexFromRightToLeft:
-					if (iMonsterTileX<0) {
-						iNoKeyPressCount=0;
-						bIsMonsterExecutingAttack=false;
-					}
-					else {						
-						iMonsterTileX-=iMonsterStepX;
-					}
-					break;
-			}
-			
-			mdo2.style.left = (iHorizontalOffset+iMonsterTileX)+"px";			
-			mdo2.style.top = iMonsterTileY+"px";	
-		}		
-		
-	if (iNoKeyPressCount>iNoKeyPressCountMax) {				
-		//note: NOT using ELSE 
-		//due to bIsMonsterExecutingAttack shall be set
-		if (!bIsMonsterExecutingAttack) {				
-			
-			//TO-DO: -add: IF executable DEFENSE TIMING of INCOMING ATTACK
-			//keyphrase: BASEBALL, BLANK v.s. RYU
-			
-			//added by Mike, 20221126; from 20221121
-			//note: auto-identifies: HUMAN's position 
-			//to appear @opposite position;
-			
-			//edited by Mike, 20221126
-//			iMonsterAttackIndex = Math.floor(Math.random() * iMax); 
-
-			iMonsterAttackIndex = Math.floor(Math.random() * iCornerCountMax); 
-					
-			var iWallOffset=64;
-
-			//if HUMAN @TOP of MONSTER
-			if (iHumanTileX-iHumanTileWidth<=0+iWallOffset) {		
-				//set MONSTER to NOT appear @HUMAN
-				if (iMonsterAttackIndex==iMonsterAttackIndexFromLeftToRight) {
-iMonsterAttackIndex=iMonsterAttackIndexFromRightToLeft;
-
-//alert("dito");
-				}
-			}
-			//if HUMAN @BOTTOM of MONSTER
-			else if (iHumanTileX+iHumanTileWidth>=iStageMaxWidth-iWallOffset) {
-				//set MONSTER to NOT appear @HUMAN
-				if (iMonsterAttackIndex==iMonsterAttackIndexFromRightToLeft) {
-					iMonsterAttackIndex=iMonsterAttackIndexFromLeftToRight;
-				}
-			}
-
-			
-			//if HUMAN @TOP of MONSTER
-//			if (humanTile.style.top>mdo2.style.top) {
-			
-			if (iHumanTileY-iHumanTileHeight<=0+iWallOffset) {		
-				//set MONSTER to NOT appear @HUMAN
-				if (iMonsterAttackIndex==iMonsterAttackIndexFromTopToBottom) {
-iMonsterAttackIndex=iMonsterAttackIndexFromBottomToTop;
-
-//alert("dito");
-				}
-			}
-			//if HUMAN @BOTTOM of MONSTER
-			else if (iHumanTileY+iHumanTileHeight>=iStageMaxHeight-iWallOffset) {
-				//set MONSTER to NOT appear @HUMAN
-				if (iMonsterAttackIndex==iMonsterAttackIndexFromBottomToTop) {
-					iMonsterAttackIndex=iMonsterAttackIndexFromTopToBottom;
-				}
-			}
-			
-			
-	
-			switch (iMonsterAttackIndex) {
-				case iMonsterAttackIndexFromTopToBottom:
-					iMonsterTileX=(0+iStageMaxWidth/2-iImgMonsterTileWidth/2);	
-					iMonsterTileY=0;
-					break;
-				case iMonsterAttackIndexFromBottomToTop:
-					iMonsterTileX=(0+iStageMaxWidth/2-iImgMonsterTileWidth/2);	
-					iMonsterTileY=(iStageMaxHeight-iImgMonsterTileHeight);					
-					break;
-				case iMonsterAttackIndexFromLeftToRight:
-					iMonsterTileX=(0);	
-					iMonsterTileY=(iStageMaxHeight/2-iImgMonsterTileHeight/2);					
-					break;
-				case iMonsterAttackIndexFromRightToLeft:
-					iMonsterTileX=(iStageMaxWidth-iImgMonsterTileWidth);	
-					iMonsterTileY=(iStageMaxHeight/2-iImgMonsterTileHeight/2);
-					break;
-			}							
-		
-		}
-			mdo2.style.left = (iHorizontalOffset+iMonsterTileX)+"px";			
-			mdo2.style.top = iMonsterTileY+"px";	
-			
-			bIsMonsterExecutingAttack=true;
-			
-			
-			//added by Mike, 20221128
-			imgPuzzle.style.visibility="hidden";
-			
-			//alert("dito: "+iMonsterAttackIndex);
-		}	
-	//}
-
-	iNoKeyPressCount++;
-	
-	if (isIntersectingRect(mdo1, mdo2)) {
-		//added by Mike, 20221121
-		//TO-DO: -add: HIT EFFECT
-		if (bIsMonsterExecutingAttack) {
-			//alert("COLLISION!");	
-			
-			//added by Mike, 20221121
-			if (bIsActionKeyPressed) {
-				//alert("DEFENDED!!!!!!");
-			
-				//----
-				//removed by Mike, 20221126
-				//var humanTile = document.getElementById("humanTileImageId");
-				
-				var myEffectCanvas = document.getElementById("myEffectCanvasId");
-
-				myEffectCanvas.style.top = (iVerticalOffsetInnerScreen+iHumanTileY-iMyDefendedEffectCanvasContextRadius+iHumanTileHeight/2)+"px";
-				myEffectCanvas.style.left = (iHorizontalOffset+iHumanTileX-iMyDefendedEffectCanvasContextRadius+iHumanTileWidth/2)+"px";
-				myEffectCanvas.style.visibility="visible";			
-												
-				//speed-up
-				//fFramesPerSecond=1.00; //16.66;				
-				
-				//speed-down
-//				fFramesPerSecond=32.00; //16.66;				
-//				fFramesPerSecond=64.00; //16.66;				
-				//fFramesPerSecond=1000.00; //16.66;				
-/*				
-				//notes: stops
-				clearInterval(iCurrentIntervalId);
-								
-				iCurrentIntervalId=setInterval(myUpdateFunction, fFramesPerSecond);
-*/				
-				//----
-								
-				bIsMonsterInHitState=true;
-			
-//				iCurrentArrayMonsterHealthActionCount--;
-				//edited by Mike, 20221128
-//				iCurrentArrayMonsterHealthActionCount-=5;
-				iCurrentArrayMonsterHealthActionCount-=2;
-				
-				//3 hits; max @8
-				//iCurrentArrayMonsterHealthActionCount-=3; 
-
-				//iCurrentArrayMonsterHealthActionCount=0;
-
-				if (iCurrentArrayMonsterHealthActionCount<=0) {
-					//MONSTER DESTROYED!
-				
-					//edited by Mike, 20221126
-					bHasDefeatedMonster=true;
-
-				fFramesPerSecond=100.00; //16.66;				
-				clearInterval(iCurrentIntervalId);
-				iCurrentIntervalId=setInterval(myUpdateFunction, fFramesPerSecond);
-						
-					//removed by Mike, 20221123;
-					//return to mini game: PUZZLE with no reset of positions
-					//initPuzzleTileTextValueContainer();
-				}
-											
-				//added by Mike, 20221123
-				if (bIsAudioPlaying) {
-					//if has NOT yet hit Monster
-					if (!bHasHitMonster) {			
-						var myAudio = document.getElementById("myAudioId");
-						myAudio.pause();
-						//myAudio.setAttribute("src", getBaseURL()+"assets/audio/UsbongGameOff2022ActionPiano20221122T1542.mp3");
-
-						myAudio.setAttribute("src", getBaseURL()+sAudioAction);
-
-						//edited by Mike, 20221125
-						//myAudio.volume=0.2;						
-						fMyAudioVolume=0.2;						
-						myAudio.volume=fMyAudioVolume;
-
-						myAudio.play();
-					}
-				}
-				
-				bHasHitMonster=true;
-			}
-			else {
-				//alert("COLLISION!");
-				//added by Mike, 20221125
-				bIsExecutingDestroyHuman=true;				
-
-//				iCurrentArrayHealthActionCount--;
-
-				//edited by Mike, 20221127
-				//iCurrentArrayHealthActionCount-=4;
-				//3 hits; max @8
-				iCurrentArrayHealthActionCount-=3;
-				
-				//added by Mike, 20221128
-				//human hit by monster attack
-				iMyHitByAttackEffectCount=0;
-
-				var myHitByAttackEffectCanvas = document.getElementById("myHitByAttackEffectCanvasId");
-
-				myHitByAttackEffectCanvas.style.top = (iVerticalOffsetInnerScreen+iHumanTileY-iMyDefendedEffectCanvasContextRadius+iHumanTileHeight/2)+"px";
-				myHitByAttackEffectCanvas.style.left = (iHorizontalOffset+iHumanTileX-iMyDefendedEffectCanvasContextRadius+iHumanTileWidth/2)+"px";
-				myHitByAttackEffectCanvas.style.visibility="visible";			
-				
-				
-
-
-				if (iCurrentArrayHealthActionCount<=0) {
-					//END!
-
-					//added by Mike, 20221127					
-					bHasDefeatedHuman=true;
-					bHasDefeatedMonster=false;
-					humanTile.style.visibility="hidden";
-					mdo2.style.visibility="visible";
-					bIsMonsterInHitState=false;
-					bIsMonsterExecutingAttack=false;
-					
-					return;
-/*					
-					iMonsterInHitStateCount=iMonsterEndStateCountBeforeMax;
-					toggleFullScreen();
-*/					
-				}
-			}
-
-			for (iCount=0; iCount<iTotalKeyCount; iCount++) {
-				arrayKeyPressed[iCount]=false;				
-			}
-		}
-		
-		//removed by Mike, 20221126; added by Mike, 20221126	
-		mdo2.style.visibility="hidden";
-
-		iNoKeyPressCount=0;
-		bIsMonsterExecutingAttack=false;
-	}
-
-	//regenerate
-	if (mdo2.style.visibility=="hidden") {	
-//	if (bIsExecutingDestroyHuman) {
-	
-//alert("dito");
-	
-			let mdo2XPos = mdo2.getBoundingClientRect().x;
-			let mdo2YPos = mdo2.getBoundingClientRect().y;	
-	
-			
-			//remembers: BOSS Battle with PANIKI in ALAMAT ng AGIMAT (J2ME)
-			//reference: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random;
-			//last accessed: 20220904
-	
-			//let iMax = 4;	//removed by Mike, 20221120
-
-			//edited by Mike, 20221126
-			//iCorner = Math.floor(Math.random() * iMax); 
-			iCorner = Math.floor(Math.random() * iCornerCountMax); 
-
-			
-			//clock-wise count, 
-			//where: 0 = TOP-LEFT, 1 = TOP-RIGHT, 2, = BOTTOM-RIGHT, 4 = BOTTOM-LEFT
-			
-			//added by Mike, 20221117
-			iVerticalOffset=0;
-	
-			//removed by Mike, 20221120
-	//		//edited by Mike, 20221120
-	////		iImgMonsterTileWidth=64; //32;
-	////		iImgMonsterTileHeight=64; //32;
-	
-			//edited by Mike, 20220925			
-			//alert("iCorner: "+iCorner);		
-					
-			if (iCorner==0) { //TOP-LEFT
-				//edited by Mike, 20220911
-				//mdo2.style.left = "0px";				
-				mdo2.style.left = (iHorizontalOffset+0)+"px";			
-				mdo2.style.top =  iVerticalOffset+"px";//"0px";
-			}
-			else if (iCorner==1) { //TOP-RIGHT
-				//edited by Mike, 20220911
-				//mdo2.style.left = iStageMaxWidth+"px";				
-				mdo2.style.left = (iHorizontalOffset+iStageMaxWidth-iImgMonsterTileWidth)+"px";			
-				mdo2.style.top =  iVerticalOffset+ "px";//"0px";
-			}
-			else if (iCorner==2)  { //BOTTOM-RIGHT
-				//edited by Mike, 20220911
-				//mdo2.style.left = iStageMaxWidth+"px";				
-				mdo2.style.left = (iHorizontalOffset+iStageMaxWidth-iImgMonsterTileWidth)+"px";
-				//mdo2.style.top = iStageMaxHeight+"px";
-				mdo2.style.top =  iVerticalOffset+(iStageMaxHeight-iImgMonsterTileHeight)+"px";
-			}
-			else if (iCorner==3) { //BOTTOM-LEFT
-				//edited by Mike, 20220911
-				//mdo2.style.left = "0px";				
-				mdo2.style.left = (iHorizontalOffset+0)+"px";				
-				//mdo2.style.top = iStageMaxHeight+"px";
-				mdo2.style.top =  iVerticalOffset+(iStageMaxHeight-iImgMonsterTileHeight)+"px";
-			}
-	
-	//alert("iCorner: "+iCorner);
-	
-			mdo2.style.visibility="visible";
-	}	
-}
-
 //--
 //note: learned: to be doable via Android (Samsung Galaxy S Duos)
 //after observing successful execution of the following:
@@ -2475,7 +2163,11 @@ function autoGeneratePuzzleFromEnd() {
 	arrayKeyPressed[iKEY_A]=true;	
 	arrayKeyPressed[iKEY_K]=true;
 */
-
+	
+	//added by Mike, 20221213
+	//-----------------------------------------
+	//notes: 15 steps
+	
 	//added by Mike, 20221108
 	//move all outer tiles
 	//to: left corner
@@ -2533,6 +2225,8 @@ function autoGeneratePuzzleFromEnd() {
 		iCountMovementStep=0;
 		bIsToBottomCornerDone=true;
 	}
+	//-----------------------------------------
+	
 	
 	//reference: https://www.w3schools.com/jsref/jsref_random.asp;
 	//last accessed: 20221108
@@ -2672,6 +2366,16 @@ function miniGamePuzzleUpdate() {
 		
 	var controllerGuideButton = document.getElementById("controllerGuideButtonId");	
 
+	//added by Mike, 20221213
+	var stepCountStatusDiv = document.getElementById("stepCountStatusDivId");
+	//note: correct sequence to cause correct OUTPUT
+	stepCountStatusDiv.innerHTML = iStepCountStatus;
+	var iStepCountStatusDivWidth = (stepCountStatusDiv.clientWidth);	
+
+	var stepCountStatusShadowDiv = document.getElementById("stepCountStatusShadowDivId");
+	stepCountStatusShadowDiv.innerHTML = iStepCountStatus;
+	var iStepCountStatusShadowDivWidth = (stepCountStatusShadowDiv.clientWidth);	
+	
 	//added by Mike, 20221130
 	if (!bHasViewedTitle) {
 		titleImage.style.visibility="visible";
@@ -2687,10 +2391,18 @@ function miniGamePuzzleUpdate() {
 	 	if (bHasViewedHowToPlayGuide) {	
 			controllerGuideButton.style.visibility = "visible"; 
 			controllerGuideMiniImage.style.visibility = "visible"; 
+			
+			//added by Mike, 20221213
+			stepCountStatusDiv.style.visibility = "visible";
+			stepCountStatusShadowDiv.style.visibility = "visible";
 		}
 		//added by Mike, 20221129
 		else {
 			controllerGuideMiniImage.style.visibility = "hidden"; 
+
+			//added by Mike, 20221213
+			stepCountStatusDiv.style.visibility = "hidden";
+			stepCountStatusShadowDiv.style.visibility = "hidden";
 		}
 	}
 	
@@ -2772,6 +2484,8 @@ function miniGamePuzzleUpdate() {
 	//added by Mike, 20221121
 	var textStatusDiv = document.getElementById("textStatusDivId");
 	var textEnterDiv = document.getElementById("textEnterDivId");
+
+
 
 /*	//removed by Mike, 20221120
 	//added by Mike, 20221118
@@ -2895,7 +2609,13 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 	controllerGuideMiniImage.style.left = iHorizontalOffset+"px";
 	controllerGuideMiniImage.style.top= (0)+"px";
 	
+	//added by Mike, 20221213
+	stepCountStatusDiv.style.left = iHorizontalOffset+iStageMaxWidth-iStepCountStatusDivWidth+"px";
+	stepCountStatusDiv.style.top= (0)+"px";
 	
+	var iStepCountStatusShadowOffset=1; //2;
+	stepCountStatusShadowDiv.style.left = iHorizontalOffset+iStageMaxWidth-iStepCountStatusShadowDivWidth+iStepCountStatusShadowOffset+"px";
+	stepCountStatusShadowDiv.style.top= (0)+"px";	
 
 	//edited by Mike, 20221012
 	pauseLink.style.left = 0+iHorizontalOffset+iStageMaxWidth/2 -iPauseLinkWidth/2 +"px";
@@ -3537,9 +3257,26 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 
 				bIsTargetAtSpace=true;
 				
-				//added by Mike, 20221113
-				bHasExecutedTileExchange=true;
-			}	
+				//edited by Mike, 20221213; from 20221113
+				//bHasExecutedTileExchange=true;
+				
+/*	//removed by Mike, 20221213				
+				//added by Mike, 20221113				
+				iStepCountStatus--;
+*/				
+				if (!bIsInitAutoGeneratePuzzleFromEnd) {
+					//note: iCountMovementStep
+					//iStepCountStatus++;
+					
+					if (arrayPuzzleTileCountId[iTileBgCount].alt=="") {
+						bHasExecutedTileExchange=false;
+					}
+					else {
+						bHasExecutedTileExchange=true;
+						iStepCountStatus++;
+					}
+				}	
+			}
 			
 			//added by Mike, 20221106
 			//iDirectionTotalKeyCount
@@ -4891,6 +4628,11 @@ alert("iButtonHeight"+iButtonHeight);
 	
 	<div id="textStatusDivId" class="DivTextStatus">CONGRATULATIONS!</div>
 	<div id="textEnterDivId" class="DivTextEnter">PRESS ENTER</div>
+
+<!-- added by Mike, 20221213; note: correct sequence -->
+	<div id="stepCountStatusShadowDivId" class="DivStepCountStatusShadow">0</div>
+	<div id="stepCountStatusDivId" class="DivStepCountStatus">0</div>
+
 			
 <?php 
 	$iRowCountMax=4; 
