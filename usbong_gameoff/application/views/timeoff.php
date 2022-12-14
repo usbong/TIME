@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20221213; from 20221210
+' @date updated: 20221214; from 20221213
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -1661,6 +1661,9 @@ var iCountMovementStep=0;
 const iCountInitMovementStepMax=15;
 const iCountMovementStepMax=100-iCountInitMovementStepMax;
 
+//added by Mike, 20221214
+var arrayCountMovementStep= [];
+
 var bIsInitAutoGeneratePuzzleFromEnd=false;
 var iDelayAnimationCountMovementStep=0;
 const iDelayAnimationCountMovementStepMax=6;
@@ -2159,6 +2162,9 @@ function isAutoVerifiedPuzzleDone() {
 //added by Mike, 20221108
 //note: Carnage Heart from Videogame Magazines, Artificial Intelligence 
 function autoGeneratePuzzleFromEnd() {
+
+		sRecordedSteps="3121220312133003112111302212133333303312003030030303133122112122121303033033311212002";
+
 /*
 	arrayKeyPressed[iKEY_A]=true;	
 	arrayKeyPressed[iKEY_K]=true;
@@ -2235,8 +2241,12 @@ function autoGeneratePuzzleFromEnd() {
 	
 	if (iCountMovementStep<iCountMovementStepMax) {
 		
-		//edited by Mike, 20221129
-		let iDirection = window.parseInt(Math.random() * 4);	
+		//edited by Mike, 20221214; from 20221129
+		//random
+		//let iDirection = window.parseInt(Math.random() * 4);	
+		
+		//OK
+		let iDirection=parseInt(sRecordedSteps.substr(iCountMovementStep,1));		
 
 		
 		//added by Mike, 20221129
@@ -2310,11 +2320,31 @@ function autoGeneratePuzzleFromEnd() {
 				arrayKeyPressed[iKEY_K]=true;			
 				break;	
 		}
+		
+		//added by Mike, 20221214
+		arrayCountMovementStep[iCountMovementStep]=iDirection;
+			
+		
 		iCountMovementStep++;
 	}	
 	else {		
 		bIsInitAutoGeneratePuzzleFromEnd=false;
-	}
+
+/*		//TO-DO: -add: in Database, with datetime stamp
+		//added by Mike, 20221214
+		var sRecordedSteps="";
+		
+		for (let iCount=0; iCount<iCountMovementStep; iCount++) {		
+			sRecordedSteps=sRecordedSteps.concat(arrayCountMovementStep[iCount]);
+		}
+		
+		
+		//OK
+		//example output: 3121220312133003112111302212133333303312003030030303133122112122121303033033311212002
+		alert(sRecordedSteps);
+*/				
+	}	
+	
 }
 
 // NOTE:
