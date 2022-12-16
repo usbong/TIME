@@ -81,8 +81,11 @@ public static void main(String[] args) throws Exception {
    
 	// read script file
 //	engine.eval(Files.newBufferedReader(Paths.get("C:/Scripts/Jsfunctions.js"), StandardCharsets.UTF_8));
+		
+//	engine.eval(Files.newBufferedReader(Paths.get("/opt/lampp/htdocs/usbong_time/kasangkapan/add-on software/assets/halimbawaJSFunction.js"), StandardCharsets.UTF_8));
 	
-	engine.eval(Files.newBufferedReader(Paths.get("/opt/lampp/htdocs/usbong_time/kasangkapan/add-on software/assets/halimbawaJSFunction.js"), StandardCharsets.UTF_8));
+	//@current directory path
+	engine.eval(Files.newBufferedReader(Paths.get("./assets/halimbawaJSFunction.js"), StandardCharsets.UTF_8));
 	
 	Invocable inv = (Invocable) engine;
 	// call function from script file
