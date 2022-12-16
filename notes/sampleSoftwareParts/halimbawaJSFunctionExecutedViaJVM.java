@@ -38,6 +38,15 @@
 
 import javax.script.*;
 
+//added by Mike, 20221216
+//used with reading external .js file
+import java.lang.Object;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Paths;
+import java.nio.file.Files;
+
+/* //removed by Mike, 20221216
+//OK
 public class halimbawaJSFunctionExecutedViaJVM {
 
 public static void main(String[] args) throws Exception {
@@ -59,18 +68,25 @@ public static void main(String[] args) throws Exception {
     inv.invokeFunction("greet", "USBONG!");  //This one works.      
  }
 }
-
-/*
-
-TO-DO: -verify: this
-
-ScriptEngineManager manager = new ScriptEngineManager();
-ScriptEngine engine = manager.getEngineByName("JavaScript");
-// read script file
-engine.eval(Files.newBufferedReader(Paths.get("C:/Scripts/Jsfunctions.js"), StandardCharsets.UTF_8));
-
-Invocable inv = (Invocable) engine;
-// call function from script file
-inv.invokeFunction("yourFunction", "param");
-
 */
+
+//OK
+public class halimbawaJSFunctionExecutedViaJVM {
+
+public static void main(String[] args) throws Exception {
+    ScriptEngineManager manager = new ScriptEngineManager();
+    ScriptEngine engine = manager.getEngineByName("JavaScript");
+
+    // JavaScript code from an external file
+   
+	// read script file
+//	engine.eval(Files.newBufferedReader(Paths.get("C:/Scripts/Jsfunctions.js"), StandardCharsets.UTF_8));
+	
+	engine.eval(Files.newBufferedReader(Paths.get("/opt/lampp/htdocs/usbong_time/kasangkapan/add-on software/assets/halimbawaJSFunction.js"), StandardCharsets.UTF_8));
+	
+	Invocable inv = (Invocable) engine;
+	// call function from script file
+	inv.invokeFunction("greet", "USBONG!");
+
+ }
+}
