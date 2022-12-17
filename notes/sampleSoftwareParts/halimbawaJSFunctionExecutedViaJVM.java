@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20221216
-' @date updated: 20221216
+' @date updated: 20221217; from 20221216
 ' @website: www.usbong.ph
 '
 ' Notes:
@@ -43,6 +43,9 @@
 '   5) https://stackoverflow.com/questions/39644510/java-code-cannot-invoke-method-from-scriptengine-with-new-context;
 '	//last accessed: 20221217
 '	//answer by: Andreas, 20160922T1704, edited 20160922T1714
+'
+'   6) generateMonthlySummaryReportWithDiagnosedCasesOfAllInputFiles.java;
+'	//last accessed: 20221217
 */
 
 import javax.script.*;
@@ -61,6 +64,10 @@ import java.nio.file.Files;
 //added by Mike, 20221217
 import java.util.ArrayList;
 import java.util.List;
+
+//added by Mike, 20221217
+import java.io.PrintWriter;
+import java.io.File;
 
 /* //removed by Mike, 20221216
 //OK
@@ -135,8 +142,36 @@ public static void main(String[] args) throws Exception {
 	String sOutput = (String)oOutput;	
 	System.out.println("sOutput: "+sOutput);
 */	
+
+	//edited by Mike, 20221217	
+//	System.out.println(list);	
+	System.out.println(list.get(0));	
 	
-	System.out.println(list);
-	
+	//added by Mike, 20221217
+	makeFilePath("./output");
+	printOutputToFile(list);
  }
+ 
+ //added by Mike, 20221217
+ private static void makeFilePath(String filePath) {
+	File directory = new File(filePath);		
+	if (!directory.exists() && !directory.mkdirs()) 
+    {
+    	System.out.println("File Path to file could not be made.");
+    }    			
+ } 
+
+ //added by Mike, 20221217 
+ private static void printOutputToFile(List<String> listInput) {
+ 	try {
+ 		PrintWriter outputWriter = new PrintWriter("output/sRecordedSteps.txt", "UTF-8");	
+		
+		outputWriter.print(listInput.get(0));		
+	
+		outputWriter.close();
+	}
+	catch (Exception e) {
+	}
+ }
+ 
 }
