@@ -13,7 +13,7 @@
 ' @date updated: 20221217; from 20221216
 ' @website: www.usbong.ph
 '
-' References:
+' Reminders:
 ' 1) https://phantomjs.org/; last accessed: 20200724
 ' downloaded phantomjs zipped file's examples: netsniff.js; last accessed: 20200725
 '
