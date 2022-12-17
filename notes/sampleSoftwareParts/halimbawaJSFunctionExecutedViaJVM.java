@@ -20,7 +20,12 @@
 ' --> HTTP components from Apache with Java instructions;
 ' --> execution already @SERVER;
 '
-' 2) Node.js also exists to execute javascript instructions;
+' 2) The following cause ERROR in OUTPUT when used with Java's ScriptEngineManager:
+'	2.1) window
+'	2.2) let
+'	2.3) const
+'
+' 3) Node.js also exists to execute javascript instructions;
 ' --> downloaded @https://nodejs.org/en/; last accessed: 20221216
 ' --> No USBONG sample instructions yet to connect to PHP instructions
 '
@@ -34,6 +39,10 @@
 '	3) The Apache Software Foundation. (2019). The Official Apache HttpComponents Homepage. https://hc.apache.org/index.html; last accessed: 20221216; from 20190810
 '
 '   4) https://github.com/usbong/SLHCC/tree/master/SLHCC/Cashier/generatePayslipAndORSlipForTheDay/add-on%20software; last accessed: 20221216
+'
+'   5) https://stackoverflow.com/questions/39644510/java-code-cannot-invoke-method-from-scriptengine-with-new-context;
+'	//last accessed: 20221217
+'	//answer by: Andreas, 20160922T1704, edited 20160922T1714
 */
 
 import javax.script.*;
@@ -44,6 +53,14 @@ import java.lang.Object;
 import java.nio.charset.StandardCharsets;
 import java.nio.file.Paths;
 import java.nio.file.Files;
+
+//added by Mike, 20221217; removed by Mike, 20221217
+//return value from javascript
+//import jdk.nashorn.api.scripting.JSObject;
+
+//added by Mike, 20221217
+import java.util.ArrayList;
+import java.util.List;
 
 /* //removed by Mike, 20221216
 //OK
@@ -77,6 +94,21 @@ public static void main(String[] args) throws Exception {
     ScriptEngineManager manager = new ScriptEngineManager();
     ScriptEngine engine = manager.getEngineByName("JavaScript");
 
+	//added by Mike, 20221217
+	//Reference: https://stackoverflow.com/questions/39644510/java-code-cannot-invoke-method-from-scriptengine-with-new-context;
+	//last accessed: 20221217
+	//answer by: Andreas, 20160922T1704, edited 20160922T1714
+
+	//note: technique puts Java object into Javascript function
+	//adds: Java object with received value can be used,
+	//as with adding container's value 
+	//via return command from Javascript function
+	//notes: NOT yet verified which object types usable;
+	
+	List<String> list = new ArrayList<>();
+	Bindings scope = engine.getBindings(ScriptContext.ENGINE_SCOPE);
+	scope.put("list", list);
+
     // JavaScript code from an external file
    
 	// read script file
@@ -85,11 +117,26 @@ public static void main(String[] args) throws Exception {
 //	engine.eval(Files.newBufferedReader(Paths.get("/opt/lampp/htdocs/usbong_time/kasangkapan/add-on software/assets/halimbawaJSFunction.js"), StandardCharsets.UTF_8));
 	
 	//@current directory path
-	engine.eval(Files.newBufferedReader(Paths.get("./assets/halimbawaJSFunction.js"), StandardCharsets.UTF_8));
+	//edited by Mike, 20221217
+//	engine.eval(Files.newBufferedReader(Paths.get("./assets/halimbawaJSFunction.js"), StandardCharsets.UTF_8));
+	
+	engine.eval(Files.newBufferedReader(Paths.get("./assets/autoGeneratePuzzleFromEndForStorage.js"), StandardCharsets.UTF_8));
 	
 	Invocable inv = (Invocable) engine;
 	// call function from script file
-	inv.invokeFunction("greet", "USBONG!");
+	//edited by Mike, 20221217
+	//inv.invokeFunction("greet", "USBONG!");
+	inv.invokeFunction("onLoad");
 
+/*	//removed by Mike, 20221217
+	Object oOutput = inv.invokeFunction("onLoad");
+	System.out.println("oOutput: "+oOutput);
+
+	String sOutput = (String)oOutput;	
+	System.out.println("sOutput: "+sOutput);
+*/	
+	
+	System.out.println(list);
+	
  }
 }
