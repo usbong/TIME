@@ -23,7 +23,7 @@ Done!
 
 ### Additional Notes
 
-1) Verify CROM status by enter the following COMMAND on TERMINAL
+1) Verify CRON status by entering the following COMMAND on TERMINAL
 
 > systemctl status cron
 
