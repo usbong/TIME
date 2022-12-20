@@ -10,7 +10,7 @@
 
 2) Add the following example TASK to the schedule 
 
-> 41 15 * * * /opt/lampp/htdocs/usbong_time/kasangkapan/add-on software/generatePuzzleForTheDay.sh
+> 41 15 * * * /opt/lampp/htdocs/usbong_time/kasangkapan/"add-on software"/generatePuzzleForTheDay.sh
 
 where: @41:15 (HH:MM), daily, execute: `generatePuzzleForTheDay.sh`
 
@@ -31,4 +31,13 @@ Done!
 
 > Dec 20 15:41:01 USBONG-MACHINE CRON[3951]: (root) CMD (/opt/lampp/htdocs/usbong_time/kasangkapan/"add-on software"/generatePuzzleForTheDay.sh)
 
+2) crontab's input fields on when and what command to execute for the task
+
+> To define the time you can provide concrete values for<br/>
+> minute (m), hour (h), day of month (dom), month (mon),<br/>
+> and day of week (dow) or use '*' in these fields (for 'any').
+
+<b>Example:</b> 
+
+> 41 15 * * * /opt/lampp/htdocs/usbong_time/kasangkapan/"add-on software"/generatePuzzleForTheDay.sh
 
