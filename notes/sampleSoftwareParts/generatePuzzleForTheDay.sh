@@ -11,7 +11,7 @@
 # @company: USBONG
 # @author: SYSON, MICHAEL B.
 # @date created: 20201001
-# @last modified: 20221216; from 20210204
+# @last modified: 20221220; from 20221216
 
 #set mainDirectory=%~dp0
 #cd /d %mainDirectory%
@@ -25,6 +25,12 @@
 #java -cp ./software:./software/org.json.jar:./software/org.apache.httpclient.jar:./software/org.apache.httpcore.jar:./software/org.apache.commons-logging.jar UsbongHTTPConnect http://localhost/ input/*.txt
 
 #java -cp ./software:./software/org.json.jar:./software/org.apache.httpclient.jar:./software/org.apache.httpcore.jar:./software/org.apache.commons-logging.jar UsbongHTTPConnect http://localhost/ output/*.txt
+
+#added by Mike, 20221220
+#note: add this due to directory where CRON command is executed 
+#may NOT be in this same directory
+#reminder: update to the CORRECT file location 
+cd /opt/lampp/htdocs/usbong_time/kasangkapan/"add-on software"/
 
 java halimbawaJSFunctionExecutedViaJVM
 
