@@ -10,17 +10,17 @@
   @company: USBONG
   @author: SYSON, MICHAEL B.
   @date created: 20190807
-  @date updated: 20221217; from 20221215
+  @date updated: 20221220; from 20221217
   @website address: http://www.usbong.ph
 
   Given:
-  1) List with the details of the transactions for the day
+  1) List with the details of the puzzle for the day
 
   Output:
   1) Automatically connect to the database (DB) and send the details of the transactions to the computer server to store them in the DB
   
   Notes:
-  1) The details of the transactions to be sent are in the JSON (JavaScript Object Notation) format.
+  1) The details of the puzzle to be sent are in the JSON (JavaScript Object Notation) format.
     
   2) To compile on Windows' Command Prompt the add-on software with the libraries, e.g. JSON .jar file, use the following command:
    javac -cp .;org.json.jar;org.apache.httpclient.jar;org.apache.httpcore.jar;org.apache.commons-logging.jar UsbongHTTPConnect.java
@@ -138,9 +138,12 @@ public class UsbongHTTPConnect {
 			main.processUpload(new String[]{args[1]});
 			//main.processUpload();
 		}
+/*
+		//removed by Mike, 20221220
 		else {
 			main.processDownload(new String[]{args[1]});
 		}
+*/		
 	}
 	
 	//edited by Mike, 20221217; from 20221216	
@@ -184,32 +187,6 @@ public class UsbongHTTPConnect {
 		}
 	}
 	
-	//added by Mike, 20190814; edited by Mike, 20190815
-	//Reference: https://hc.apache.org/httpcomponents-client-4.5.x/httpclient/examples/org/apache/http/examples/client/ClientWithResponseHandler.java; last accessed: 20190814
-	private void processDownload(String[] args) throws Exception {
-		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
-
-		 try {
-            HttpGet httpget = new HttpGet(serverIpAddress+GET_TRANSACTIONS_LIST_FOR_THE_DAY_DOWNLOAD);
-
-            System.out.println("Executing request " + httpget.getRequestLine());
-
-            //Create a custom response handler
-            ResponseHandler<String> responseHandler = new MyResponseHandler();
-			
-            String responseBody = httpClient.execute(httpget, responseHandler);
-            System.out.println("----------------------------------------");
-            System.out.println(responseBody); 
-			
-			//edited by Mike, 20190820
-			if (!responseBody.contains("No payslips")) {
-				System.out.println("JSON Array----------------------------------------");			
-				processPayslipInputAfterDownload(responseBody);
-			}			
-        } finally {
-            httpClient.close();
-        }
-	}
 		
 	//added by Mike, 20190811; edited by Mike, 20190812
 	//Note: Consultation and PT Treatment payslip inputs are processed separately
@@ -329,7 +306,34 @@ public class UsbongHTTPConnect {
 		return json;
 	}	
 	
-		
+
+/*	//removed by Mike, 20221220
+	//added by Mike, 20190814; edited by Mike, 20190815
+	//Reference: https://hc.apache.org/httpcomponents-client-4.5.x/httpclient/examples/org/apache/http/examples/client/ClientWithResponseHandler.java; last accessed: 20190814
+	private void processDownload(String[] args) throws Exception {
+		CloseableHttpClient httpClient = HttpClientBuilder.create().build();
+
+		 try {
+            HttpGet httpget = new HttpGet(serverIpAddress+GET_TRANSACTIONS_LIST_FOR_THE_DAY_DOWNLOAD);
+
+            System.out.println("Executing request " + httpget.getRequestLine());
+
+            //Create a custom response handler
+            ResponseHandler<String> responseHandler = new MyResponseHandler();
+			
+            String responseBody = httpClient.execute(httpget, responseHandler);
+            System.out.println("----------------------------------------");
+            System.out.println(responseBody); 
+			
+			//edited by Mike, 20190820
+			if (!responseBody.contains("No payslips")) {
+				System.out.println("JSON Array----------------------------------------");			
+				processPayslipInputAfterDownload(responseBody);
+			}			
+        } finally {
+            httpClient.close();
+        }
+	}		
 	
 	//added by Mike, 20190812; edited by Mike, 20191026
 	//Note: Consultation and PT Treatment payslip inputs are automatically identified
@@ -346,19 +350,8 @@ public class UsbongHTTPConnect {
 		if (nestedJsonArray != null) {
 		   for(int j=0;j<nestedJsonArray.length();j++) {
 				JSONObject jo_inside = nestedJsonArray.getJSONObject(j);
-
-/*				//removed by Mike, 20191026				
-				//added by Mike, 20190917
-				if (jo_inside.getInt("payslip_type_id") == 1) {
-					writer = new PrintWriter("output/payslipConsultationFromCashier.txt", "UTF-8");	
-				}
-*/				
-/*				else {
-					writer = new PrintWriter("output/payslipPTFromCashier.txt", "UTF-8");	
-				}
-*/				
-				System.out.println(""+jo_inside.getString("payslip_description"));				
-				
+		
+				System.out.println(""+jo_inside.getString("payslip_description"));								
 				JSONObject payslipInJSONFormat = new JSONObject(jo_inside.getString("payslip_description"));
 
 				int totalTransactionCount = payslipInJSONFormat.getInt("iTotal");
@@ -395,8 +388,8 @@ public class UsbongHTTPConnect {
 
 					//edited by Mike, 20191026
 					//write in Tab-delimited .txt file
-/*					writer.write(outputString);
-*/
+////					writer.write(outputString);
+
 					if (jo_inside.getInt("payslip_type_id") == 1) {
 						consultationWriter.write(outputString);
 					}
@@ -411,6 +404,7 @@ public class UsbongHTTPConnect {
 		   consultationWriter.close();
 		}
 	}
+*/	
 	
 	//added by Mike, 20190820
 	//input: 2019-08-11T14:12:16
