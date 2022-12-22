@@ -1,5 +1,5 @@
 <!--
-' Copyright 2020~2022 USBONG
+' Copyright 2020~2022 SYSON, MICHAEL B.
 '
 ' Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You ' may obtain a copy of the License at
 '
@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20221215; from 20221214
+' @date updated: 20221222; from 20221214
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -58,7 +58,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							background-color: #ffffff; /* white */
 																					
 							padding: 0;
-							marginstepCountStatusShadowDiv: 0;
+							margin: 0;
 							
 							/* //added by Mike, 20221002
 							//reference: https://www.w3schools.com/howto/howto_css_disable_text_selection.asp;
@@ -232,12 +232,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						{
 							width: 416px;
 							height: 312px;
-						}
-						
-						/* //added by Mike, 20221215 */
-						span.puzzleRecordedStepsSpan
-						{
-							visibility: hidden;
 						}
 						
 						a.executeLink
@@ -2169,10 +2163,7 @@ function isAutoVerifiedPuzzleDone() {
 //note: Carnage Heart from Videogame Magazines, Artificial Intelligence 
 function autoGeneratePuzzleFromEnd() {
 
-		//sRecordedSteps="3121220312133003112111302212133333303312003030030303133122112122121303033033311212002";
-
-	var puzzleRecordedStepsSpan = document.getElementById("puzzleRecordedStepsId");
-	sRecordedSteps=puzzleRecordedStepsSpan.innerHTML;
+		sRecordedSteps="3121220312133003112111302212133333303312003030030303133122112122121303033033311212002";
 
 /*
 	arrayKeyPressed[iKEY_A]=true;	
@@ -4665,7 +4656,7 @@ alert("iButtonHeight"+iButtonHeight);
 	<img id="titleImageId" class="ImageTitle" src="<?php echo base_url('assets/images/gameOff2022Title.png');?>">	
 
 	
-	<div id="textStatusDivId" class="DivTextStatus">CONGRATULATIautoGeneratePuzzleFromEndONS!</div>
+	<div id="textStatusDivId" class="DivTextStatus">CONGRATULATIONS!</div>
 	<div id="textEnterDivId" class="DivTextEnter">PRESS ENTER</div>
 
 <!-- added by Mike, 20221213; note: correct sequence -->
@@ -4795,12 +4786,6 @@ for ($iCount=0; $iCount<$iActionHealthMax; $iCount++) {
 	  Your browser does not support the audio tag.
 	</audio><br/>	
 
-	<!-- added by Mike, 20221215 -->
-	<span id="puzzleRecordedStepsId" class="puzzleRecordedStepsSpan">
-<?php		
-		echo $sRecordedSteps;
-?>		
-	</span>
 
   </body>
 </html>
