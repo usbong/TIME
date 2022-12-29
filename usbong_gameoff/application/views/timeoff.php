@@ -1,5 +1,5 @@
 <!--
-' Copyright 2020~2022 SYSON, MICHAEL B.
+' Copyright 2020~2022 USBONG
 '
 ' Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You ' may obtain a copy of the License at
 '
@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20221222; from 20221214
+' @date updated: 20221229; from 20221220
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -232,6 +232,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						{
 							width: 416px;
 							height: 312px;
+						}
+						
+						/* //added by Mike, 20221215 */
+						span.puzzleRecordedStepsSpan
+						{
+							visibility: hidden;
 						}
 						
 						a.executeLink
@@ -1543,7 +1549,13 @@ var sBaseURL = '<?php echo base_url();?>';
 //added by Mike, 20221115
 var iCurrentMiniGame=0;
 const MINI_GAME_PUZZLE=0;
-const MINI_GAME_ACTION=1;
+
+//removed by Mike, 20221229
+//const MINI_GAME_ACTION=1;
+
+//added by Mike, 20221229
+const MINI_GAME_LEADERBOARD=2;
+
 
 //added by Mike, 20221118
 var imgPuzzle;
@@ -2163,7 +2175,10 @@ function isAutoVerifiedPuzzleDone() {
 //note: Carnage Heart from Videogame Magazines, Artificial Intelligence 
 function autoGeneratePuzzleFromEnd() {
 
-		sRecordedSteps="3121220312133003112111302212133333303312003030030303133122112122121303033033311212002";
+		//sRecordedSteps="3121220312133003112111302212133333303312003030030303133122112122121303033033311212002";
+
+	var puzzleRecordedStepsSpan = document.getElementById("puzzleRecordedStepsId");
+	sRecordedSteps=puzzleRecordedStepsSpan.innerHTML;
 
 /*
 	arrayKeyPressed[iKEY_A]=true;	
@@ -2356,6 +2371,7 @@ function autoGeneratePuzzleFromEnd() {
 function myUpdateFunction() {
 
 //	iCurrentMiniGame=MINI_GAME_ACTION;
+	iCurrentMiniGame=MINI_GAME_LEADERBOARD;
 
 	//added by Mike, 20221115
     switch(iCurrentMiniGame) {
@@ -2368,9 +2384,128 @@ function myUpdateFunction() {
 			miniGameActionUpdate();
     	break;
 */    	
+		//added by Mike, 20221229
+    	case MINI_GAME_LEADERBOARD:
+			miniGameLeaderboardUpdate();
+    	break;
+
+
     }
 }
 
+//added by Mike, 20221229
+//TO-DO: -update: this
+
+function miniGameLeaderboardUpdate() {
+	var imgUsbongLogo = document.getElementById("usbongLogoId");
+	//imgUsbongLogo.style.visibility="hidden";
+		
+	//added by Mike, 20221130
+	var titleImage = document.getElementById("titleImageId");	
+	//titleImage.style.visibility="hidden";
+	
+	var iTitleImageWidth = (titleImage.clientWidth);
+	var iTitleImageHeight = (titleImage.clientHeight);	
+		
+	//added by Mike, 20221122
+	var controllerGuideImage = document.getElementById("controllerGuideImageId");	
+	//controllerGuideImage.style.visibility = "hidden"; //hidden
+
+	var iControllerGuideImageWidth = (controllerGuideImage.clientWidth);
+	var iControllerGuideImageHeight = (controllerGuideImage.clientHeight);	
+	
+	var controllerGuideMiniImage = document.getElementById("controllerGuideMiniImageId");		
+	//removed by Mike, 20221129
+//	controllerGuideMiniImage.style.visibility = "visible"; 
+		
+	var controllerGuideButton = document.getElementById("controllerGuideButtonId");	
+
+
+//added by Mike, 20221129	
+	var howToPlayGuideImage = document.getElementById("howToPlayGuideImageId");	
+	//howToPlayGuide.style.visibility="hidden";
+	
+	var iHowToPlayGuideImageWidth = (howToPlayGuideImage.clientWidth);
+	var iHowToPlayGuideImageHeight = (howToPlayGuideImage.clientHeight);	
+
+/* //removed by Mike, 20221229
+	if (bHasPressedStart) {
+		if (!bHasViewedHowToPlayGuide) {	
+			howToPlayGuideImage.style.visibility = "visible"; 
+		}
+		else {
+			//removed by Mike, 20221129
+			//bIsInitAutoGeneratePuzzleFromEnd=true;
+			howToPlayGuideImage.style.visibility = "hidden"; 
+		}
+	}
+*/
+
+	//added by Mike, 20221104; edited by Mike, 20221118
+//	var imgPuzzle;
+	if (document.getElementById("puzzleImageId")==null) {
+		//alert("dito");
+		//reference: https://www.w3schools.com/jsref/met_node_removechild.asp;
+		//last accessed: 2022118
+		const imgPuzzleChild = document.adoptNode(imgPuzzle);
+		document.body.appendChild(imgPuzzleChild);		
+	}
+
+	imgPuzzle = document.getElementById("puzzleImageId");
+
+    //edited by Mike, 20221121; 
+    //reverify: if solves noticeable DELAY in loading image file			
+	//alert(imgPuzzle.src);	
+	//edited by Mike, 20221210
+//	if (!imgPuzzle.src.toLowerCase().includes("pinatubo")) {
+	if (!imgPuzzle.src.toLowerCase().includes("buhangin")) {
+		//added by Mike, 2022118
+		imgPuzzle.setAttribute("src", getBaseURL()+sImagePuzzleBg);
+		imgPuzzle.setAttribute("class", "ImageBackgroundOfPuzzle");	
+	}
+
+	//added by Mike, 20221105
+	imgPuzzle.style.visibility="visible";		
+	imgPuzzle.style.zIndex=0; //added by Mike, 20221118
+	
+	
+	
+	//added by Mike, 20220912	
+	var pauseLink = document.getElementById("pauseLinkId");
+	var iPauseLinkHeight = (pauseLink.clientHeight);//+1; + "px";
+	var iPauseLinkWidth = (pauseLink.clientWidth);//+1; + "px"
+
+	//		alert("screen.height: "+screen.height); //533
+
+
+
+	//reference: https://www.w3schools.com/tags/canvas_fillrect.asp; 
+	//last accessed: 2020911
+	var myCanvas = document.getElementById("myCanvasId");
+	var myCanvasContext = myCanvas.getContext("2d");
+	//TO-DO: -add: center align of bigger window 
+	//TO-DO: -reverify: this
+
+	//removed by Mike, 20221210
+	//myCanvasContext.fillRect(0, 0, iStageMaxWidth, iStageMaxHeight);	
+
+
+//alert (iHorizontalOffset);
+
+//added by Mike, 20221002; edited by Mike, 20221005
+//myCanvas.style.top = (0)+"px"; //iVerticalOffset+
+myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
+
+	//added by Mike, 20221012
+	iHorizontalOffset=myCanvas.getBoundingClientRect().x;
+
+	//added by Mike, 20221118
+	imgPuzzle.style.top = (iVerticalOffsetInnerScreen+0)+"px";
+	imgPuzzle.style.left = (iHorizontalOffset+0)+"px";
+
+
+
+}
 
 function miniGamePuzzleUpdate() {
 	var imgUsbongLogo = document.getElementById("usbongLogoId");
@@ -2455,42 +2590,6 @@ function miniGamePuzzleUpdate() {
 		}
 	}
 
-	//added by Mike, 20221125
-	var myEffectCanvas = document.getElementById("myEffectCanvasId");
-	myEffectCanvas.style.visibility="hidden";
-
-	//TO-DO: -reverify: this if can be deleted
-	if (iMyDefendedEffectCount>=iMyDefendedEffectCountMax) {
-		myEffectCanvas.style.visibility="hidden";
-	}
-	
-	//added by Mike, 20221128	
-	var myHitByAttackEffectCanvas = document.getElementById("myHitByAttackEffectCanvasId");
-	myHitByAttackEffectCanvas.style.visibility="hidden";
-
-
-	//added by Mike, 20221123	
-	for (let iHealthCount=0; iHealthCount<iArrayHealthActionCountMax; iHealthCount++) {
-		arrayHealthAction[iHealthCount] = document.getElementById("divActionHealthId"+iHealthCount);
-		
-		arrayHealthAction[iHealthCount].style.visibility="hidden";	
-	}
-
-	for (let iMonsterHealthCount=0; iMonsterHealthCount<iArrayMonsterHealthActionCountMax; iMonsterHealthCount++) {		
-
-		arrayMonsterHealthAction[iMonsterHealthCount] = document.getElementById("divActionMonsterHealthId"+iMonsterHealthCount);
-
-		arrayMonsterHealthAction[iMonsterHealthCount].style.visibility="hidden";		
-	}
-
-	//added by Mike, 20221124
-	var divActionHealthContainer = document.getElementById("divActionHealthContainerId");
-	divActionHealthContainer.style.visibility="hidden";		
-
-	var divActionMonsterHealthContainer = document.getElementById("divActionMonsterHealthContainerId");
-	divActionMonsterHealthContainer.style.visibility="hidden";		
-	
-
 
 /*
 	var iControllerGuideButtonWidth = (controllerGuideButton.clientWidth);
@@ -2499,17 +2598,6 @@ function miniGamePuzzleUpdate() {
 
 	var iControllerGuideButtonWidth = 32;
 	var iControllerGuideButtonHeight = 32;
-
-		
-	//added by Mike, 20220820
-	var humanTile = document.getElementById("humanTileImageId");
-
-	//added by Mike, 20220828
-	var humanDeathTile = document.getElementById("humanDeathTileImageId");
-	humanDeathTile.style.visibility="hidden";
-
-	//added by Mike, 20220904
-	var monsterTile = document.getElementById("monsterTileImageId");
 
 	//added by Mike, 20221121
 	var textStatusDiv = document.getElementById("textStatusDivId");
@@ -2630,6 +2718,14 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 	//@BOTTOM-RIGHT
 //	controllerGuideButton.style.left = iHorizontalOffset+iStageMaxWidth -iControllerGuideButtonWidth+"px";
 //	controllerGuideButton.style.top= (iStageMaxHeight-iControllerGuideButtonHeight)+"px";
+	//added by Mike, 20221121
+	//add mini puzzle tile image after auto-generating
+	if (!bIsInitAutoGeneratePuzzleFromEnd) {
+		miniPuzzleTileImage.style.visibility = "visible";
+	}
+		
+	miniPuzzleTileImage.style.left = iHorizontalOffset+"px";
+	miniPuzzleTileImage.style.top= (iStageMaxHeight-iMiniPuzzleHeight)+"px";
 
 	//@TOP-LEFT
 	controllerGuideButton.style.left = iHorizontalOffset+"px";
@@ -2715,8 +2811,7 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 	alert(screen.width);
 	alert(screen.height);
 */
-	let iHumanStepX=5; //4;
-	let iHumanStepY=5; //4;
+
 
 
 	//added by Mike, 20221030
@@ -2735,69 +2830,6 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 	}
 
 	
-	//added by Mike, 20221012
-	//notes: what is @100%, IF @start, @120% zoom scale?
-	//alert(window.innerWidth); //130%; 631px
-	//alert(window.innerWidth); //110%; 751px
-	//alert(window.innerWidth); //100%; 819px
-	
-	//removed by Mike, 20221012
-	//iHorizontalOffset=myCanvas.getBoundingClientRect().x;
-	//humanTile.style.left = (iHorizontalOffset+iHumanTileY)+"px";	
-	//humanTile.style.left = (iHorizontalOffset+iHumanTileX)+"px";	
-
-	//if (bKeyDownRight) { //key d
-	if (arrayKeyPressed[iKEY_D]) {
-		//humanTile.style.left =  iHorizontalOffset+iHumanTileX+iHumanStepX+"px";
-		//humanTile.style.left =  iHumanTileX+iHumanStepX+"px";
-
-		iHumanTileX+=iHumanStepX;
-		//humanTile.style.left =  iHorizontalOffset+iHumanTileX +"px";
-	}	
-	else if (arrayKeyPressed[iKEY_A]) {
-		//humanTile.style.left =  iHorizontalOffset+iHumanTileX-iHumanStepX+"px";				
-		//humanTile.style.left =  iHumanTileX-iHumanStepX+"px";				
-		iHumanTileX-=iHumanStepX;
-		//humanTile.style.left =  iHorizontalOffset+iHumanTileX +"px";
-	}
-
-	
-	//note: inverted Y-axis; where: @top of window is 0px
-	if (arrayKeyPressed[iKEY_W]) {
-//		humanTile.style.top = iVerticalOffset+iHumanTileY-iHumanStepY+"px";				
-		//humanTile.style.top = iHumanTileY-iHumanStepY+"px";	
-		iHumanTileY-=iHumanStepY;	
-		
-		//humanTile.style.top = iVerticalOffsetInnerScreen+iHumanTileY+"px";	
-	}	
-	else if (arrayKeyPressed[iKEY_S]) {
-//		humanTile.style.top =  iVerticalOffset+iHumanTileY+iHumanStepY+"px";				
-//		humanTile.style.top =  iHumanTileY+iHumanStepY+"px";				
-		iHumanTileY+=iHumanStepY;	
-		
-		//humanTile.style.top = iVerticalOffsetInnerScreen+iHumanTileY+"px";		
-	}
-
-/*	//removed by Mike, 20221106; 
-	//TO-DO: -add: as CASE @MINIGAME with IPIS
-
-	humanTile.style.left = (iHorizontalOffset+iHumanTileX)+"px";	
-
-	//added by Mike, 20221029
-	humanTile.style.top = (iVerticalOffsetInnerScreen+iHumanTileY)+"px";	
-*/	
-	//added by Mike, 20221115; from 20221106
-	humanTile.style.visibility="hidden";
-//	humanTile.style.visibility="visible";	
-	
-	//added by Mike, 20221104		
-/*	//removed by Mike, 20221127; 
-	//ANCHOR @TOP-LEFT, instead of @CENTER	
-	imgPuzzle.style.left = (iHorizontalOffset-iStageMaxWidth/2)+"px";	
-
-	imgPuzzle.style.top = (iVerticalOffsetInnerScreen-iStageMaxHeight/2)+"px";	
-*/
-
 
 
 	//reference: https://stackoverflow.com/questions/7545641/how-to-create-multidimensional-array;
@@ -4656,7 +4688,7 @@ alert("iButtonHeight"+iButtonHeight);
 	<img id="titleImageId" class="ImageTitle" src="<?php echo base_url('assets/images/gameOff2022Title.png');?>">	
 
 	
-	<div id="textStatusDivId" class="DivTextStatus">CONGRATULATIONS!</div>
+	<div id="textStatusDivId" class="DivTextStatus">CONGRATULATIautoGeneratePuzzleFromEndONS!</div>
 	<div id="textEnterDivId" class="DivTextEnter">PRESS ENTER</div>
 
 <!-- added by Mike, 20221213; note: correct sequence -->
@@ -4786,6 +4818,12 @@ for ($iCount=0; $iCount<$iActionHealthMax; $iCount++) {
 	  Your browser does not support the audio tag.
 	</audio><br/>	
 
+	<!-- added by Mike, 20221215 -->
+	<span id="puzzleRecordedStepsId" class="puzzleRecordedStepsSpan">
+<?php		
+		echo $sRecordedSteps;
+?>		
+	</span>
 
   </body>
 </html>
