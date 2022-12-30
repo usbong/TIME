@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20221229; from 20221220
+' @date updated: 20221230; from 20221229
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -53,7 +53,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							*/
 							width: 100%; /*90%; 80%;*/
 							height: 100%;
-							
+									
 							/*//added by Mike, 20221210*/
 							background-color: #ffffff; /* white */
 																					
@@ -114,8 +114,22 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							margin: auto;							
 							display: block;
 							
+/* 							default VALUES; 
+								TO-DO: -reverify: with mobile;
+								TO-DO: -put: in reusable container 
+*/
+/*
 							width: 320px;
 							height: 288px;	
+*/
+
+							width: 640px;
+							height: 576px;	
+
+/*
+							width: 640px;
+							height: 576px;	
+*/
 							
 
 /*
@@ -935,9 +949,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							padding: 0;
 							margin: auto;
 							display: block;							
-														
+																					
+							/* default VALUES; 
+								TO-DO: -reverify: with mobile
+							*/
+/*
 							width: 320px;
-							height: 288px;
+							height: 288px;	
+*/
+
+							width: 640px;
+							height: 576px;	
+							
 							
 							/* 
 							object-fit: contain;
@@ -988,8 +1011,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							width: 160px;
 							height: 144px;					*/	
 							
+							/* default VALUES; 
+								TO-DO: -reverify: with mobile
+							*/
+/*
 							width: 320px;
-							height: 288px;												
+							height: 288px;	
+*/
+
+							width: 640px;
+							height: 576px;	
+											
 							/* //added by Mike, 20221104 */
 							z-index: 15;									
 						}
@@ -1002,8 +1034,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							
 							visibility: hidden;
 							
+							/* default VALUES; 
+								TO-DO: -reverify: with mobile
+							*/
+/*
 							width: 320px;
-							height: 288px;							
+							height: 288px;	
+*/
+
+							width: 640px;
+							height: 576px;	
+					
 							
 							/* //added by Mike, 20221104 */
 							z-index: 10;									
@@ -1022,7 +1063,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							width: 320px;
 							height: 288px;							
 */							
+							/* default VALUES; 
+								TO-DO: -reverify: with mobile
+							*/
+/*
 							width: 320px;
+*/
+
+							width: 640px;
+							
 							object-fit: contain;
 
 							z-index: 10;									
