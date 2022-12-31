@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20221230; from 20221229
+' @date updated: 20221231; from 20221230
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -124,13 +124,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */
 
 							width: 640px;
-							height: 576px;	
-
-/*
-							width: 640px;
-							height: 576px;	
-*/
-							
+							height: 576px;							
 
 /*
 							transform: scale(1.0,0.9);	
@@ -1555,8 +1549,13 @@ border: none;
 //note: landscape screen size in SUPER FANTASY ZONE, DEFENDER ARCADE
 //keyphrase: FLYING, PlayStation Portable, Nintendo Switch Lite
 //current: gameboy color screen ratio; 160x144, w x h
+
+/* //edited by Mike, 20221231
 const iStageMaxWidth=160*2; //160;
 const iStageMaxHeight=144*2; //144;
+*/
+const iStageMaxWidth=160*4; //160;
+const iStageMaxHeight=144*4; //144;
 
 var iHorizontalOffset=0;
 var iVerticalOffset=0;
@@ -2420,7 +2419,7 @@ function autoGeneratePuzzleFromEnd() {
 function myUpdateFunction() {
 
 //	iCurrentMiniGame=MINI_GAME_ACTION;
-	iCurrentMiniGame=MINI_GAME_LEADERBOARD;
+//	iCurrentMiniGame=MINI_GAME_LEADERBOARD;
 
 	//added by Mike, 20221115
     switch(iCurrentMiniGame) {
@@ -2742,7 +2741,6 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 	imgPuzzle.style.top = (iVerticalOffsetInnerScreen+0)+"px";
 	imgPuzzle.style.left = (iHorizontalOffset+0)+"px";
 
-
 	//added by Mike, 20221130
 /*	//removed by Mike, 20221130
 	var titleImage = document.getElementById("titleImageId");	
@@ -2764,18 +2762,6 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 
 
 
-	//@BOTTOM-RIGHT
-//	controllerGuideButton.style.left = iHorizontalOffset+iStageMaxWidth -iControllerGuideButtonWidth+"px";
-//	controllerGuideButton.style.top= (iStageMaxHeight-iControllerGuideButtonHeight)+"px";
-	//added by Mike, 20221121
-	//add mini puzzle tile image after auto-generating
-	if (!bIsInitAutoGeneratePuzzleFromEnd) {
-		miniPuzzleTileImage.style.visibility = "visible";
-	}
-		
-	miniPuzzleTileImage.style.left = iHorizontalOffset+"px";
-	miniPuzzleTileImage.style.top= (iStageMaxHeight-iMiniPuzzleHeight)+"px";
-
 	//@TOP-LEFT
 	controllerGuideButton.style.left = iHorizontalOffset+"px";
 	controllerGuideButton.style.top= (0)+"px";
@@ -2783,6 +2769,7 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 	//added by Mike, 20221122
 	controllerGuideMiniImage.style.left = iHorizontalOffset+"px";
 	controllerGuideMiniImage.style.top= (0)+"px";
+	
 	
 	//added by Mike, 20221213
 	stepCountStatusDiv.style.left = iHorizontalOffset+iStageMaxWidth-iStepCountStatusDivWidth+"px";
@@ -3568,7 +3555,7 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 				myAudio.pause();
 			}
 		
-			
+/* //removed by Mike, 20221230; TO-DO: -add: LEADERBOARD MINI GAME SCREEN
 			if (iDelayCountToNextLevel>=iDelayCountToNextLevelMax) {
 				iDelayCountToNextLevel=0;
 				
@@ -3590,6 +3577,7 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 				}				
 			}
 			iDelayCountToNextLevel++;
+*/			
 		}	
 	}
 	//added by Mike, 20221120
