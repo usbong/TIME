@@ -27,6 +27,21 @@
 ' last accessed: 20221105 
 '
 <?php
+/*
+NOTES; TO-DO LIST: 
+
+ANDROID mobile, 
+TO-DO: -set: canvas, background images to 50% of current size
+
+iPAD (portrait) no buttons;
+--> (landscape) increase: button size
+
+EDGE; desktop
+--> @100% based on computer monitor excessively large;
+
+FIREFOX; desktop
+--> excess space at bottom
+*/
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 ?>
@@ -4858,7 +4873,13 @@ for ($iCount=0; $iCount<$iActionHealthMax; $iCount++) {
 	<!-- added by Mike, 20221215 -->
 	<span id="puzzleRecordedStepsId" class="puzzleRecordedStepsSpan">
 <?php		
+		//added by Mike, 20221231
+		//debug; example value
+		$sRecordedSteps="3121220312133003112111302212133333303312003030030303133122112122121303033033311212002";
+
 		echo $sRecordedSteps;
+	
+
 ?>		
 	</span>
 
