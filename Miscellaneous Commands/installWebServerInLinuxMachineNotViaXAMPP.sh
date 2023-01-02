@@ -14,7 +14,7 @@
 # @company: USBONG
 # @author: SYSON, MICHAEL B.
 # @date created: 20220328
-# @last modified: 20221230; from 20220807
+# @last modified: 20230102; from 20220807
 # @website address: http://www.usbong.ph
 #
 # Additional Notes:
@@ -60,6 +60,8 @@ sudo apt-get install phpmyadmin
 
 #Part 2
 #To set up under Apache all you need to do is include the following line in /etc/apache2/apache2.conf. 
+#edited by Mike, 20230102
+#Note: remove the hash mark, i.e #, before "Include
 #Include /etc/phpmyadmin/apache.conf
 sudo vi /etc/apache2/apache2.conf
 
