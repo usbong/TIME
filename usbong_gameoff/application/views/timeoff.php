@@ -1,5 +1,5 @@
 <!--
-' Copyright 2020~2022 USBONG
+' Copyright 2020~2023 USBONG
 '
 ' Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You ' may obtain a copy of the License at
 '
@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20221231; from 20221230
+' @date updated: 20230106; from 20221231
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -32,6 +32,12 @@ NOTES; TO-DO LIST:
 
 ANDROID mobile, 
 TO-DO: -set: canvas, background images to 50% of current size
+
+--> update: the following
+myCanvas
+ImageBackgroundOfPuzzle
+ImageController
+ImageHowToPlayGuide
 
 iPAD (portrait) no buttons;
 --> (landscape) increase: button size
@@ -1569,9 +1575,15 @@ border: none;
 const iStageMaxWidth=160*2; //160;
 const iStageMaxHeight=144*2; //144;
 */
-const iStageMaxWidth=160*4; //160;
-const iStageMaxHeight=144*4; //144;
+var iStageMaxWidth=160*4; //160;
+var iStageMaxHeight=144*4; //144;
 
+//added by Mike, 20230106
+const iDefaultCanvasWidth=640;
+const iDefaultCanvasHeight=576;
+
+var bHasSetMaxWidthHeight=false;
+ 
 var iHorizontalOffset=0;
 var iVerticalOffset=0;
 
@@ -2585,8 +2597,10 @@ function miniGamePuzzleUpdate() {
 	var controllerGuideImage = document.getElementById("controllerGuideImageId");	
 	//controllerGuideImage.style.visibility = "hidden"; //hidden
 
+/* //removed by Mike, 20230106
 	var iControllerGuideImageWidth = (controllerGuideImage.clientWidth);
 	var iControllerGuideImageHeight = (controllerGuideImage.clientHeight);	
+*/
 	
 	var controllerGuideMiniImage = document.getElementById("controllerGuideMiniImageId");		
 	//removed by Mike, 20221129
@@ -2660,7 +2674,7 @@ function miniGamePuzzleUpdate() {
 */	
 
 	var iControllerGuideButtonWidth = 32;
-	var iControllerGuideButtonHeight = 32;
+	var iControllerGuidhowToPlayGuideImageeButtonHeight = 32;
 
 	//added by Mike, 20221121
 	var textStatusDiv = document.getElementById("textStatusDivId");
@@ -2686,7 +2700,7 @@ function miniGamePuzzleUpdate() {
 	imgPuzzle = document.getElementById("puzzleImageId");
 
     //edited by Mike, 20221121; 
-    //reverify: if solves noticeable DELAY in loading image file			
+    //reverify: if solves myCanvasnoticeable DELAY in loading image file			
 	//alert(imgPuzzle.src);	
 	//edited by Mike, 20221210
 //	if (!imgPuzzle.src.toLowerCase().includes("pinatubo")) {
@@ -2742,6 +2756,42 @@ function miniGamePuzzleUpdate() {
 	//removed by Mike, 20221210
 	//myCanvasContext.fillRect(0, 0, iStageMaxWidth, iStageMaxHeight);	
 
+
+	//added by Mike, 20230106
+//	if ((!bIsMobile) || (bIsUsingAppleMac)) {
+	if (!bIsMobile) {
+	}
+	else {
+		if (!bHasSetMaxWidthHeight) {	
+			iStageMaxWidth=iStageMaxWidth/2; 
+			iStageMaxHeight=iStageMaxHeight/2;	
+			
+			iTitleImageWidth = iTitleImageWidth/2;
+			iTitleImageHeight = iTitleImageHeight/2;				
+
+	//	alert(myCanvas.style.width);
+			myCanvas.style.width = iDefaultCanvasWidth/2 +"px"; //"300px"; 
+			myCanvas.style.height = iDefaultCanvasHeight/2 +"px";
+			
+			imgPuzzle.style.width = iDefaultCanvasWidth/2 +"px"; 
+			imgPuzzle.style.height = iDefaultCanvasHeight/2 +"px"; 
+			
+			controllerGuideImage.style.width = iDefaultCanvasWidth/2 +"px"; 
+			controllerGuideImage.style.height = iDefaultCanvasHeight/2 +"px"; 
+			
+			howToPlayGuideImage.style.width = iDefaultCanvasWidth/2 +"px"; 
+			howToPlayGuideImage.style.height = iDefaultCanvasHeight/2 +"px"; 
+			
+			titleImage.style.width=iStageMaxWidth;
+			titleImage.style.height=iStageMaxHeight;
+			
+			bHasSetMaxWidthHeight=true;
+		}		
+	}
+	
+	var iControllerGuideImageWidth = (controllerGuideImage.clientWidth);
+	var iControllerGuideImageHeight = (controllerGuideImage.clientHeight);	
+	
 
 //alert (iHorizontalOffset);
 
