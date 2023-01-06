@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20230106; from 20221231
+' @date updated: 20230107; from 20230106
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -2055,53 +2055,6 @@ function toggleFullScreen() {
   //added by Mike, 20221129
   var textEnterDiv = document.getElementById("textEnterDivId");
 
-  //added by Mike, 20221126
-  if (iCurrentMiniGame==MINI_GAME_ACTION) {
-	  //edited by Mike, 20221128
-  	if (bHasDefeatedMonster) {
-//  	if (bHasDefeatedHuman) {
-		
-/* //edited by Mike, 20221127
-		if (iMonsterInHitStateCount>=iMonsterInDestroyedStateCountMax) {
-*/
-		if (iMonsterInHitStateCount>=iMonsterEndStateCountBeforeMax) {
-
-  			iMonsterInHitStateCount=iMonsterEndStateCountMax;
-				
-			//added by Mike, 20221126
-			//TO-DO: -reverify: this due to noticeable DELAY in execution
-			//notes: CAUSE to be requestFullscreen()
-			var imgPuzzle = document.getElementById("puzzleImageId");	
-			imgPuzzle.style.visibility="hidden";
-/*		
-			if (!imgPuzzle.src.toLowerCase().includes("pinatubo")) {
-				//added by Mike, 2022118
-				imgPuzzle.setAttribute("src", getBaseURL()+"assets/images/mtPinatubo20150115T1415.jpg");
-				imgPuzzle.setAttribute("class", "ImageBackgroundOfPuzzle");	
-			}	
-*/
-
-/*	//removed by Mike, 20221127; 
-//note: shake appears to be due change in background image
-			//added by Mike, 20221127
-			var myCanvas = document.getElementById("myCanvasId");
-			myCanvas.style.visibility="hidden";
-*/			
-						
-			//added by Mike, 20221126
-			var myAudioEffect = document.getElementById("myAudioEffectId");
-
-			myAudioEffect.setAttribute("src", getBaseURL()+sAudioEffectActionStart);
-
-			//edited by Mike, 20221126
-			//fMyAudioEffectVolume=0.2;					
-			fMyAudioEffectVolume=0.4;						
-			myAudioEffect.volume=fMyAudioEffectVolume;
-			myAudioEffect.loop=false;
-			myAudioEffect.play();
-		}
-  	}
-  }
 		
   //added by Mike, 20221108
   //note: fullscreenElement command 
