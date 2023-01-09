@@ -1,7 +1,7 @@
 <?php 
 
 /*
-' Copyright 2020~2022 USBONG
+' Copyright 2020~2023 USBONG
 '
 ' Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You ' may obtain a copy of the License at
 '
@@ -12,7 +12,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20221215; from 20221214
+' @date updated: 20230109; from 20221215
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
