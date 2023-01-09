@@ -10,7 +10,7 @@ COMMAND from PHP, to BSHELL (UBUNTU OS), to JAVA, to javascript;<br/>
 
 ### OBJECTIVE
 
-auto-generate puzzle for the day if does NOT yet exist when user enters the web service,<br/>
+AUTO-GENERATE puzzle for the day if does NOT yet exist when user enters the web service,<br/>
 --> due to: SERVER was shutdown, et cetera;<br/>
 --> keyphrase: a puzzle for the day always exists
 
@@ -26,6 +26,7 @@ auto-generate puzzle for the day if does NOT yet exist when user enters the web 
 --> when user enters the web service;<br/>
 --> adds: [Task Scheduling](https://github.com/usbong/TIME/blob/main/notes/TaskScheduling.md) to auto-generate puzzle at set TIME already exists,<br/>
 --> albeit shall NOT execute IF SERVER is OFF<br/>
+--> notes: [Task Scheduling](https://github.com/usbong/TIME/blob/main/notes/TaskScheduling.md) : BSHELL (UBUNTU OS), to JAVA, to javascript;<br/>
 <br/>
 --> adds: multiple people who enter the web service at nearly the same time,<br/>
 --> may cause multiple puzzles to be auto-generated via this ACTION;<br/>
