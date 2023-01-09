@@ -25,7 +25,7 @@ auto-generate puzzle for the day if does NOT yet exist when user enters the web 
 --> shares: added PHP COMMAND to auto-generate input (puzzle for the day),<br/>
 --> when user enters the web service;<br/>
 --> adds: [Task Scheduling](https://github.com/usbong/TIME/blob/main/notes/TaskScheduling.md) to auto-generate puzzle at set TIME already exists,<br/>
---> albeit shall NOT execute IF SERVICE is OFF<br/>
+--> albeit shall NOT execute IF SERVER is OFF<br/>
 <br/>
 --> adds: multiple people who enter the web service at nearly at the same time,<br/>
 --> may cause multiple puzzles to be auto-generated via this ACTION;<br/>
