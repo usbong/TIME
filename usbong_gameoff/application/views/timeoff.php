@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20230109; from 20230106
+' @date updated: 20230110; from 20230109
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -2757,11 +2757,17 @@ function miniGamePuzzleUpdate() {
 	//myCanvasContext.fillRect(0, 0, iStageMaxWidth, iStageMaxHeight);	
 
 
-	//added by Mike, 20230106
-//	if ((!bIsMobile) || (bIsUsingAppleMac)) {
-	if (!bIsMobile) {
+	//added by Mike, 20230106; edited by Mike, 20230110
+	if ((!bIsMobile) || (bIsUsingAppleMac)) {
+//	if (!bIsMobile) {
 	}
 	else {
+		
+		//TO-DO: -verify: IF using iPAD, width and height also increased;
+/*
+		if (bIsUsingAppleWebKit) { //if iPAD
+		}
+*/	
 		if (!bHasSetMaxWidthHeight) {	
 			iStageMaxWidth=iStageMaxWidth/2; 
 			iStageMaxHeight=iStageMaxHeight/2;	
