@@ -2732,8 +2732,8 @@ function miniGamePuzzleUpdate() {
 
 
 	//added by Mike, 20230106
-//	if ((!bIsMobile) || (bIsUsingAppleMac)) {
-	if (!bIsMobile) {
+	if ((!bIsMobile) || (bIsUsingAppleMac)) {
+//	if (!bIsMobile) {
 	}
 	else {
 		if (!bHasSetMaxWidthHeight) {	
@@ -3478,9 +3478,16 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 		buttonRightLeverCenterNeutralKey.style.visibility = "hidden";
 	}
 	else {
-		//edited by Mike, 20221108
-		if (bIsUsingAppleWebKit) {
-			iVerticalOffset=(iStageMaxHeight+buttonUpKey.clientHeight*3);			
+		//edited by Mike, 20221108; edited by Mike, 20230111;
+		//TO-DO: -reverify: when iPAD starts @PORTRAIT;
+		//--> size not smaller for portrait; button positions incorrect;
+		//TO-DO: -reverify: when iPAD starts @LANDSCAPE,
+		//--> has: excess offset at top
+		if (bIsUsingAppleWebKit) {		
+			//edited by Mike, 20230111	//iVerticalOffset=(iStageMaxHeight+buttonUpKey.clientHeight*3);			
+			//iVerticalOffset=window.innerWidth/2;
+			iVerticalOffset=iStageMaxHeight/2;
+			//iVerticalOffset=iCurrentAppleWebKitInnerWidth/2;
 
 			//alert(screen.orientation); //OUTPUT: [object ScreenOrientation]
 
@@ -3498,9 +3505,11 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 				
 				if (iAppleWebKitInnerWidthOffset<0) {
 					iAppleWebKitInnerWidthOffset*=(-1);
+					
+					//added by Mike, 20230111
+					iVerticalOffset=iCurrentAppleWebKitInnerWidth/2;
 				}
 			}
-			
 		}
 		else {			
 			//added by Mike, 20221002
@@ -4103,7 +4112,7 @@ function onLoad() {
 	//keyphrase: identify machine and computer browser
 
 	//added by Mike, 20221108
-//		alert(navigator.userAgent);
+	//alert(navigator.userAgent);
 
 	//added by Mike, 20220910
 	//reference: https://stackoverflow.com/questions/6666907/how-to-detect-a-mobile-device-with-javascript; last accessed: 20220910
@@ -4386,7 +4395,10 @@ function onLoad() {
 
 				  bIsUsingAppleMac=false;
 				  bIsMobile=true; //added by Mike, 20221110			
-			    }
+				  
+				  //added by Mike, 20230111
+				  bHasSetMaxWidthHeight=true;
+				}
 				break;				
 		}
 
