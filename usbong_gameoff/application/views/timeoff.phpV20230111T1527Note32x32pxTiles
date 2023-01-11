@@ -1160,22 +1160,21 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						.Image32x32Tile {
 							position: absolute;
 	
-							/* //added by Mike, 20221113; edited by Mike, 20230111*/
-/*
+							/* //added by Mike, 20221113 */
 						    width: 128px;
 						    height: 128px;
-*/
+/*
 						    width: 256px;
-						    height: 256px;							
+						    height: 256px;
+*/							
 
 							object-fit: contain;
 	
-							/* //added by Mike, 20221112; edited by Mike, 20230111 */
-/*
+							/* //added by Mike, 20221112 */
   							clip: rect(0px,32px,32px,0px);
-*/
+/*
  							clip: rect(0px,64px,64px,0px);
-	
+*/	
 							background-color: transparent;
 							border: none;
 
@@ -1208,23 +1207,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						/* noted by Mike, 20221105 */						
 						.Image32x32TileTarget {
 							position: absolute;
-						    
-/* //added by Mike, 20221113; edited by Mike, 20230111*/
-/*
+
+							/* //added by Mike, 20221113 */
 						    width: 128px;
 						    height: 128px;
-*/
-						    width: 256px;
-						    height: 256px;							    
-						    
 							object-fit: contain;
 
 
-							/* //added by Mike, 20221112; edited by Mike, 20230111 */
-/*
+							/* //added by Mike, 20221112 */
   							clip: rect(0px,32px,32px,0px);
-*/
- 							clip: rect(0px,64px,64px,0px);
 	
 /* //removed by Mike, 20221112
 							width: 32px;
@@ -1264,13 +1255,9 @@ border: none;
 						
 						.Image32x32TileTargetBorder {
 							position: absolute;
-/*
-edited by Mike, 20230111
+
 							width: 27px;
 							height: 27px;
-*/
-							width: 58px;
-							height: 58px;
 
 							background-color: transparent;
 							color: #222222;
@@ -1294,13 +1281,8 @@ edited by Mike, 20230111
 						.Image32x32TileSpaceBorder {
 							position: absolute;
 
-/*
-edited by Mike, 20230111
 							width: 27px;
 							height: 27px;
-*/
-							width: 58px;
-							height: 58px;
 
 							background-color: transparent;
 							color: #222222;
@@ -1321,17 +1303,58 @@ edited by Mike, 20230111
 							z-index: 4;		
 						}
 						
+						.Image32x32TileSpaceTargetPrev {
+							position: absolute;
+
+							/* //added by Mike, 20221113 */
+						    width: 128px;
+						    height: 128px;
+							object-fit: contain;
+
+
+							/* //added by Mike, 20221112 */
+  							clip: rect(0px,32px,32px,0px);
+	
+/* //removed by Mike, 20221112
+							width: 32px;
+							height: 32px;
+*/
+
+/* //edited by Mike, 20221112 */
+/*
+							background-color: #222222;
+*/
+background-color: transparent;
+border: none;
+
+
+							color: #222222;
+
+							/* //added by Mike, 20221111 
+							   //TO-DO: -update: this
+							*/
+							opacity: 0.5;
+							
+							text-align: center;
+							line-height: 32px;
+
+							/*padding-top: 0.1875%;*/ /*6px;*/
+							
+/* //note: with clip rect border is put on entire sprite image */
+/* //removed by Mike, 20221112
+							border: 3px solid #ff0000;
+							border-radius: 3px;
+*/
+							margin: 0px; /*1px;*/	
+							padding: 0px;
+							z-index: 5;		
+						}
 						
 						.Image32x32TileSpaceTarget {
 							position: absolute;
 
-/*
-edited by Mike, 20230111
 							width: 27px;
 							height: 27px;
-*/
-							width: 58px;
-							height: 58px;
 
 							background-color: #000000; /*#ffffff;*/
 							color: #222222;
@@ -1351,21 +1374,14 @@ edited by Mike, 20230111
 						.Image32x32TileSpace {
 							position: absolute;
 							
-	/* //added by Mike, 20221113; edited by Mike, 20230111*/
-/*
+							/* //added by Mike, 20221113 */
 						    width: 128px;
 						    height: 128px;
-*/
-						    width: 256px;
-						    height: 256px;	
 							object-fit: contain;
-														
-							/* //added by Mike, 20221112; edited by Mike, 20230111 */
-/*
+							
+							
+							/* //added by Mike, 20221112 */
   							clip: rect(0px,32px,32px,0px);
-*/
- 							clip: rect(0px,64px,64px,0px);
-
 	
 /* //removed by Mike, 20221112
 							width: 32px;
@@ -1520,24 +1536,13 @@ border: none;
 						
 						.Image32x32TileFrame1 {
 							position: absolute;
-							/* //added by Mike, 20221112; edited by Mike, 20230111 */
-/*
   							clip: rect(0px,32px,32px,0px);
-*/
- 							clip: rect(0px,64px,64px,0px);
-
 						}
 
 						.Image32x32TileFrame2 {
 							position: absolute;
   							/*clip: rect(0px,128px,64px,64px);*/
-
-							/* //added by Mike, 20221112; edited by Mike, 20230111 */
-/*
   							clip: rect(0px,32px,32px,0px);
-*/
- 							clip: rect(0px,64px,64px,0px);
-
 /* //removed by Mike, 20221116							
 							object-position: -32px;
 */							
@@ -2164,10 +2169,7 @@ function autoUpdatePuzzleTileImage() {
 
 			//note: Tile Space; target number become its own	
 			//clip
-/* //edited by Mike, 20230111			
 			arrayPuzzleTileCountId[iTileBgCount].style.objectPosition = "-96px -96px";
-*/
-			arrayPuzzleTileCountId[iTileBgCount].style.objectPosition = "-192px -192px";
 			
 				
 			}
@@ -2179,13 +2181,8 @@ function autoUpdatePuzzleTileImage() {
 				iColumnCount = (iTileTextCount-1)%4;
 				iRowCount = Math.floor((iTileTextCount-1)/4);
 
-/* //edited by Mike, 20230111			
 				//x, y
 				arrayPuzzleTileCountId[iTileBgCount].style.objectPosition = "-" + iColumnCount*32 + "px -" + iRowCount*32 + "px";
-*/
-				arrayPuzzleTileCountId[iTileBgCount].style.objectPosition = "-" + iColumnCount*64 + "px -" + iRowCount*64 + "px";
-
-
 			}
 				
 			iTileBgCount++;
@@ -2915,13 +2912,8 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 	//var arrayPuzzleTilePos = [ [],[],[],[] ]; 
 
 	let iTileBgCount=0;
-
-/* //edited by Mike, 20230111	
 	let iPuzzleTileWidth=32;
 	let iPuzzleTileHeight=32;
-*/
-	let iPuzzleTileWidth=64;
-	let iPuzzleTileHeight=64;
 	
 	const iPuzzleTileTotalWidthMax=iPuzzleTileWidth*iColumnCountMax;
 	const iPuzzleTileTotalHeightMax=iPuzzleTileHeight*iRowCountMax;
