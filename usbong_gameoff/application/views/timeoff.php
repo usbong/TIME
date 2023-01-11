@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20230110; from 20230109
+' @date updated: 20230111; from 20230107
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -2055,53 +2055,6 @@ function toggleFullScreen() {
   //added by Mike, 20221129
   var textEnterDiv = document.getElementById("textEnterDivId");
 
-  //added by Mike, 20221126
-  if (iCurrentMiniGame==MINI_GAME_ACTION) {
-	  //edited by Mike, 20221128
-  	if (bHasDefeatedMonster) {
-//  	if (bHasDefeatedHuman) {
-		
-/* //edited by Mike, 20221127
-		if (iMonsterInHitStateCount>=iMonsterInDestroyedStateCountMax) {
-*/
-		if (iMonsterInHitStateCount>=iMonsterEndStateCountBeforeMax) {
-
-  			iMonsterInHitStateCount=iMonsterEndStateCountMax;
-				
-			//added by Mike, 20221126
-			//TO-DO: -reverify: this due to noticeable DELAY in execution
-			//notes: CAUSE to be requestFullscreen()
-			var imgPuzzle = document.getElementById("puzzleImageId");	
-			imgPuzzle.style.visibility="hidden";
-/*		
-			if (!imgPuzzle.src.toLowerCase().includes("pinatubo")) {
-				//added by Mike, 2022118
-				imgPuzzle.setAttribute("src", getBaseURL()+"assets/images/mtPinatubo20150115T1415.jpg");
-				imgPuzzle.setAttribute("class", "ImageBackgroundOfPuzzle");	
-			}	
-*/
-
-/*	//removed by Mike, 20221127; 
-//note: shake appears to be due change in background image
-			//added by Mike, 20221127
-			var myCanvas = document.getElementById("myCanvasId");
-			myCanvas.style.visibility="hidden";
-*/			
-						
-			//added by Mike, 20221126
-			var myAudioEffect = document.getElementById("myAudioEffectId");
-
-			myAudioEffect.setAttribute("src", getBaseURL()+sAudioEffectActionStart);
-
-			//edited by Mike, 20221126
-			//fMyAudioEffectVolume=0.2;					
-			fMyAudioEffectVolume=0.4;						
-			myAudioEffect.volume=fMyAudioEffectVolume;
-			myAudioEffect.loop=false;
-			myAudioEffect.play();
-		}
-  	}
-  }
 		
   //added by Mike, 20221108
   //note: fullscreenElement command 
@@ -2757,17 +2710,11 @@ function miniGamePuzzleUpdate() {
 	//myCanvasContext.fillRect(0, 0, iStageMaxWidth, iStageMaxHeight);	
 
 
-	//added by Mike, 20230106; edited by Mike, 20230110
-	if ((!bIsMobile) || (bIsUsingAppleMac)) {
-//	if (!bIsMobile) {
+	//added by Mike, 20230106
+//	if ((!bIsMobile) || (bIsUsingAppleMac)) {
+	if (!bIsMobile) {
 	}
 	else {
-		
-		//TO-DO: -verify: IF using iPAD, width and height also increased;
-/*
-		if (bIsUsingAppleWebKit) { //if iPAD
-		}
-*/	
 		if (!bHasSetMaxWidthHeight) {	
 			iStageMaxWidth=iStageMaxWidth/2; 
 			iStageMaxHeight=iStageMaxHeight/2;	
@@ -4130,7 +4077,7 @@ function onLoad() {
 	//keyphrase: identify machine and computer browser
 
 	//added by Mike, 20221108
-//	alert(navigator.userAgent);
+//		alert(navigator.userAgent);
 
 	//added by Mike, 20220910
 	//reference: https://stackoverflow.com/questions/6666907/how-to-detect-a-mobile-device-with-javascript; last accessed: 20220910
@@ -4168,6 +4115,15 @@ function onLoad() {
 		if ((navigator.userAgent.includes("Macintosh")) || navigator.userAgent.includes("Mac")) {
 			bIsUsingAppleMac=true;
 		}		
+		
+		//added by Mike, 20230111
+		//note: TO-DO: -add: touch/mouse click ACTION COMMANDS
+		//if using EDGE browser;
+		//observed: shaking on EDGE browser via desktop,
+		//caused by bIsMobile=true;
+		if (navigator.userAgent.includes("Edg")) {
+			bIsMobile=false;			
+		}	
 	}
 	
 	//added by Mike, 20221106
@@ -4931,8 +4887,7 @@ for ($iCount=0; $iCount<$iActionHealthMax; $iCount++) {
 <?php		
 		//added by Mike, 20221231
 		//debug; example value
-		//removed by Mike, 20230109
-		//$sRecordedSteps="3121220312133003112111302212133333303312003030030303133122112122121303033033311212002";
+		$sRecordedSteps="3121220312133003112111302212133333303312003030030303133122112122121303033033311212002";
 
 		echo $sRecordedSteps;
 	
