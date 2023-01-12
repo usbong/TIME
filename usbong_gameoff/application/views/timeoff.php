@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20230111; from 20230107
+' @date updated: 20230112; from 20230111
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -62,6 +62,10 @@ Image32x32TileSpace
 Image32x32TileFrame1
 Image32x32TileFrame2
 
+
+//added by Mike, 20230112
+TO-DO: -verify: correct display design layout for Android mobile;
+--> steps count NOT clearly displayed with 64x64px image tiles
 
 */
 
@@ -228,8 +232,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /*							
 							background-color: #000000aa;
 */							
-							/*color: #6d4e22;*/ /* brown */
-							color: #ffffff; /* white */
+							color: #6d4e22; /* brown */
+
+							/*color: #ffffff;*/ /* white */
 
 							/*opacity: 50%;*/
 
@@ -239,6 +244,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							padding: 10px;
 
 							visibility: hidden;							
+							
+							/* put above image tiles */							
+							z-index: 4;
 						}	
 						
 						div.DivStepCountStatusShadow
@@ -257,7 +265,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							padding: 10px;
 
 							visibility: hidden;							
-						}												
+							
+							/* put above image tiles */
+							z-index: 4;						}												
 						
 						div.DivTextEnter
 						{
@@ -4792,11 +4802,6 @@ alert("iButtonHeight"+iButtonHeight);
 	
 	<div id="textStatusDivId" class="DivTextStatus">CONGRATULATIautoGeneratePuzzleFromEndONS!</div>
 	<div id="textEnterDivId" class="DivTextEnter">PRESS ENTER</div>
-
-<!-- added by Mike, 20221213; note: correct sequence -->
-	<div id="stepCountStatusShadowDivId" class="DivStepCountStatusShadow">0</div>
-	<div id="stepCountStatusDivId" class="DivStepCountStatus">0</div>
-
 			
 <?php 
 	$iRowCountMax=4; 
@@ -4859,6 +4864,11 @@ for ($iCount=0; $iCount<$iActionHealthMax; $iCount++) {
 		<span>© <b>www.usbong.ph</b> 2011~<?php echo date("Y");?>. All rights reserved.</span>
 	</div>		 
 -->	
+
+	<!-- added by Mike, 20230112; from 20221213; note: correct sequence -->
+	<div id="stepCountStatusShadowDivId" class="DivStepCountStatusShadow">0</div>
+	<div id="stepCountStatusDivId" class="DivStepCountStatus">0</div>
+
 
 <!-- edited by Mike, 20220918; 
 	replaced: onClick COMMAND, with onMouseDown to be onMouseUp-->
