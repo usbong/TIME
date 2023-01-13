@@ -1120,7 +1120,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							z-index: 10;									
 						}	
 
-						.ImageMiniController {
+						.ImageMiniController, .ImageMiniStepCount {
 							position: absolute;
 							
 							width: 32px;
@@ -1135,13 +1135,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							background: transparent;
 							opacity: 80%;
 							
-							margin: 10px;
+							/* //changed from margin */
+							padding: 10px;
 							
 							visibility: hidden;						
 						}
 
 						
-						.ButtonControllerGuide {
+						.ButtonControllerGuide, .ButtonStepCountGuide {
 							position: absolute;	
 							width: 32px;
 						    height: 32px;
@@ -1160,7 +1161,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							visibility: hidden;			
 						}
 						
-						.ButtonControllerGuide:active {
+						.ButtonControllerGuide:active, .ButtonStepCountGuide:active {
 							background: transparent; /*#ffffff;*/
   							border: none;							
 						}
@@ -1974,6 +1975,33 @@ function toggleControllerGuide() {
 	}
 }
 
+//added by Mike, 20230113
+function toggleStepCountGuide() {
+/* //TO-DO: -update: this
+	//edited by Mike, 20221129
+//	if (bHasPressedStart) {
+	if ((bHasPressedStart) && (bHasViewedHowToPlayGuide)){	
+		var controllerGuideImage = document.getElementById("controllerGuideImageId");			
+	
+		//added by Mike, 20221122
+		var controllerGuideButton = document.getElementById("controllerGuideButtonId");
+		//remove focus on clicked button
+		//to NOT execute when ENTER key is pressed;
+		controllerGuideButton.blur();
+	
+	//alert("dito");		
+			
+		if (controllerGuideImage.style.visibility=="hidden") {
+			controllerGuideImage.style.visibility = "visible";
+		}
+		else {
+			controllerGuideImage.style.visibility = "hidden";
+		}			
+	}
+*/	
+}
+
+
 //added by Mike, 20221129
 function toggleHowToPlayGuide() {
 	if (bHasPressedStart) {
@@ -2591,6 +2619,14 @@ function miniGamePuzzleUpdate() {
 //	controllerGuideMiniImage.style.visibility = "visible"; 
 		
 	var controllerGuideButton = document.getElementById("controllerGuideButtonId");	
+	
+	//added by Mike, 20230113
+	var stepCountGuideMiniImage = document.getElementById("stepCountGuideMiniImageId");		
+	//removed by Mike, 20230113
+//	controllerGuideMiniImage.style.visibility = "visible"; 
+		
+	var stepCountGuideButton = document.getElementById("stepCountGuideButtonId");	
+		
 
 	//added by Mike, 20221213
 	var stepCountStatusDiv = document.getElementById("stepCountStatusDivId");
@@ -2618,6 +2654,10 @@ function miniGamePuzzleUpdate() {
 			controllerGuideButton.style.visibility = "visible"; 
 			controllerGuideMiniImage.style.visibility = "visible"; 
 			
+			//added by Mike, 20230113
+			stepCountGuideButton.style.visibility = "visible"; 
+			stepCountGuideMiniImage.style.visibility = "visible"; 
+						
 			//added by Mike, 20221213
 			stepCountStatusDiv.style.visibility = "visible";
 			stepCountStatusShadowDiv.style.visibility = "visible";
@@ -2656,9 +2696,17 @@ function miniGamePuzzleUpdate() {
 	var iControllerGuideButtonWidth = (controllerGuideButton.clientWidth);
 	var iControllerGuideButtonHeight = (controllerGuideButton.clientHeight);		
 */	
+	
+	//removed by Mike, 20230113
+/*
+	//var iControllerGuideButtonWidth = 32;
+	//var iControllerGuideButtonHeight = 32;
 
-	var iControllerGuideButtonWidth = 32;
-	var iControllerGuidhowToPlayGuideImageeButtonHeight = 32;
+	//added by Mike, 20230113
+	var iStepCountGuideButtonWidth = stepCountGuideMiniImage.getBoundingClientRect().width; //32;
+//	var iStepGuideGuideButtonHeight= 32;
+*/
+	var iStepCountGuideButtonWidth = stepCountGuideMiniImage.clientWidth; 
 
 	//added by Mike, 20221121
 	var textStatusDiv = document.getElementById("textStatusDivId");
@@ -2810,7 +2858,6 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 	howToPlayGuideImage.style.left = 0+iHorizontalOffset+iStageMaxWidth/2 -iHowToPlayGuideImageWidth/2 +"px";
 
 
-
 	//@TOP-LEFT
 	controllerGuideButton.style.left = iHorizontalOffset+"px";
 	controllerGuideButton.style.top= (0)+"px";
@@ -2819,6 +2866,22 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 	controllerGuideMiniImage.style.left = iHorizontalOffset+"px";
 	controllerGuideMiniImage.style.top= (0)+"px";
 	
+	//added by Mike, 20230113
+	//@TOP-RIGHT
+
+	stepCountGuideButton.style.left = iHorizontalOffset+iStageMaxWidth-iStepCountGuideButtonWidth+"px";
+	stepCountGuideButton.style.top= (0)+"px";
+	
+	stepCountGuideMiniImage.style.left = iHorizontalOffset+iStageMaxWidth-iStepCountGuideButtonWidth+"px";
+	stepCountGuideMiniImage.style.top= (0)+"px";
+	
+/*	
+	stepCountGuideButton.style.right = iHorizontalOffset+iStageMaxWidth+"px";
+	stepCountGuideButton.style.top= (0)+"px";
+	
+	stepCountGuideMiniImage.style.right = iHorizontalOffset+iStageMaxWidth+"px";
+	stepCountGuideMiniImage.style.top= (0)+"px";
+*/		
 	
 	//added by Mike, 20221213
 	stepCountStatusDiv.style.left = iHorizontalOffset+iStageMaxWidth-iStepCountStatusDivWidth+"px";
@@ -4788,10 +4851,17 @@ alert("iButtonHeight"+iButtonHeight);
 <!-- added by Mike, 20221122 -->
 	<img id="controllerGuideImageId" class="ImageController" src="<?php echo base_url('assets/images/gameOff2022ControllerGuide.png');?>">	
 
-<button id="controllerGuideButtonId" class="buttonControllerGuide" onClick="toggleControllerGuide()">
+<button id="controllerGuideButtonId" class="ButtonControllerGuide" onClick="toggleControllerGuide()">
 </button>		
 
 	<img id="controllerGuideMiniImageId" class="ImageMiniController" src="<?php echo base_url('assets/images/gameOff2022MiniControllerGuide.png');?>">	
+
+<!-- added by Mike, 20230113 -->
+<button id="stepCountGuideButtonId" class="ButtonStepCountGuide" onClick="toggleStepCountGuide()">
+</button>		
+
+	<img id="stepCountGuideMiniImageId" class="ImageMiniStepCount" src="<?php echo base_url('assets/images/stepCountGuide.png');?>">	
+
 
 <!-- added by Mike, 20221129 -->
 	<img id="howToPlayGuideImageId" class="ImageHowToPlayGuide" src="<?php echo base_url('assets/images/gameOff2022HowToPlay.png');?>">	
