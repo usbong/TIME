@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20230112; from 20230111
+' @date updated: 20230115; from 20230112
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -289,6 +289,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						{
 							width: 416px;
 							height: 312px;
+
+							/* added by Mike, 20230115 */
+							visibility: hidden;							
 						}
 						
 						/* //added by Mike, 20221215 */
@@ -1042,7 +1045,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							
 						}
 
-						.ImageController {
+						.ImageController, .ImageStepCount {
 							position: absolute;
 
 							text-align: center;
@@ -1972,33 +1975,54 @@ function toggleControllerGuide() {
 		else {
 			controllerGuideImage.style.visibility = "hidden";
 		}			
+
+		//added by Mike, 20230115
+//------		
+		var stepCountGuideImage = document.getElementById("stepCountGuideImageId");			
+		var stepCountGuideButton = document.getElementById("stepCountGuideButtonId");
+
+		//remove focus on clicked button
+		//to NOT execute when ENTER key is pressed;
+		stepCountGuideButton.blur();
+
+		stepCountGuideImage.style.visibility = "hidden";
+//------		
 	}
 }
 
 //added by Mike, 20230113
 function toggleStepCountGuide() {
-/* //TO-DO: -update: this
 	//edited by Mike, 20221129
 //	if (bHasPressedStart) {
 	if ((bHasPressedStart) && (bHasViewedHowToPlayGuide)){	
-		var controllerGuideImage = document.getElementById("controllerGuideImageId");			
+		var stepCountGuideImage = document.getElementById("stepCountGuideImageId");			
 	
-		//added by Mike, 20221122
+		var stepCountGuideButton = document.getElementById("stepCountGuideButtonId");
+
+		//remove focus on clicked button
+		//to NOT execute when ENTER key is pressed;
+		stepCountGuideButton.blur();
+	
+	//alert("dito");					
+		if (stepCountGuideImage.style.visibility=="hidden") {
+			stepCountGuideImage.style.visibility = "visible";
+		}
+		else {
+			stepCountGuideImage.style.visibility = "hidden";
+		}			
+		
+		//added by Mike, 20230115
+//------		
+		var controllerGuideImage = document.getElementById("controllerGuideImageId");			
 		var controllerGuideButton = document.getElementById("controllerGuideButtonId");
+
 		//remove focus on clicked button
 		//to NOT execute when ENTER key is pressed;
 		controllerGuideButton.blur();
-	
-	//alert("dito");		
-			
-		if (controllerGuideImage.style.visibility=="hidden") {
-			controllerGuideImage.style.visibility = "visible";
-		}
-		else {
-			controllerGuideImage.style.visibility = "hidden";
-		}			
+
+		controllerGuideImage.style.visibility = "hidden";
+//------		
 	}
-*/	
 }
 
 
@@ -2619,6 +2643,11 @@ function miniGamePuzzleUpdate() {
 //	controllerGuideMiniImage.style.visibility = "visible"; 
 		
 	var controllerGuideButton = document.getElementById("controllerGuideButtonId");	
+
+	//added by Mike, 20230115
+	var stepCountGuideImage = document.getElementById("stepCountGuideImageId");	
+	//stepCountGuideImage.style.visibility = "hidden"; //hidden
+
 	
 	//added by Mike, 20230113
 	var stepCountGuideMiniImage = document.getElementById("stepCountGuideMiniImageId");		
@@ -2810,7 +2839,12 @@ function miniGamePuzzleUpdate() {
 			
 			controllerGuideImage.style.width = iDefaultCanvasWidth/2 +"px"; 
 			controllerGuideImage.style.height = iDefaultCanvasHeight/2 +"px"; 
-			
+
+			//added by Mike, 20230115
+			stepCountGuideImage.style.width = iDefaultCanvasWidth/2 +"px"; 
+			stepCountGuideImage.style.height = iDefaultCanvasHeight/2 +"px"; 
+
+
 			howToPlayGuideImage.style.width = iDefaultCanvasWidth/2 +"px"; 
 			howToPlayGuideImage.style.height = iDefaultCanvasHeight/2 +"px"; 
 			
@@ -2823,7 +2857,12 @@ function miniGamePuzzleUpdate() {
 	
 	var iControllerGuideImageWidth = (controllerGuideImage.clientWidth);
 	var iControllerGuideImageHeight = (controllerGuideImage.clientHeight);	
-	
+
+	//added by Mike, 20230115
+	var iStepCountGuideImageWidth = (stepCountGuideImage.clientWidth);
+	var iStepCountGuideImageHeight = (stepCountGuideImage.clientHeight);	
+
+
 
 //alert (iHorizontalOffset);
 
@@ -2852,6 +2891,9 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 	controllerGuideImage.style.top = (iVerticalOffsetInnerScreen+0+iStageMaxHeight/2 -iControllerGuideImageHeight/2)+"px";
 	controllerGuideImage.style.left = 0+iHorizontalOffset+iStageMaxWidth/2 -iControllerGuideImageWidth/2 +"px";
 	
+	//added by Mike, 20230115
+	stepCountGuideImage.style.top = (iVerticalOffsetInnerScreen+0+iStageMaxHeight/2 -iStepCountGuideImageHeight/2)+"px";
+	stepCountGuideImage.style.left = 0+iHorizontalOffset+iStageMaxWidth/2 -iStepCountGuideImageWidth/2 +"px";
 	
 	//added by Mike, 20221129	
 	howToPlayGuideImage.style.top = (iVerticalOffsetInnerScreen+0+iStageMaxHeight/2 -iHowToPlayGuideImageHeight/2)+"px";
@@ -3961,6 +4003,7 @@ function tempAlert(msg,duration)
 
 	//alert("screen.height: "+screen.height); //landscape:533; potrait: 320
 
+/* //removed by Mike, 20230115
 	//added by Mike, 20220926
 	//TO-DO: -add: auto-update for all moving objects, et cetera	
 	var humanTile = document.getElementById("humanTileImageId");
@@ -3971,6 +4014,7 @@ function tempAlert(msg,duration)
 	//humanTile.style.left =  iHorizontalOffset + iHumanTileX+"px";
 
 	//alert(humanTile.style.left);
+*/
 	
 	//added by Mike, 20221006
 	var pauseLink = document.getElementById("pauseLinkId");
@@ -4266,6 +4310,11 @@ function onLoad() {
 	var controllerGuideImage = document.getElementById("controllerGuideImageId");			
 	controllerGuideImage.style.visibility = "hidden"; //hidden
 
+	//added by Mike, 20230115
+	var stepCountGuideImage = document.getElementById("stepCountGuideImageId");			
+	stepCountGuideImage.style.visibility = "hidden"; //hidden
+
+
 	
 	//reference: https://stackoverflow.com/questions/4917664/detect-viewport-orientation-if-orientation-is-portrait-display-alert-message-ad; last accessed: 20220910
 	//answer by: Jatin, 20120731T0711;
@@ -4307,7 +4356,7 @@ function onLoad() {
 	//added by Mike, 20221118
 	imgPuzzle = document.getElementById("puzzleImageId");
 
-
+/* //removed by Mike, 20230115
 	//added by Mike, 20220904	
 	//TO-DO: -add: init; where: set initial positions, et cetera
 	var monsterTile = document.getElementById("monsterTileImageId");
@@ -4316,7 +4365,7 @@ function onLoad() {
 
 	//edited by Mike, 20221120; from 20221118
 	monsterTile.style.visibility="hidden"; //visible
-
+*/
 
 	document.body.onkeydown = function(e){
 	//alert("e.keyCode: "+e.keyCode);
@@ -4829,10 +4878,6 @@ alert("iButtonHeight"+iButtonHeight);
 	<canvas id="myEffectCanvasId" class="myEffectCanvas">
 	</canvas>
 
-	<!-- added by Mike, 20221128 -->
-	<canvas id="myHitByAttackEffectCanvasId" class="myHitByAttackEffectCanvas">
-	</canvas>
-
 <!--
 //reference: https://stackoverflow.com/questions/9454125/javascript-request-fullscreen-is-unreliable;
 //last accessed: 20220825
@@ -4856,11 +4901,15 @@ alert("iButtonHeight"+iButtonHeight);
 
 	<img id="controllerGuideMiniImageId" class="ImageMiniController" src="<?php echo base_url('assets/images/gameOff2022MiniControllerGuide.png');?>">	
 
+
+<!-- added by Mike, 20230115; add: display leaderboard -->
+	<img id="stepCountGuideImageId" class="ImageStepCount" src="<?php echo base_url('assets/images/blank.png');?>">	
+
 <!-- added by Mike, 20230113 -->
 <button id="stepCountGuideButtonId" class="ButtonStepCountGuide" onClick="toggleStepCountGuide()">
 </button>		
 
-	<img id="stepCountGuideMiniImageId" class="ImageMiniStepCount" src="<?php echo base_url('assets/images/stepCountGuide.png');?>">	
+	<img id="stepCountGuideMiniImageId" class="ImageMiniStepCount" src="<?php echo base_url('assets/images/miniStepCountGuide.png');?>">	
 
 
 <!-- added by Mike, 20221129 -->
@@ -4899,20 +4948,6 @@ for ($iCount=0; $iCount<$iTileBgCountMax; $iCount++) {
 	<!-- added by Mike, 20221121 -->
 	<div id="divPuzzleTileImageSpaceBorderId" class="Image32x32TileSpaceBorder"></div>
 	
-	<img id="humanTileImageId" class="Image32x32TileFrame1" src="<?php echo base_url('assets/images/human.png');?>">	
-		
-<!-- edited by Mike, 20221120; from 20221117; Image32x32TileFrame1 -->
-	<img id="monsterTileImageId" class="Image64x64TileFrame1" src="<?php echo base_url('assets/images/monster.png');?>">	
-
-<!-- added by Mike, 20221128 -->
-	<img id="humanDeathTileImageId" class="Image32x32TileFrame1" src="<?php echo base_url('assets/images/favicon.png');?>">	
-
-
-	<!-- added by Mike, 20221124 -->
-	<div id="divActionHealthContainerId" class="ImageHealthTileContainer"></div>
-
-	<div id="divActionMonsterHealthContainerId" class="ImageMonsterHealthTileContainer"></div>
-
 	<!-- added by Mike, 20221122 -->
 <?php
 
