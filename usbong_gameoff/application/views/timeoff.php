@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20230115; from 20230112
+' @date updated: 20230118; from 20230115
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -3270,14 +3270,17 @@ arrayPuzzleTileCountId[iTileBgCount].setAttribute("src", getBaseURL()+sImagePuzz
 		}		
 		
 		
-		//added by Mike, 20221121
-		if (bIsPuzzleDone) {			
+		//added by Mike, 20221121; edited by Mike, 20230118
+//		if (bIsPuzzleDone) {		
+		if ((bIsPuzzleDone) ||		
+			(controllerGuideImage.style.visibility == "visible") ||
+			(stepCountGuideImage.style.visibility == "visible")) {
+			
 			for (iCount=0; iCount<iTotalKeyCount; iCount++) {
 				//set to FALSE all pressed keys
 				arrayKeyPressed[iCount]=false;
 			}
 		}
-		
 	
 		if (arrayPuzzleTileCountId[iTileBgCount].alt=="") {
 			//reminder: @last tile #16, space
@@ -4043,6 +4046,24 @@ function tempAlert(msg,duration)
 //edited by Mike, 20221030
 //function keyPressDown(iKey) {
 function keyPressDown(iKey, event) {	
+
+	//added by Mike, 20230118
+/*	//removed by Mike, 20230118; incorrect; no change in output
+	var controllerGuideImage = document.getElementById("controllerGuideImageId");			
+
+	var stepCountGuideImage = document.getElementById("stepCountGuideImageId");	
+		
+	if (controllerGuideImage.style.visibility == "visible") {
+  		return;
+	}
+
+	if (stepCountGuideImage.style.visibility == "visible") {
+  		return;
+	}
+
+	alert("dito");	
+*/	
+
 	arrayKeyPressed[iKey]=true;	
 	
 	//added by Mike, 20221121
