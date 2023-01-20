@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20230118; from 20230115
+' @date updated: 20230121; from 20230115
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -1105,18 +1105,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							line-height: 32px;
 							
 							visibility: hidden;
-/*							
-							width: 320px;
-							height: 288px;							
-*/							
-							/* default VALUES; 
-								TO-DO: -reverify: with mobile
-							*/
-/*
-							width: 320px;
-*/
 
-							width: 640px;
+							/* //edited by Mike, 20230121
+							//notes: @640px, excess shaking via MS EDGE Browser
+							*/
+							width: 480px; /*640px;*/
 							
 							object-fit: contain;
 
@@ -3270,17 +3263,14 @@ arrayPuzzleTileCountId[iTileBgCount].setAttribute("src", getBaseURL()+sImagePuzz
 		}		
 		
 		
-		//added by Mike, 20221121; edited by Mike, 20230118
-//		if (bIsPuzzleDone) {		
-		if ((bIsPuzzleDone) ||		
-			(controllerGuideImage.style.visibility == "visible") ||
-			(stepCountGuideImage.style.visibility == "visible")) {
-			
+		//added by Mike, 20221121
+		if (bIsPuzzleDone) {			
 			for (iCount=0; iCount<iTotalKeyCount; iCount++) {
 				//set to FALSE all pressed keys
 				arrayKeyPressed[iCount]=false;
 			}
 		}
+		
 	
 		if (arrayPuzzleTileCountId[iTileBgCount].alt=="") {
 			//reminder: @last tile #16, space
@@ -4046,24 +4036,6 @@ function tempAlert(msg,duration)
 //edited by Mike, 20221030
 //function keyPressDown(iKey) {
 function keyPressDown(iKey, event) {	
-
-	//added by Mike, 20230118
-/*	//removed by Mike, 20230118; incorrect; no change in output
-	var controllerGuideImage = document.getElementById("controllerGuideImageId");			
-
-	var stepCountGuideImage = document.getElementById("stepCountGuideImageId");	
-		
-	if (controllerGuideImage.style.visibility == "visible") {
-  		return;
-	}
-
-	if (stepCountGuideImage.style.visibility == "visible") {
-  		return;
-	}
-
-	alert("dito");	
-*/	
-
 	arrayKeyPressed[iKey]=true;	
 	
 	//added by Mike, 20221121
