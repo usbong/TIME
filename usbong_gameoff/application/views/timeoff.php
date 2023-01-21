@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20230121; from 20230115
+' @date updated: 20230121; from 20230121
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -2675,11 +2675,11 @@ function miniGamePuzzleUpdate() {
 	 	if (bHasViewedHowToPlayGuide) {	
 			controllerGuideButton.style.visibility = "visible"; 
 			controllerGuideMiniImage.style.visibility = "visible"; 
-			
+
 			//added by Mike, 20230113
 			stepCountGuideButton.style.visibility = "visible"; 
 			stepCountGuideMiniImage.style.visibility = "visible"; 
-						
+
 			//added by Mike, 20221213
 			stepCountStatusDiv.style.visibility = "visible";
 			stepCountStatusShadowDiv.style.visibility = "visible";
@@ -3557,10 +3557,38 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 			}	
 		}
 	}
+
+	//added by Mike, 20230121
+	var iTopRightPuzzleTilePosX=iHorizontalOffset+iOffsetWidth+iPuzzleTileWidth*iColumnCountMax+iBorderOffset*iColumnCountMax;
+		
+//	alert(iTopRightPuzzleTilePosX);
+//	alert(iPuzzleTileWidth);
+
+/*  //removed by Mike, 20230121
+	//stepCountStatusDiv
+	stepCountGuideMiniImage.style.visibility="hidden";
+	stepCountGuideButton.style.visibility="hidden";
+*/
+
+//	alert(stepCountStatusDiv.getBoundingClientRect().x);
+	//is stepCount intersecting with top-right puzzle tile
+	//via mobile? if so, set to hidden displayed step count status
+	//note: did not anymore add the y-axis 
+	if (stepCountStatusDiv.getBoundingClientRect().x<=iTopRightPuzzleTilePosX+iPuzzleTileWidth) {
+	
+		stepCountGuideMiniImage.style.visibility="visible";
+		stepCountGuideButton.style.visibility="visible";
+		
+		//stepCountStatusDiv.style.visibility="hidden";
+		
+		//alert("dito");
+		
+		stepCountStatusDiv.style.visibility = "hidden";
+		stepCountStatusShadowDiv.style.visibility = "hidden";		
+	}
+
 		
 	//added by Mike, 20220917	
-
-
 	//alert (buttonLeftKey.getBoundingClientRect().width);	//Example Output: 47.28334045410156
 	var iButtonWidth = buttonUpKey.getBoundingClientRect().width;
 	var iButtonHeight = buttonUpKey.getBoundingClientRect().height;
@@ -4494,10 +4522,41 @@ function onLoad() {
 		//reference: https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pointerType;
 		//last accessed: 20221122
 		switch(event.pointerType) {
-			case 'mouse':
+			case 'mouse':			
 				if (bIsUsingAppleWebKit) {
 				  bIsUsingAppleMac=true;
 				}
+
+				//added by Mike, 20230121
+				//TO-DO: put in reusable function
+
+				//note: ZOOM function causes position ERROR via screenX
+				var iXPos = event.clientX;//screenX;
+
+				//note: screenY includes BROWSER address bar, et cetera;
+				var iYPos = event.pageY; //screenY;
+/*
+				alert("iXPos: "+iXPos);
+				alert("iYPos: "+iYPos);		
+*/				
+				//TO-DO: -add: the following to verify if tile was clicked;
+/*				
+	iTileBgCount=0;
+
+	for (iRowCount=0; iRowCount<iRowCountMax; iRowCount++) {		
+		for (iColumnCount=0; iColumnCount<iColumnCountMax; iColumnCount++) {
+
+		//alert(iTileBgCount);
+			arrayPuzzleTilePos[iRowCount][iColumnCount]=iTileBgCount;
+				
+				//...
+
+		arrayPuzzleTileCountId[iTileBgCount].style.left = iHorizontalOffset+iOffsetWidth+iPuzzleTileWidth*iColumnCount+iBorderOffset*iColumnCount+"px";
+		
+//		arrayPuzzleTileCountId[iTileBgCount].style.top = iVerticalOffset+iPuzzleTileHeight*iColumnCount+"px";
+		arrayPuzzleTileCountId[iTileBgCount].style.top = 0+iOffsetHeight+iPuzzleTileHeight*iRowCount+iBorderOffset*iRowCount+"px";											
+								
+*/				
 				break;
 			case 'touch':
 			    //alert("TOUCH");		  
@@ -4527,13 +4586,14 @@ function onLoad() {
 		
 		iEventChangedTouchCount = event.changedTouches.length;
 		
-		
 		for (iCount=0; iCount<iEventChangedTouchCount; iCount++) {
 			
 		//added by Mike, 20221121
 		if (iCurrentMiniGame==MINI_GAME_PUZZLE) {
 			if (bHasPressedStart) {
+/* //removed by Mike, 20230121			
 				var monsterTile = document.getElementById("monsterTileImageId");
+*/				
 				//edited by Mike, 20221121
 				//note: ZOOM function causes position ERROR via screenX
 				var iXPos = event.changedTouches[iCount].clientX;//screenX;
@@ -4546,6 +4606,10 @@ function onLoad() {
 				alert("iXPos: "+iXPos);
 				alert("iYPos: "+iYPos);
 */
+
+	//TO-DO: -reuse: this part
+/* //removed by Mike, 20230121			
+
 				if (isPointIntersectingRect(iXPos, iYPos, monsterTile)) {
 					//added by Mike, 20221127
 					//TO-DO: -put: in function to be reusable
@@ -4563,6 +4627,8 @@ function onLoad() {
 					
 					changeMiniGame(MINI_GAME_ACTION);
 				}
+*/				
+				
 			}
 		}
 		
