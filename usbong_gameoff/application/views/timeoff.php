@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20230121; from 20230121
+' @date updated: 20230123; from 20230121
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -1855,7 +1855,19 @@ var bIsActionKeyPressed=false;
 var bHasHitMonster=false;
 var bHasDefeatedMonster=false;
 var bHasDefeatedHuman=false; //added by Mike, 20221127
-		  
+
+//added by Mike, 20230123
+var iPuzzleTileWidth=64;
+var iPuzzleTileHeight=64;
+
+//added by Mike, 20230123
+const iPuzzleTileTotalWidthMax=iPuzzleTileWidth*iColumnCountMax;
+const iPuzzleTileTotalHeightMax=iPuzzleTileHeight*iRowCountMax;
+
+var iBorderOffset=0;
+var iOffsetWidth=0;
+var iOffsetHeight=0;
+	  
 //added by Mike, 20220829
 const iHumanTileAnimationCountMax=6; //12;//20; //6;
 var iHumanTileAnimationCount=0;	  
@@ -3028,19 +3040,23 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 	let iPuzzleTileWidth=32;
 	let iPuzzleTileHeight=32;
 */
+/*	//removed by Mike, 20230123
 	let iPuzzleTileWidth=64;
 	let iPuzzleTileHeight=64;
-	
+*/
+
+/*	//removed by Mike, 20230123	
 	const iPuzzleTileTotalWidthMax=iPuzzleTileWidth*iColumnCountMax;
 	const iPuzzleTileTotalHeightMax=iPuzzleTileHeight*iRowCountMax;
-/*	
-	alert(iPuzzleTileWidth);
-	alert (iPuzzleTileTotalMaxWidth);
-*/	
-	//edited by Mike, 20221113
-	const iBorderOffset=0; //2;
-	const iOffsetWidth=iStageMaxWidth/2-iPuzzleTileTotalWidthMax/2;
-	const iOffsetHeight=iStageMaxHeight/2-iPuzzleTileTotalHeightMax/2;
+	
+//	alert(iPuzzleTileWidth);
+//	alert (iPuzzleTileTotalMaxWidth);
+	
+*/
+	//edited by Mike, 20230123
+	iBorderOffset=0; //2;
+	iOffsetWidth=iStageMaxWidth/2-iPuzzleTileTotalWidthMax/2;
+	iOffsetHeight=iStageMaxHeight/2-iPuzzleTileTotalHeightMax/2;
 	
 	//removed by Mike, 20221106
 	//16=4*4
@@ -3982,6 +3998,48 @@ function isPointIntersectingRect(iXPos, iYPos, mdo2) {
 }
 
 
+//added by Mike, 20221123
+//@return bool
+function isPointsOfRectIntersectingPointsOfRect(iXPos1, iYPos1, iXPos2, iYPos2) {
+		//alert("iPuzzleTileWidth: "+iPuzzleTileWidth);
+
+	let mdo1XPos = iXPos1;
+	let mdo1YPos = iYPos1;				
+	
+	let mdo1Width = iPuzzleTileWidth;
+	let mdo1Height = iPuzzleTileHeight; 
+
+	let mdo2XPos = iXPos2;
+	let mdo2YPos = iYPos2;				
+	
+	let mdo2Width = iPuzzleTileWidth;
+	let mdo2Height = iPuzzleTileHeight; 
+
+	let iOffsetXPosAsPixel = 0;
+	let iOffsetYPosAsPixel = 0;
+	
+	//alert("mdo1XPos: "+mdo1XPos);
+
+/*	
+	alert("mdo1XPos: "+mdo1XPos+"; "+"mdo1Width: "+mdo1Width);	
+	alert("mdo2XPos: "+mdo2XPos+"; "+"mdo2Width: "+mdo2Width);
+*/
+
+	if ((mdo2YPos+mdo2Height < mdo1YPos+iOffsetYPosAsPixel) || //is the bottom of mdo2 above the top of mdo1?
+		(mdo2YPos > mdo1YPos+mdo1Height-iOffsetYPosAsPixel) || //is the top of mdo2 below the bottom of mdo1?
+		(mdo2XPos+mdo2Width < mdo1XPos+iOffsetXPosAsPixel) || //is the right of mdo2 to the left of mdo1?
+		(mdo2XPos > mdo1XPos+mdo1Width-iOffsetXPosAsPixel)) //is the left of mdo2 to the right of mdo1?
+	{		
+		//no collision
+		return false;
+	}
+	
+		
+	return true;
+}
+
+
+
 //reference: https://stackoverflow.com/questions/15466802/how-can-i-auto-hide-alert-box-after-it-showing-it; last accessed: 20220911
 //answer by: Travis J, 20130317T2213
 function tempAlert(msg,duration)
@@ -4540,23 +4598,46 @@ function onLoad() {
 				alert("iYPos: "+iYPos);		
 */				
 				//TO-DO: -add: the following to verify if tile was clicked;
-/*				
-	iTileBgCount=0;
+	//iTileBgCount=0;
 
 	for (iRowCount=0; iRowCount<iRowCountMax; iRowCount++) {		
 		for (iColumnCount=0; iColumnCount<iColumnCountMax; iColumnCount++) {
 
-		//alert(iTileBgCount);
-			arrayPuzzleTilePos[iRowCount][iColumnCount]=iTileBgCount;
-				
-				//...
+			iTileBgCount=arrayPuzzleTilePos[iRowCount][iColumnCount];
 
+		//alert(iTileBgCount);
+/* //edited by Mike, 20230123		
+		var iTilePosX= arrayPuzzleTileCountId[iTileBgCount].style.left;
+		var iTilePosY= arrayPuzzleTileCountId[iTileBgCount].style.Top;
+*/
+
+		var iTilePosX= iHorizontalOffset+iOffsetWidth+iPuzzleTileWidth*iColumnCount+iBorderOffset*iColumnCount;
+		var iTilePosY=0+iOffsetHeight+iPuzzleTileHeight*iRowCount+iBorderOffset*iRowCount;
+
+		
+				//iPuzzleTileWidth
+//alert("iTilePosX: "+iTilePosX);
+		
+		if (isPointsOfRectIntersectingPointsOfRect(iXPos,iYPos,iTilePosX,iTilePosY)) {
+			//alert("HIT!");
+			//OK; row1; columns; 1 to 4; 
+			//row2; columns 5 to 8;...
+			alert("HIT! TILE COUNT: " + iTileBgCount);
+		}
+
+		
+		
+/*
 		arrayPuzzleTileCountId[iTileBgCount].style.left = iHorizontalOffset+iOffsetWidth+iPuzzleTileWidth*iColumnCount+iBorderOffset*iColumnCount+"px";
 		
 //		arrayPuzzleTileCountId[iTileBgCount].style.top = iVerticalOffset+iPuzzleTileHeight*iColumnCount+"px";
-		arrayPuzzleTileCountId[iTileBgCount].style.top = 0+iOffsetHeight+iPuzzleTileHeight*iRowCount+iBorderOffset*iRowCount+"px";											
-								
-*/				
+		arrayPuzzleTileCountId[iTileBgCount].style.top = 0+iOffsetHeight+iPuzzleTileHeight*iRowCount+iBorderOffset*iRowCount+"px";			
+*/		
+		}
+	}
+		
+		
+										
 				break;
 			case 'touch':
 			    //alert("TOUCH");		  
