@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20230125; from 20230123
+' @date updated: 20230126; from 20230125
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -3586,21 +3586,25 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 	stepCountGuideButton.style.visibility="hidden";
 */
 
-//	alert(stepCountStatusDiv.getBoundingClientRect().x);
-	//is stepCount intersecting with top-right puzzle tile
-	//via mobile? if so, set to hidden displayed step count status
-	//note: did not anymore add the y-axis 
-	if (stepCountStatusDiv.getBoundingClientRect().x<=iTopRightPuzzleTilePosX+iPuzzleTileWidth) {
-	
-		stepCountGuideMiniImage.style.visibility="visible";
-		stepCountGuideButton.style.visibility="visible";
+
+	//added by Mike, 20230126
+	if ((bHasPressedStart) && (bHasViewedHowToPlayGuide)){	
+	//	alert(stepCountStatusDiv.getBoundingClientRect().x);
+		//is stepCount intersecting with top-right puzzle tile
+		//via mobile? if so, set to hidden displayed step count status
+		//note: did not anymore add the y-axis 
+		if (stepCountStatusDiv.getBoundingClientRect().x<=iTopRightPuzzleTilePosX+iPuzzleTileWidth) {
 		
-		//stepCountStatusDiv.style.visibility="hidden";
-		
-		//alert("dito");
-		
-		stepCountStatusDiv.style.visibility = "hidden";
-		stepCountStatusShadowDiv.style.visibility = "hidden";		
+			stepCountGuideMiniImage.style.visibility="visible";
+			stepCountGuideButton.style.visibility="visible";
+			
+			//stepCountStatusDiv.style.visibility="hidden";
+			
+			//alert("dito");
+			
+			stepCountStatusDiv.style.visibility = "hidden";
+			stepCountStatusShadowDiv.style.visibility = "hidden";		
+		}
 	}
 
 		
