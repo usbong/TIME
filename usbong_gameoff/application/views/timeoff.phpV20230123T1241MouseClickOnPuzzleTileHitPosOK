@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20230125; from 20230123
+' @date updated: 20230123; from 20230121
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -4600,22 +4600,6 @@ function onLoad() {
 				//TO-DO: -add: the following to verify if tile was clicked;
 	//iTileBgCount=0;
 
-	//added by Mike, 20230125
-	//identify blank/empty tile
-	var iTileBgCountOfEmptyTile=-1;
-	
-	for (iRowCount=0; iRowCount<iRowCountMax; iRowCount++) {		
-		for (iColumnCount=0; iColumnCount<iColumnCountMax; iColumnCount++) 		{
-
-			iTileBgCount=arrayPuzzleTilePos[iRowCount][iColumnCount];
-			
-			if (arrayPuzzleTileCountId[iTileBgCount].alt=="") {
-				iTileBgCountOfEmptyTile=iTileBgCount;
-			}	
-		}
-	}
-
-
 	for (iRowCount=0; iRowCount<iRowCountMax; iRowCount++) {		
 		for (iColumnCount=0; iColumnCount<iColumnCountMax; iColumnCount++) {
 
@@ -4638,21 +4622,7 @@ function onLoad() {
 			//alert("HIT!");
 			//OK; row1; columns; 1 to 4; 
 			//row2; columns 5 to 8;...
-//			alert("HIT! TILE COUNT: " + iTileBgCount);
-						
-			//OK; number value of Tile
-			//alert (arrayPuzzleTileCountId[iTileBgCount].alt);
-			//if NOT blank/empty tile
-			if (arrayPuzzleTileCountId[iTileBgCount].alt!="") {
-				//alert("HIT! EXCHANGE! " + iTileBgCount);
-/*	//TO-DO: -update: this
-				//exchange				
-				arrayPuzzleTileCountId[iTileBgCountOfEmptyTile].alt=arrayPuzzleTileCountId[iTileBgCount].alt;
-
-				arrayPuzzleTileCountId[iTileBgCount].alt="";
-				break;
-*/				
-			}			
+			alert("HIT! TILE COUNT: " + iTileBgCount);
 		}
 
 		
