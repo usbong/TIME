@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20230126; from 20230125
+' @date updated: 20230127; from 20230126
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -224,6 +224,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							padding: 10px;
 
 							visibility: hidden;							
+							
+							z-index: 99;
 						}
 						
 						div.DivStepCountStatus
@@ -382,7 +384,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							
 							visibility: hidden;
 							
-							z-index: 99;
+							/* 	//2023-01-27
+								put on top of any object, except control buttons @z-index 99 
+							*/
+							z-index: 90;
 						}
 
 						button:active { /* focus out after click */
