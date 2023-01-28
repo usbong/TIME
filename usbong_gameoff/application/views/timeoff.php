@@ -223,7 +223,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							
 							padding: 10px;
 
-							visibility: hidden;							
+							visibility: hidden;	
+							
+							/* added by Mike, 20230128;
+								put above tile images */
+							z-index: 90; /*4;*/													
 						}
 						
 						div.DivStepCountStatus
@@ -238,7 +242,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 							/*opacity: 50%;*/
 
-							font-size: 42px;
+							font-size: 32px;/*42px;*/
 							font-weight: bold;
 							
 							padding: 10px;
@@ -261,7 +265,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 							/*opacity: 50%;*/
 
-							font-size: 42px;
+							font-size: 32px;/*42px;*/
 							font-weight: bold;
 							
 							padding: 10px;
@@ -2769,11 +2773,13 @@ function miniGamePuzzleUpdate() {
 			//added by Mike, 20221213
 			stepCountStatusDiv.style.visibility = "visible";
 			stepCountStatusShadowDiv.style.visibility = "visible";
-			
+
+/*
+			//removed by Mike, 20230128			
 			//added by Mike, 20230128
 			//TO-DO: -put: in mobile
 			stepCountStatusDiv.style.fontSize = "32px"; //42px 
-			stepCountStatusShadowDiv.style.fontSize = "32px"; //42px 			
+			stepCountStatusShadowDiv.style.fontSize = "32px"; //42px 	*/		
 		}
 		//added by Mike, 20221129
 		else {
@@ -3649,37 +3655,39 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 				else {
 					iDelayAnimationCountMovementStep++;
 				}
-			}	
+			}
+			
+			
+
+			//added by Mike, 20230128; from 20230121
+			var iTopRightPuzzleTilePosX=iHorizontalOffset+iOffsetWidth+iPuzzleTileWidth*iColumnCountMax+iBorderOffset*iColumnCountMax;
+				
+		//	alert(iTopRightPuzzleTilePosX);
+		//	alert(iPuzzleTileWidth);
+		
+		/*  //removed by Mike, 20230121
+			//stepCountStatusDiv
+			stepCountGuideMiniImage.style.visibility="hidden";
+			stepCountGuideButton.style.visibility="hidden";
+		*/
+		
+		//	alert(stepCountStatusDiv.getBoundingClientRect().x);
+			//is stepCount intersecting with top-right puzzle tile
+			//via mobile? if so, set to hidden displayed step count status
+			//note: did not anymore add the y-axis 
+			if (stepCountStatusDiv.getBoundingClientRect().x<=iTopRightPuzzleTilePosX+iPuzzleTileWidth) {
+			
+				stepCountGuideMiniImage.style.visibility="visible";
+				stepCountGuideButton.style.visibility="visible";
+				
+				//stepCountStatusDiv.style.visibility="hidden";
+				
+				//alert("dito");
+				
+				stepCountStatusDiv.style.visibility = "hidden";
+				stepCountStatusShadowDiv.style.visibility = "hidden";		
+			}
 		}
-	}
-
-	//added by Mike, 20230121
-	var iTopRightPuzzleTilePosX=iHorizontalOffset+iOffsetWidth+iPuzzleTileWidth*iColumnCountMax+iBorderOffset*iColumnCountMax;
-		
-//	alert(iTopRightPuzzleTilePosX);
-//	alert(iPuzzleTileWidth);
-
-/*  //removed by Mike, 20230121
-	//stepCountStatusDiv
-	stepCountGuideMiniImage.style.visibility="hidden";
-	stepCountGuideButton.style.visibility="hidden";
-*/
-
-//	alert(stepCountStatusDiv.getBoundingClientRect().x);
-	//is stepCount intersecting with top-right puzzle tile
-	//via mobile? if so, set to hidden displayed step count status
-	//note: did not anymore add the y-axis 
-	if (stepCountStatusDiv.getBoundingClientRect().x<=iTopRightPuzzleTilePosX+iPuzzleTileWidth) {
-	
-		stepCountGuideMiniImage.style.visibility="visible";
-		stepCountGuideButton.style.visibility="visible";
-		
-		//stepCountStatusDiv.style.visibility="hidden";
-		
-		//alert("dito");
-		
-		stepCountStatusDiv.style.visibility = "hidden";
-		stepCountStatusShadowDiv.style.visibility = "hidden";		
 	}
 
 		
@@ -5168,7 +5176,7 @@ alert("iButtonHeight"+iButtonHeight);
 	<img id="titleImageId" class="ImageTitle" src="<?php echo base_url('assets/images/gameOff2022Title.png');?>">	
 
 	
-	<div id="textStatusDivId" class="DivTextStatus">CONGRATULATIautoGeneratePuzzleFromEndONS!</div>
+	<div id="textStatusDivId" class="DivTextStatus">CONGRATULATIONS!</div>
 	<div id="textEnterDivId" class="DivTextEnter">PRESS ENTER</div>
 			
 <?php 
