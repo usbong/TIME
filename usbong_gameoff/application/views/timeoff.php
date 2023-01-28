@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20230127; from 20230126
+' @date updated: 20230128; from 20230125
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -224,8 +224,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							padding: 10px;
 
 							visibility: hidden;							
-							
-							z-index: 99;
 						}
 						
 						div.DivStepCountStatus
@@ -247,8 +245,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 							visibility: hidden;							
 							
-							/* put above image tiles */							
-							z-index: 4;
+							/* put above image tiles;
+								below step count button
+							*/							
+							z-index: 90; /*4;*/
 						}	
 						
 						div.DivStepCountStatusShadow
@@ -268,8 +268,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 							visibility: hidden;							
 							
-							/* put above image tiles */
-							z-index: 4;						}												
+							/* put above image tiles;
+								below step count button
+							*/							
+							z-index: 90; /*4;*/
+						}												
 						
 						div.DivTextEnter
 						{
@@ -384,10 +387,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							
 							visibility: hidden;
 							
-							/* 	//2023-01-27
-								put on top of any object, except control buttons @z-index 99 
-							*/
-							z-index: 90;
+							z-index: 99;
 						}
 
 						button:active { /* focus out after click */
@@ -1121,11 +1121,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							z-index: 10;									
 						}	
 
-						.ImageMiniController, .ImageMiniStepCount {
+						.ImageMiniController {
 							position: absolute;
-							
+
 							width: 32px;
 						    height: 32px;
+
 							object-fit: contain;
 
 							pointer-events: none;
@@ -1141,9 +1142,36 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							
 							visibility: hidden;						
 						}
+						
+						.ImageMiniStepCount {
+							position: absolute;
+
+/*	//edited by Mike, 20230128
+							width: 32px;
+						    height: 32px;
+*/						    
+							width: 64px;
+						    height: 32px;
+
+/*	//removed by Mike, 20230128
+							object-fit: contain;
+*/
+							pointer-events: none;
+							
+							/* put above button */
+							z-index: 20;		
+							
+							background: transparent;
+							opacity: 80%;
+							
+							/* //changed from margin */
+							padding: 10px;
+							
+							visibility: hidden;						
+						}
 
 						
-						.ButtonControllerGuide, .ButtonStepCountGuide {
+						.ButtonControllerGuide {
 							position: absolute;	
 							width: 32px;
 						    height: 32px;
@@ -1161,6 +1189,34 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							
 							visibility: hidden;			
 						}
+						
+
+						.ButtonStepCountGuide {
+							position: absolute;	
+/*	//edited by Mike, 20230128
+							width: 32px;
+						    height: 32px;
+*/						    
+							width: 64px;
+						    height: 32px;
+							object-fit: contain;
+  								  								
+  							background: transparent; /*#ffffff;*/
+  							border: none;
+								
+  							/*
+							background:url("../assets/images/gameOff2022ControllerGuideButton.png") no-repeat;
+							*/
+																								margin: 10px;
+							
+							/* //edited by Mike, 20230128
+								put above the step count text;
+								z-index: 20;	
+							*/
+							z-index: 99;	
+							
+							visibility: hidden;			
+						}						
 						
 						.ButtonControllerGuide:active, .ButtonStepCountGuide:active {
 							background: transparent; /*#ffffff;*/
@@ -2666,16 +2722,29 @@ function miniGamePuzzleUpdate() {
 		
 	var stepCountGuideButton = document.getElementById("stepCountGuideButtonId");	
 		
+	
+	//added by Mike, 20230128
+	//note: max to be 999
+	//iStepCountStatus=999;
+
+	if (iStepCountStatus>999) {
+		iStepCountStatus=999;
+	}
 
 	//added by Mike, 20221213
 	var stepCountStatusDiv = document.getElementById("stepCountStatusDivId");
 	//note: correct sequence to cause correct OUTPUT
 	stepCountStatusDiv.innerHTML = iStepCountStatus;
-	var iStepCountStatusDivWidth = (stepCountStatusDiv.clientWidth);	
+	//edited by Mike, 20230128
+	//var iStepCountStatusDivWidth = (stepCountStatusDiv.clientWidth);	
+	var iStepCountStatusDivWidthOffset=5;
+	var iStepCountStatusDivWidth = (stepCountStatusDiv.clientWidth)+iStepCountStatusDivWidthOffset;	
 
 	var stepCountStatusShadowDiv = document.getElementById("stepCountStatusShadowDivId");
 	stepCountStatusShadowDiv.innerHTML = iStepCountStatus;
-	var iStepCountStatusShadowDivWidth = (stepCountStatusShadowDiv.clientWidth);	
+	//edited by Mike, 20230128
+	//var iStepCountStatusShadowDivWidth = (stepCountStatusShadowDiv.clientWidth);	
+	var iStepCountStatusShadowDivWidth = (stepCountStatusShadowDiv.clientWidth)+iStepCountStatusDivWidthOffset;	
 	
 	//added by Mike, 20221130
 	if (!bHasViewedTitle) {
@@ -2700,6 +2769,11 @@ function miniGamePuzzleUpdate() {
 			//added by Mike, 20221213
 			stepCountStatusDiv.style.visibility = "visible";
 			stepCountStatusShadowDiv.style.visibility = "visible";
+			
+			//added by Mike, 20230128
+			//TO-DO: -put: in mobile
+			stepCountStatusDiv.style.fontSize = "32px"; //42px 
+			stepCountStatusShadowDiv.style.fontSize = "32px"; //42px 			
 		}
 		//added by Mike, 20221129
 		else {
@@ -3591,25 +3665,21 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 	stepCountGuideButton.style.visibility="hidden";
 */
 
-
-	//added by Mike, 20230126
-	if ((bHasPressedStart) && (bHasViewedHowToPlayGuide)){	
-	//	alert(stepCountStatusDiv.getBoundingClientRect().x);
-		//is stepCount intersecting with top-right puzzle tile
-		//via mobile? if so, set to hidden displayed step count status
-		//note: did not anymore add the y-axis 
-		if (stepCountStatusDiv.getBoundingClientRect().x<=iTopRightPuzzleTilePosX+iPuzzleTileWidth) {
+//	alert(stepCountStatusDiv.getBoundingClientRect().x);
+	//is stepCount intersecting with top-right puzzle tile
+	//via mobile? if so, set to hidden displayed step count status
+	//note: did not anymore add the y-axis 
+	if (stepCountStatusDiv.getBoundingClientRect().x<=iTopRightPuzzleTilePosX+iPuzzleTileWidth) {
+	
+		stepCountGuideMiniImage.style.visibility="visible";
+		stepCountGuideButton.style.visibility="visible";
 		
-			stepCountGuideMiniImage.style.visibility="visible";
-			stepCountGuideButton.style.visibility="visible";
-			
-			//stepCountStatusDiv.style.visibility="hidden";
-			
-			//alert("dito");
-			
-			stepCountStatusDiv.style.visibility = "hidden";
-			stepCountStatusShadowDiv.style.visibility = "hidden";		
-		}
+		//stepCountStatusDiv.style.visibility="hidden";
+		
+		//alert("dito");
+		
+		stepCountStatusDiv.style.visibility = "hidden";
+		stepCountStatusShadowDiv.style.visibility = "hidden";		
 	}
 
 		
