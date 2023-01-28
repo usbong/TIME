@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20230128; from 20230125
+' @date updated: 20230129; from 20230128
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -2825,6 +2825,8 @@ function miniGamePuzzleUpdate() {
 	var iStepCountGuideButtonWidth = stepCountGuideMiniImage.getBoundingClientRect().width; //32;
 //	var iStepGuideGuideButtonHeight= 32;
 */
+	//edited by Mike, 20230129
+	//TO-DO: -reduce: size IF mobile; example: half of width and height;
 	var iStepCountGuideButtonWidth = stepCountGuideMiniImage.clientWidth; 
 
 	//added by Mike, 20221121
@@ -3683,9 +3685,14 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 				//stepCountStatusDiv.style.visibility="hidden";
 				
 				//alert("dito");
-				
+				//TO-DO: -reduce: size for mobile; width and height, half?
+/* //edited by Mike, 20230129				
 				stepCountStatusDiv.style.visibility = "hidden";
 				stepCountStatusShadowDiv.style.visibility = "hidden";		
+*/
+				stepCountStatusDiv.style.visibility = "visible";
+				stepCountStatusShadowDiv.style.visibility = "visible";		
+
 			}
 		}
 	}
