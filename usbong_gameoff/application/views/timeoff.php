@@ -11,10 +11,14 @@
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
 ' @date updated: 20230130; from 20230129
+' @website address: http://www.usbong.ph
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
 '	2) Usbong Game Off 2022;
+'
+' Reminder:
+' 1) http://localhost/usbong_time/index.php/timeoff
 '
 ' Reference:
 ' 1) http://gcctech.org/csc/javascript/javascript_keycodes.htm;
