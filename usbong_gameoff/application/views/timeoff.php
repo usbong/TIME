@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20230129; from 20230128
+' @date updated: 20230130; from 20230129
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -220,7 +220,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 							font-size: 16px;
 							font-weight: bold;
-							
+
+/* //edited by Mike, 20230130							
+							margin: 10px;
+*/
 							padding: 10px;
 
 							visibility: hidden;	
@@ -245,7 +248,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							font-size: 32px;/*42px;*/
 							font-weight: bold;
 							
+/* //edited by Mike, 20230130							
 							padding: 10px;
+*/
+							/* //changed from margin */
+							/* //edited by Mike, 20230130 
+							margin: 10px;
+							*/
+							padding: 0px;
 
 							visibility: hidden;							
 							
@@ -268,7 +278,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							font-size: 32px;/*42px;*/
 							font-weight: bold;
 							
+/* //edited by Mike, 20230130							
 							padding: 10px;
+*/
+							/* //changed from margin */
+							/* //edited by Mike, 20230130 
+							margin: 10px;
+							*/
+							padding: 0px;
+
 
 							visibility: hidden;							
 							
@@ -289,7 +307,15 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							font-size: 16px;
 							font-weight: bold;
 							
+/* //edited by Mike, 20230130							
 							padding: 10px;
+*/
+							/* //changed from margin */
+							/* //edited by Mike, 20230130 
+							margin: 10px;
+							*/
+							padding: 0px;
+
 
 							visibility: visible;							
 						}						
@@ -315,7 +341,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							top: 0px;
 							position: absolute;
 							
+/* //edited by Mike, 20230130							
+							margin: 12px;
+*/
 							padding: 12px;
+
 							background-color: #ffe400;
 							color: #222222;
 							font-size: 16px;
@@ -1169,7 +1199,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							opacity: 80%;
 							
 							/* //changed from margin */
+							/* //edited by Mike, 20230130 
 							padding: 10px;
+							*/
+							margin: 0px;
 							
 							visibility: hidden;						
 						}
@@ -2029,7 +2062,7 @@ function toggleControllerGuide() {
 	//edited by Mike, 20221129
 //	if (bHasPressedStart) {
 	if ((bHasPressedStart) && (bHasViewedHowToPlayGuide)){	
-		var controllerGuideImage = document.getElementById("controllerGuideImageId");			
+		var controllerGuideImage = document.getElementById("controllerGuideImageId");
 	
 		//added by Mike, 20221122
 		var controllerGuideButton = document.getElementById("controllerGuideButtonId");
@@ -2099,7 +2132,7 @@ function toggleStepCountGuide() {
 //added by Mike, 20221129
 function toggleHowToPlayGuide() {
 	if (bHasPressedStart) {
-		var howToPlayGuideImage = document.getElementById("howToPlayGuideImageId");			
+		var howToPlayGuideImage = document.getElementById("howToPlayGuideImageId");
 		
 		//alert("dito");		
 			
@@ -3157,7 +3190,8 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 	
 	//added by Mike, 20221121
 	var puzzleTileImageSpaceBorder = document.getElementById("divPuzzleTileImageSpaceBorderId");
-	
+
+/* //removed by Mike, 20230129
 	//added by Mike, 202221121
 	var miniPuzzleTileImage = document.getElementById("miniPuzzleTileImageId");	
 
@@ -3169,6 +3203,7 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 		
 	miniPuzzleTileImage.style.left = iHorizontalOffset+"px";
 	miniPuzzleTileImage.style.top= (iStageMaxHeight-iMiniPuzzleHeight)+"px";
+*/
 
 	//added by Mike, 20221124
 	var myAudio = document.getElementById("myAudioId");
@@ -3181,11 +3216,12 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 	switch (iCurrentPuzzleStage) {
 		case 0: //starting level			
 		
-/*	//removed by Mike, 20221122; no mini puzzle image in starting level
-			miniPuzzleTileImage.setAttribute("src", getBaseURL()+"assets/images/count1024x1024.png");			
-*/			
+//	//removed by Mike, 20221122; no mini puzzle image in starting level
+////			miniPuzzleTileImage.setAttribute("src", getBaseURL()+"assets/images/count1024x1024.png");			
+			
+/* //removed by Mike, 20230129
 			miniPuzzleTileImage.style.visibility = "hidden";
-
+*/
 			//added by Mike, 20221124
 //			alert("myAudio.src: "+myAudio.src);
 //			alert("getBaseURL()+sAudioPuzzleStage0: "+getBaseURL()+sAudioPuzzleStage0);
@@ -3224,9 +3260,10 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 			}
 			break;
 		case 1: //next level; duck army
+/* //removed by Mike, 20230129
 			//note: cicada sound  : school bell in forest
 			miniPuzzleTileImage.setAttribute("src", getBaseURL()+sImagePuzzleStage1);
-
+*/
 			//added by Mike, 20221124			
 			if (myAudio.src!=getBaseURL()+sAudioPuzzleStage1) {	
 				if (myAudio.volume>0) {
@@ -3255,8 +3292,9 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 			}			
 			break;
 		case 2: //next level; cambodia
+/* //removed by Mike, 20230129		
 			miniPuzzleTileImage.setAttribute("src", getBaseURL()+sImagePuzzleStage2);
-
+*/
 			//added by Mike, 20221127
 			//note: myAudio NOT played IF same file due to instructions
 			//added by Mike, 20221124			
@@ -3288,10 +3326,12 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 			break;			
 			
 		default: //END
+/* //removed by Mike, 20230129		
 //			miniPuzzleTileImage.setAttribute("src", getBaseURL()+"assets/images/blank.png");			
 			miniPuzzleTileImage.setAttribute("src", getBaseURL()+sImagePuzzleStage0);			
 			
 			miniPuzzleTileImage.style.visibility = "hidden";
+*/
 			break;
 	}	
 	
@@ -3659,8 +3699,7 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 				}
 			}
 			
-			
-
+		
 			//added by Mike, 20230128; from 20230121
 			var iTopRightPuzzleTilePosX=iHorizontalOffset+iOffsetWidth+iPuzzleTileWidth*iColumnCountMax+iBorderOffset*iColumnCountMax;
 				
@@ -5153,10 +5192,11 @@ alert("iButtonHeight"+iButtonHeight);
 
 <!-- edited by Mike, 20221119; from 20221105; mtPinatubo20150115T1415.jpg -->
 	<img id="puzzleImageId" class="ImageBackgroundOfPuzzle" src="<?php echo base_url('assets/images/blank.png');?>">	
-	
-<!-- added by Mike, 20221121 -->	
-	<img id="miniPuzzleTileImageId" class="ImageMiniPuzzleImage" onerror="" src="<?php echo base_url('assets/images/cambodia1024x1024-20141225T0958.jpg');?>" alt="" title="">	
 
+<!-- added by Mike, 20221121; removed by Mike, 20230129	
+	<img id="miniPuzzleTileImageId" class="ImageMiniPuzzleImage" onerror="" src="<?php echo base_url('assets/images/cambodia1024x1024-20141225T0958.jpg');?>" alt="" title="">	
+-->
+ 
 <!-- added by Mike, 20221122 -->
 	<img id="controllerGuideImageId" class="ImageController" src="<?php echo base_url('assets/images/gameOff2022ControllerGuide.png');?>">	
 
