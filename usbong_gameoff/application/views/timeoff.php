@@ -306,16 +306,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 							font-size: 16px;
 							font-weight: bold;
-							
-/* //edited by Mike, 20230130							
-							padding: 10px;
-*/
-							/* //changed from margin */
-							/* //edited by Mike, 20230130 
-							margin: 10px;
-							*/
-							padding: 0px;
 
+							/* //noted by Mike, 20230130 */
+							padding: 10px;
 
 							visibility: visible;							
 						}						
