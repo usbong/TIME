@@ -10,15 +10,11 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20230130; from 20230129
-' @website address: http://www.usbong.ph
+' @date updated: 20230207; from 20230130
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
 '	2) Usbong Game Off 2022;
-'
-' Reminder:
-' 1) http://localhost/usbong_time/index.php/timeoff
 '
 ' Reference:
 ' 1) http://gcctech.org/csc/javascript/javascript_keycodes.htm;
@@ -405,8 +401,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							position: absolute;
 							
 							padding: 10px; /*12px;*/
-							background-color: rgb(60,60,60);							
-							color: rgb(60,60,60); /*rgb(30,30,30);*/
+
+							/*background-color: rgb(60,60,60);*/							
+							/*color: rgb(60,60,60);*/ /*rgb(30,30,30);*/
+
+							background-color: #3c3c3cAA; /*rgb(107,169,39);*/
+							color: #3c3c3c00; /*rgb(107,169,39);*/ 
 
 							font-size: 16px;
 							font-weight: bold;
@@ -426,8 +426,14 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							background-color: rgb(120,120,120);
 							color: rgb(120,120,120); 
 */
+/*	//edited by Mike, 20230207
 							background-color: rgb(20,20,20);
 							color: rgb(20,20,20); 
+*/
+							background-color: #141414AA; /*rgb(107,169,39);*/
+							color: #14141400; /*rgb(107,169,39);*/ 
+
+
 						}
 						
 						/*
@@ -447,8 +453,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							  background-color: rgb(123,196,45);							
 							  color: rgb(123,196,45);
 							*/
-							background-color: rgb(107,169,39);
-							color: rgb(107,169,39); 
+							background-color: #6ba927AA; /*rgb(107,169,39);*/
+							color: #6ba92700; /*rgb(107,169,39);*/ 
+
+							/*opacity: 80%;*/
 							
 							font-size: 16px;
 							font-weight: bold;
@@ -2900,6 +2908,9 @@ function miniGamePuzzleUpdate() {
 	
 	imgPuzzle.style.zIndex=0; //added by Mike, 20221118
 		
+	//added by Mike, 20230207
+	//TO-DO: -increase: touchable part (lower zIndex than displayed button) for inputs
+		
 	//added by Mike, 20220917; edited by Mike, 20220918
 	//var linkAsButtonLeftKey = document.getElementById("leftKeyId");
 	var buttonLeftKey = document.getElementById("leftKeyId");
@@ -3736,9 +3747,9 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 		
 	//added by Mike, 20220917	
 	//alert (buttonLeftKey.getBoundingClientRect().width);	//Example Output: 47.28334045410156
-	var iButtonWidth = buttonUpKey.getBoundingClientRect().width;
+	//var iButtonWidth = buttonUpKey.getBoundingClientRect().width;
+	var iButtonWidth = buttonRightKey.getBoundingClientRect().width;	
 	var iButtonHeight = buttonUpKey.getBoundingClientRect().height;
-
 
 
 	//if (!document.fullscreenElement) {	
@@ -3794,6 +3805,9 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 			}
 		}
 		else {			
+			//added by Mike, 20230207
+			//TO-DO: -verify: with iPAD;
+		
 			//added by Mike, 20221002
 			iVerticalOffset=(iStageMaxHeight+(screen.height/1.5-iStageMaxHeight));
 			
@@ -3801,7 +3815,11 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 
 			if (window.matchMedia("(orientation: landscape)").matches) {
 				//note: for CONTROLLER BUTTONS
-				iVerticalOffset=(screen.height-buttonUpKey.clientHeight*3); //set to 3 button height from the bottom
+				//edited by Mike, 20230207
+				//iVerticalOffset=(screen.height-buttonUpKey.clientHeight*3); //set to 3 button height from the bottom
+				//put @vertical center 
+				//iVerticalOffset=(screen.height/2); 
+				iVerticalOffset=(screen.height/2-buttonUpKey.clientHeight); 
 			}				
 		}
 	
@@ -3814,14 +3832,17 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 		buttonLeftKey.style.top =  iVerticalOffset+iButtonHeight*1+"px"; //iStageMaxHeight+iButtonHeight*1+"px";
 		buttonLeftKey.style.visibility = "visible";
 
-		//added by Mike, 20221019
+		//edited by Mike, 20230207; from 20221019
+		//TO-DO: -fix: execss pixel on right of neutral key
 		buttonLeverCenterNeutralKey.style.left = (0)+iButtonWidth*1+"px";
 		buttonLeverCenterNeutralKey.style.top =  iVerticalOffset+iButtonHeight*1+"px"; 
-		buttonLeverCenterNeutralKey.style.visibility = "visible";
+		//buttonLeverCenterNeutralKey.style.visibility = "visible";
+		buttonLeverCenterNeutralKey.style.visibility = "hidden";
 
 		buttonRightKey.style.left = (0)+iButtonWidth*2+"px";
 		buttonRightKey.style.top =  iVerticalOffset+iButtonHeight*1+"px";//iStageMaxHeight+iButtonHeight*1+"px";
 		buttonRightKey.style.visibility = "visible";
+//		buttonRightKey.style.visibility = "hidden";
 
 		buttonDownKey.style.left = (0)+iButtonWidth*1+"px";
 		buttonDownKey.style.top =  iVerticalOffset+iButtonHeight*2+"px"; //iStageMaxHeight+iButtonHeight*2+"px";
@@ -4970,8 +4991,10 @@ function onLoad() {
 			//added by Mike, 20221031
 			var buttonRightKey = document.getElementById("rightKeyId");
 			var buttonUpKey = document.getElementById("upKeyId");
-
-			var iButtonWidth = buttonRightKey.getBoundingClientRect().width;
+			
+			//edited by Mike, 20230207
+			//var iButtonWidth = buttonRightKey.getBoundingClientRect().width;
+			var iButtonWidth = buttonUpKey.getBoundingClientRect().width;
 			var iButtonHeight = buttonUpKey.getBoundingClientRect().height;
 			
 	
