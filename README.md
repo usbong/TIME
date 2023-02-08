@@ -79,7 +79,7 @@ classified as Entertainment
 6) [ほぼ日刊イトイ新聞](https://www.1101.com/home.html)
 
 ## Open Source Software License
-Copyright 2022 SYSON, MICHAEL B.
+Copyright 2022~2023 SYSON, MICHAEL B.
 
 Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You may obtain a copy of the License at
 
