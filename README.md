@@ -25,6 +25,16 @@ http://store.usbong.ph/timeoff (work-in-progress)
 </tr>
 </table>
 
+### Notes:
+
+1) observed: select APPS are not anymore played after FINISHING GAME via LAST BOSS;<br/>
+--> executing: ACTIONS for APP to still be quickly PLAYABLE,<br/>
+--> by self even after knowing the techniques to WIN;<br/>
+--> notes: STEPS count;<br/>
+--> remembers: observing SOLITAIRE CARDS GAME on TABLET PC,<br/>
+--> to be continuously played by GERIATRIC PATIENT;<br/>
+--> notes: ELAPSED TIME count;<br/>
+--> adds: as QUESTION, FIGHTING GAMES played by GERIATRIC PATIENTS also?
 
 ### Additional Notes:
 
