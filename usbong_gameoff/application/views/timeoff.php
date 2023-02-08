@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20230207; from 20230130
+' @date updated: 20230209; from 20230207
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -3748,7 +3748,10 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 	//added by Mike, 20220917	
 	//alert (buttonLeftKey.getBoundingClientRect().width);	//Example Output: 47.28334045410156
 	//var iButtonWidth = buttonUpKey.getBoundingClientRect().width;
-	var iButtonWidth = buttonRightKey.getBoundingClientRect().width;	
+	//edited by Mike, 20230209
+	var iButtonWidth = buttonRightKey.getBoundingClientRect().width;
+	//notes: iButtonCenterNeutralKeyWidth longer than iButtonWidth
+	//var iButtonCenterNeutralKeyWidth = buttonLeverCenterNeutralKey.getBoundingClientRect().width;	
 	var iButtonHeight = buttonUpKey.getBoundingClientRect().height;
 
 
@@ -3833,13 +3836,15 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 		buttonLeftKey.style.visibility = "visible";
 
 		//edited by Mike, 20230207; from 20221019
-		//TO-DO: -fix: execss pixel on right of neutral key
+		//TO-DO: -fix: excess pixel on right of neutral key
 		buttonLeverCenterNeutralKey.style.left = (0)+iButtonWidth*1+"px";
 		buttonLeverCenterNeutralKey.style.top =  iVerticalOffset+iButtonHeight*1+"px"; 
-		//buttonLeverCenterNeutralKey.style.visibility = "visible";
-		buttonLeverCenterNeutralKey.style.visibility = "hidden";
+		buttonLeverCenterNeutralKey.style.visibility = "visible";
+		//buttonLeverCenterNeutralKey.style.visibility = "hidden";
 
+		//edited by Mike, 20230209
 		buttonRightKey.style.left = (0)+iButtonWidth*2+"px";
+		//buttonRightKey.style.left = (0)+iButtonCenterNeutralKeyWidth*2+"px";
 		buttonRightKey.style.top =  iVerticalOffset+iButtonHeight*1+"px";//iStageMaxHeight+iButtonHeight*1+"px";
 		buttonRightKey.style.visibility = "visible";
 //		buttonRightKey.style.visibility = "hidden";
@@ -5325,8 +5330,8 @@ for ($iCount=0; $iCount<$iActionHealthMax; $iCount++) {
 <button id="rightKeyId" class="controlKeyButtonRight" ontouchstart="keyPressDown(<?php echo iKEY_D;?>, event)" ontouchend="keyPressUp(<?php echo iKEY_D;?>, event)">AAA</button>
 <button id="downKeyId" class="controlKeyButtonDown" ontouchstart="keyPressDown(<?php echo iKEY_S;?>, event)" ontouchend="keyPressUp(<?php echo iKEY_S;?>, event)">AAA</button>
 
-<!-- //added by Mike, 20221019 -->
-<button id="leverCenterNeutralKeyId" class="controlKeyButtonLeverCenterNeutral">OOO</button>
+<!-- //edited by Mike, 20230209; from 20221019 -->
+<button id="leverCenterNeutralKeyId" class="controlKeyButtonLeverCenterNeutral">AAA</button>
 
 <!-- //added by Mike, 20221021 -->
 <button id="letterIKeyId" class="controlKeyButtonLetterI" ontouchstart="keyPressDown(<?php echo iKEY_I;?>, event)" ontouchend="keyPressUp(<?php echo iKEY_I;?>, event)">AAA</button>
@@ -5334,8 +5339,8 @@ for ($iCount=0; $iCount<$iActionHealthMax; $iCount++) {
 <button id="letterLKeyId" class="controlKeyButtonLetterL" ontouchstart="keyPressDown(<?php echo iKEY_L;?>, event)" ontouchend="keyPressUp(<?php echo iKEY_L;?>, event)">AAA</button>
 <button id="letterKKeyId" class="controlKeyButtonLetterK" ontouchstart="keyPressDown(<?php echo iKEY_K;?>, event)" ontouchend="keyPressUp(<?php echo iKEY_K;?>, event)">AAA</button>
 
-<!-- //added by Mike, 20221019 -->
-<button id="rightLeverCenterNeutralKeyId" class="controlKeyButtonRightLeverCenterNeutral">OOO</button>
+<!-- //edited by Mike, 20230209; from 20221019 -->
+<button id="rightLeverCenterNeutralKeyId" class="controlKeyButtonRightLeverCenterNeutral">AAA</button>
 
 <!-- //edited by Mike, 20221110
 	//reference: https://stackoverflow.com/questions/12804028/safari-with-audio-tag-not-working; 
