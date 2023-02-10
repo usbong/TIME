@@ -35,3 +35,15 @@ AUTO-GENERATE puzzle for the day if does NOT yet exist when user enters the web 
 --> instead of auto-verifying and generating the puzzle for the day<br/> 
 --> when OS boots from shutdown;<br/>
 --> due to: appeared faster to execute;
+
+## 2) CONTROLLER INPUT technique 
+
+observed: ACTION BUTTONS (at RIGHT PANEL) are NOT hit by human user fingers;<br/>
+--> when the buttons are NOT observed by human user;<br/>
+--> adds: instead the space, e.g. TOP-LEFT, is hit;<br/>
+--> TO-DO: -verify: adding ACTION button for TOP-LEFT, et cetera;<br/>
+--> adds: assistive AI to auto-identify if human user going for LEFT, instead of TOP;<br/>
+<br/>
+notes: TOUCH screen technique of TILE to move exists;<br/>
+--> however, CONTROLLER INPUT can be reused, e.g. turn-based GAME;
+
