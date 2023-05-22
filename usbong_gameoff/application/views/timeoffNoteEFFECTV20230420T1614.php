@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20230522; from 20230520
+' @date updated: 20230520; from 20230209
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -4760,9 +4760,6 @@ function onLoad() {
 	//identify blank/empty tile
 	var iTileBgCountOfEmptyTile=-1;
 	
-	//added by Mike, 20230522
-	bIsActionKeyPressed=true;
-		
 	for (iRowCount=0; iRowCount<iRowCountMax; iRowCount++) {		
 		for (iColumnCount=0; iColumnCount<iColumnCountMax; iColumnCount++) 		{
 
@@ -4803,73 +4800,17 @@ function onLoad() {
 			//alert (arrayPuzzleTileCountId[iTileBgCount].alt);
 			//if NOT blank/empty tile
 			if (arrayPuzzleTileCountId[iTileBgCount].alt!="") {
-/*				
-				alert("HIT! EXCHANGE! " + iTileBgCount);
+				//alert("HIT! EXCHANGE! " + iTileBgCount);
 //	//TO-DO: -update: this
 				//exchange				
 				
 				alert("EXCHANGE! EMPTY location: "+iTileBgCountOfEmptyTile);
-*/
 				
-				//alert("arrayPuzzleTileCountId[iTileBgCount].alt: " + arrayPuzzleTileCountId[iTileBgCount].alt);			
-
-/*				arrayPuzzleTileCountId[iTileBgCountOfEmptyTile].alt=arrayPuzzleTileCountId[iTileBgCount].alt;
+				//arrayPuzzleTileCountId[iTileBgCountOfEmptyTile].alt=arrayPuzzleTileCountId[iTileBgCount].alt;
 
 				arrayPuzzleTileCountId[iTileBgCount].alt="";
-*/				
-				//added by Mike, 20230522
-				//-----
-				bIsActionKeyPressed=true;
-/*
-arrayPuzzleTileCountId[iTileBgCount].className="Image32x32Tile";
-				arrayPuzzleTileCountId[iTargetTileBgCount].className="Image32x32TileSpace";
+				break;
 				
-arrayPuzzleTileCountId[iTileBgCountOfEmptyTile].alt=arrayPuzzleTileCountId[iTileBgCount].alt;
-*/
-/*
-arrayPuzzleTileCountId[iTileBgCount].className="Image32x32Tile";
-arrayPuzzleTileCountId[iTargetTileBgCount].className="Image32x32TileSpace";
-*/
-arrayPuzzleTileCountId[iTileBgCountOfEmptyTile].className="Image32x32Tile";
-arrayPuzzleTileCountId[iTargetTileBgCount].className="Image32x32TileSpace";
-
-
-//arrayPuzzleTileCountId[iTileBgCountOfEmptyTile].alt=arrayPuzzleTileCountId[iTileBgCount].alt;
-
-arrayPuzzleTileCountId[iTileBgCountOfEmptyTile].alt=arrayPuzzleTileCountId[iTileBgCount].alt;
-
-
-//				alert("dito");
-/*
-				arrayPuzzleTileCountId[iTileBgCount].alt="";
-				arrayPuzzleTileCountId[iTargetTileBgCount].alt="";
-*/	
-	//TO-DO: -verify: "iTargetTileBgCount" to cause incorrect output
-				
-				//arrayPuzzleTileCountId[iTileBgCountOfEmptyTile	].alt="";
-								
-				if (!bIsInitAutoGeneratePuzzleFromEnd) {
-					//note: iCountMovementStep
-					//iStepCountStatus++;
-					
-					if (arrayPuzzleTileCountId[iTileBgCount].alt=="") {
-						bHasExecutedTileExchange=false;
-						alert( "FALSE!" );
-					}
-					else {
-						bHasExecutedTileExchange=true;
-						iStepCountStatus++;
-					}
-				}					
-				
-				for (iKeyCount=0; iKeyCount<iDirectionTotalKeyCount; iKeyCount++) {
-					arrayKeyPressed[iKeyCount]=false;
-				}
-				//-----
-								
-				//edited by Mike, 20230522
-//				break;	//causes multiple entering in the function	
-				return;		
 			}			
 		}
 
