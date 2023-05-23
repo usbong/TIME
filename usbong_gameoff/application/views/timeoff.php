@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20230522; from 20230520
+' @date updated: 20230523; from 20230522
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -4762,6 +4762,9 @@ function onLoad() {
 	
 	//added by Mike, 20230522
 	bIsActionKeyPressed=true;
+
+	//added by Mike, 20230523
+	bHasExecutedTileExchange=false;
 		
 	for (iRowCount=0; iRowCount<iRowCountMax; iRowCount++) {		
 		for (iColumnCount=0; iColumnCount<iColumnCountMax; iColumnCount++) 		{
@@ -4830,7 +4833,20 @@ arrayPuzzleTileCountId[iTileBgCountOfEmptyTile].alt=arrayPuzzleTileCountId[iTile
 arrayPuzzleTileCountId[iTileBgCount].className="Image32x32Tile";
 arrayPuzzleTileCountId[iTargetTileBgCount].className="Image32x32TileSpace";
 */
+//edited by Mike, 20230523
 arrayPuzzleTileCountId[iTileBgCountOfEmptyTile].className="Image32x32Tile";
+
+var puzzleTileImageTargetBorder = document.getElementById("divPuzzleTileImageTargetBorderId");
+
+//puzzleTileImageTargetBorder.style.visibility = "hidden";
+puzzleTileImageTargetBorder.style.visibility = "visible";
+
+//reminder: arrayPuzzleTileCountId[iTileBgCount].alt="";
+					puzzleTileImageTargetBorder.style.left = arrayPuzzleTileCountId[iTileBgCount].style.left;
+					
+					puzzleTileImageTargetBorder.style.top = arrayPuzzleTileCountId[iTileBgCount].style.top;
+					
+					
 arrayPuzzleTileCountId[iTargetTileBgCount].className="Image32x32TileSpace";
 
 
@@ -4838,6 +4854,12 @@ arrayPuzzleTileCountId[iTargetTileBgCount].className="Image32x32TileSpace";
 
 arrayPuzzleTileCountId[iTileBgCountOfEmptyTile].alt=arrayPuzzleTileCountId[iTileBgCount].alt;
 
+//added by Mike, 20230523
+//TO-DO: -add: NO DIAGONAL exchange;
+iTargetTileBgCount=iTileBgCountOfEmptyTile;
+				
+				arrayPuzzleTileCountId[iTileBgCount].alt="";
+				
 
 //				alert("dito");
 /*
@@ -4851,15 +4873,18 @@ arrayPuzzleTileCountId[iTileBgCountOfEmptyTile].alt=arrayPuzzleTileCountId[iTile
 				if (!bIsInitAutoGeneratePuzzleFromEnd) {
 					//note: iCountMovementStep
 					//iStepCountStatus++;
-					
+/*					
 					if (arrayPuzzleTileCountId[iTileBgCount].alt=="") {
 						bHasExecutedTileExchange=false;
-						alert( "FALSE!" );
+						//alert( "FALSE!" );
 					}
 					else {
+*/					
 						bHasExecutedTileExchange=true;
 						iStepCountStatus++;
+/*
 					}
+*/					
 				}					
 				
 				for (iKeyCount=0; iKeyCount<iDirectionTotalKeyCount; iKeyCount++) {
