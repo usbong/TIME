@@ -25,6 +25,8 @@ http://store.usbong.ph/timeoff (work-in-progress)
 </tr>
 </table>
 
+<img src="https://github.com/usbong/TIME/blob/main/screenshots/usbongTIMEMouseClickV20230523T1547.gif" width="40%">
+
 ### Notes:
 
 1) observed: select APPS are not anymore played after FINISHING GAME via LAST BOSS;<br/>
