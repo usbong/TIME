@@ -41,7 +41,11 @@ date_default_timezone_set('Asia/Hong_Kong');
 
 //edited by Mike, 20221104
 //$config['base_url'] = 'http://localhost/usbong_flash/'; 
-$config['base_url'] = 'http://localhost/usbong_gameoff/'; 
+//edited by Mike, 20230527
+//$config['base_url'] = 'http://localhost/usbong_gameoff/'; 
+//note: using "localhost" causes IMAGES to not load correctly,
+//when server is accessed via another machine;
+$config['base_url'] = 'http://192.168.11.01:80/usbong_gameoff/'; 
 
 
 /*
