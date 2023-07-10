@@ -3235,19 +3235,10 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 	
 //iCurrentPuzzleStage=1;
 	//miniPuzzleTileImage
+	
+/* //removed by Mike, 20230710
 	switch (iCurrentPuzzleStage) {
 		case 0: //starting level			
-		
-//	//removed by Mike, 20221122; no mini puzzle image in starting level
-////			miniPuzzleTileImage.setAttribute("src", getBaseURL()+"assets/images/count1024x1024.png");			
-			
-/* //removed by Mike, 20230129
-			miniPuzzleTileImage.style.visibility = "hidden";
-*/
-			//added by Mike, 20221124
-//			alert("myAudio.src: "+myAudio.src);
-//			alert("getBaseURL()+sAudioPuzzleStage0: "+getBaseURL()+sAudioPuzzleStage0);
-
 			if (myAudio.src!=getBaseURL()+sAudioPuzzleStage0) {
 				if (myAudio.volume>0) {
 					//edited by Mike, 20221125; from 20221124
@@ -3281,81 +3272,12 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 				myAudio.volume=fMyAudioVolume;
 			}
 			break;
-		case 1: //next level; duck army
-/* //removed by Mike, 20230129
-			//note: cicada sound  : school bell in forest
-			miniPuzzleTileImage.setAttribute("src", getBaseURL()+sImagePuzzleStage1);
-*/
-			//added by Mike, 20221124			
-			if (myAudio.src!=getBaseURL()+sAudioPuzzleStage1) {	
-				if (myAudio.volume>0) {
-					fMyAudioVolume-=0.2;
-					if (fMyAudioVolume<0) {
-						fMyAudioVolume=0;
-					}
-					
-					myAudio.volume=fMyAudioVolume; 
-					
-					//alert(fMyAudioVolume);
-				}
-				else {				
-					//alert("dito");
-					myAudio.pause();
-					myAudio.setAttribute("src", getBaseURL()+sAudioPuzzleStage1);
-
-					fMyAudioVolume=0.2;//1.0;
-					myAudio.volume=fMyAudioVolume;
-
-					//added by Mike, 20221129
-					if (textEnterDiv.style.visibility=="hidden") {
-						myAudio.play();	
-					}
-				}
-			}			
-			break;
-		case 2: //next level; cambodia
-/* //removed by Mike, 20230129		
-			miniPuzzleTileImage.setAttribute("src", getBaseURL()+sImagePuzzleStage2);
-*/
-			//added by Mike, 20221127
-			//note: myAudio NOT played IF same file due to instructions
-			//added by Mike, 20221124			
-			if (myAudio.src!=getBaseURL()+sAudioPuzzleStage2) {	
-				if (myAudio.volume>0) {
-					fMyAudioVolume-=0.2;
-					if (fMyAudioVolume<0) {
-						fMyAudioVolume=0;
-					}
-					
-					myAudio.volume=fMyAudioVolume; 
-					
-					//alert(fMyAudioVolume);
-				}
-				else {			
-					//alert("dito");
-					myAudio.pause();
-					myAudio.setAttribute("src", getBaseURL()+sAudioPuzzleStage2);
-
-					fMyAudioVolume=0.2;//1.0;
-					myAudio.volume=fMyAudioVolume;
-
-					//added by Mike, 20221129
-					if (textEnterDiv.style.visibility=="hidden") {
-						myAudio.play();	
-					}
-				}
-			}	
-			break;			
+		
 			
 		default: //END
-/* //removed by Mike, 20230129		
-//			miniPuzzleTileImage.setAttribute("src", getBaseURL()+"assets/images/blank.png");			
-			miniPuzzleTileImage.setAttribute("src", getBaseURL()+sImagePuzzleStage0);			
-			
-			miniPuzzleTileImage.style.visibility = "hidden";
-*/
 			break;
 	}	
+*/	
 	
 	//added by Mike, 20221124; removed by Mike, 20221124
 	//iTileBgCount=0;
@@ -4294,6 +4216,16 @@ function tempAlert(msg,duration)
 //edited by Mike, 20221030
 //function keyPressDown(iKey) {
 function keyPressDown(iKey, event) {	
+
+	//added by Mike, 20230710
+	//TODO: reverify: this; 
+	//appears to NOT yet solve low-severity error
+	//during auto-generation, 
+	//where: target tile is highlighted
+	if (bIsInitAutoGeneratePuzzleFromEnd) {
+		return;
+	}
+
 	arrayKeyPressed[iKey]=true;	
 	
 	//added by Mike, 20221121
@@ -4765,7 +4697,11 @@ function onLoad() {
 				if (bIsInitAutoGeneratePuzzleFromEnd) {
 					return;
 				}
-
+				//added by Mike, 20230710				
+				if (bIsPuzzleDone) {
+					return;
+				}
+				
 				//added by Mike, 20230121
 				//TO-DO: put in reusable function
 
