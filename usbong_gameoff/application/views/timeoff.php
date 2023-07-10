@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20230525; from 20230524
+' @date updated: 2023710; from 20230527
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -1680,8 +1680,12 @@ border: none;
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
     <style type="text/css">
     </style>
+
+	<!--  
+  <base href="http://store.usbong.ph/"> 
+-->
   
-  <base href="http://store.usbong.ph/"> <!--target="_blank"-->
+  <!--target="_blank"-->
   
   </head>
 	  <script>
@@ -4751,6 +4755,15 @@ function onLoad() {
 				if (bIsUsingAppleWebKit) {
 				  bIsUsingAppleMac=true;
 				}
+				
+				//added by Mike, 20230710
+				if (!bHasViewedTitle) {
+					return;
+				}
+				//added by Mike, 20230710				
+				if (bIsInitAutoGeneratePuzzleFromEnd) {
+					return;
+				}
 
 				//added by Mike, 20230121
 				//TO-DO: put in reusable function
@@ -5406,7 +5419,7 @@ alert("iButtonHeight"+iButtonHeight);
 <a id="pauseLinkId" class="pauseLink" onClick="toggleFullScreen()"><u>START</u></a>
 
 <!-- edited by Mike, 20221119; from 20221105; mtPinatubo20150115T1415.jpg -->
-	<img id="puzzleImageId" class="ImageBackgroundOfPuzzle" src="<?php echo base_url('assets/images/blank.png');?>">	
+	<img id="puzzleImageId" class="ImageBackgroundOfPuzzle" src="<?php echo base_url('../assets/images/blank.png');?>">	
 
 <!-- added by Mike, 20221121; removed by Mike, 20230129	
 	<img id="miniPuzzleTileImageId" class="ImageMiniPuzzleImage" onerror="" src="<?php echo base_url('assets/images/cambodia1024x1024-20141225T0958.jpg');?>" alt="" title="">	
