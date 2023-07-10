@@ -2819,7 +2819,8 @@ function miniGamePuzzleUpdate() {
 
 			//added by Mike, 20230113
 			stepCountGuideButton.style.visibility = "visible"; 
-			stepCountGuideMiniImage.style.visibility = "visible"; 
+			//removed by Mike, 20230710
+			//stepCountGuideMiniImage.style.visibility = "visible"; 
 
 			//added by Mike, 20221213
 			stepCountStatusDiv.style.visibility = "visible";
