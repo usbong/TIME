@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 2023710; from 20230527
+' @date updated: 2023711; from 2023710
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -5385,7 +5385,7 @@ alert("iButtonHeight"+iButtonHeight);
 	<img id="howToPlayGuideImageId" class="ImageHowToPlayGuide" src="<?php echo base_url('assets/images/gameOff2022HowToPlay.png');?>">	
 
 <!-- added by Mike, 20221130 -->
-	<img id="titleImageId" class="ImageTitle" src="<?php echo base_url('assets/images/gameOff2022Title.png');?>">	
+	<img id="titleImageId" class="ImageTitle" src="<?php echo "../assets/images/gameOff2022Title.png"; /*echo base_url('assets/images/gameOff2022Title.png');*/?>">	
 
 	
 	<div id="textStatusDivId" class="DivTextStatus">CONGRATULATIONS!</div>
