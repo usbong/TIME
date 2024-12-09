@@ -1,5 +1,5 @@
 <!--
-' Copyright 2020~2023 USBONG
+' Copyright 2020~2024 USBONG
 '
 ' Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You ' may obtain a copy of the License at
 '
@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 2023819; from 2023802
+' @date updated: 20241209; from 2023819
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -5393,7 +5393,7 @@ alert("iButtonHeight"+iButtonHeight);
 
 
 <!-- added by Mike, 20221129 -->
-	<img id="howToPlayGuideImageId" class="ImageHowToPlayGuide" src="<?php echo base_url('assets/images/gameOff2022HowToPlay.png');?>">	
+	<img id="howToPlayGuideImageId" class="ImageHowToPlayGuide" src="<?php echo base_url('assets/images/gameOff2022HowToPlay.png?lastmod=20241209T1031');?>">	
 
 <!-- added by Mike, 20221130 -->
 	<img id="titleImageId" class="ImageTitle" src="<?php echo "../assets/images/gameOff2022Title.png"; /*echo base_url('assets/images/gameOff2022Title.png');*/?>">	
