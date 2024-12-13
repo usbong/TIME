@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20241209; from 2023819
+' @date updated: 20241213; from 20241209
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -248,14 +248,17 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /*							
 							background-color: #000000aa;
 */							
-							color: #6d4e22; /* brown */
+							/*color: rgb(92,70,50);*/ /*#6d4e22; brown */
 
-							/*color: #ffffff;*/ /* white */
+							color: #ffffff; /* white */
+							/*color: #000000;*/ /* black */
+							/*color: #2683D0;*/ /* blue */
 
 							/*opacity: 50%;*/
 
-							font-size: 32px;/*42px;*/
+							font-size: 4em; /*32px;*//*42px;*/							
 							font-weight: bold;
+
 							
 /* //edited by Mike, 20230130							
 							padding: 10px;
@@ -284,7 +287,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 							/*opacity: 50%;*/
 
-							font-size: 32px;/*42px;*/
+							font-size: 4em; /*32px;*//*42px;*/							
 							font-weight: bold;
 							
 /* //edited by Mike, 20230130							
@@ -1100,7 +1103,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 						.ImageController, .ImageStepCount {
 							position: absolute;
-
+							
 							text-align: center;
 							line-height: 32px;
 							
@@ -2087,31 +2090,50 @@ function toggleControllerGuide() {
 		//remove focus on clicked button
 		//to NOT execute when ENTER key is pressed;
 		controllerGuideButton.blur();
-	
-	//alert("dito");		
-			
-		if (controllerGuideImage.style.visibility=="hidden") {
-			controllerGuideImage.style.visibility = "visible";
-		}
-		else {
-			controllerGuideImage.style.visibility = "hidden";
-		}			
 
-		//added by Mike, 20230115
-//------		
+		var stepCountStatusDiv = document.getElementById("stepCountStatusDivId");
+		var stepCountStatusShadowDiv = document.getElementById("stepCountStatusShadowDivId");
+
 		var stepCountGuideImage = document.getElementById("stepCountGuideImageId");			
 		var stepCountGuideButton = document.getElementById("stepCountGuideButtonId");
 
+				
+		if (controllerGuideImage.style.visibility=="hidden") {
+			controllerGuideImage.style.visibility = "visible";
+			
+			stepCountStatusDiv.style.visibility = "hidden";
+			stepCountStatusShadowDiv.style.visibility = "hidden";			
+		}
+		else {
+			controllerGuideImage.style.visibility = "hidden";
+
+			stepCountStatusDiv.style.visibility = "visible";
+			stepCountStatusShadowDiv.style.visibility = "visible";
+			
+			//remove focus on clicked button
+			//to NOT execute when ENTER key is pressed;
+			stepCountGuideButton.blur();
+
+			stepCountGuideImage.style.visibility = "hidden";					
+		}			
+/*		
+//added by Mike, 20230115
+//------		
+		var controllerGuideImage = document.getElementById("controllerGuideImageId");			
+		var controllerGuideButton = document.getElementById("controllerGuideButtonId");
+
 		//remove focus on clicked button
 		//to NOT execute when ENTER key is pressed;
-		stepCountGuideButton.blur();
+		controllerGuideButton.blur();
 
-		stepCountGuideImage.style.visibility = "hidden";
-//------		
+		controllerGuideImage.style.visibility = "hidden";
+//------			
+*/
 	}
 }
 
 //added by Mike, 20230113
+//TODO: -fix: this with controller guide
 function toggleStepCountGuide() {
 	//edited by Mike, 20221129
 //	if (bHasPressedStart) {
@@ -2120,6 +2142,9 @@ function toggleStepCountGuide() {
 	
 		var stepCountGuideButton = document.getElementById("stepCountGuideButtonId");
 
+		var stepCountStatusDiv = document.getElementById("stepCountStatusDivId");
+		var stepCountStatusShadowDiv = document.getElementById("stepCountStatusShadowDivId");
+		
 		//remove focus on clicked button
 		//to NOT execute when ENTER key is pressed;
 		stepCountGuideButton.blur();
@@ -2127,9 +2152,17 @@ function toggleStepCountGuide() {
 	//alert("dito");					
 		if (stepCountGuideImage.style.visibility=="hidden") {
 			stepCountGuideImage.style.visibility = "visible";
+/*			
+			stepCountStatusDiv.style.visibility = "hidden";
+			stepCountStatusShadowDiv.style.visibility = "hidden";		
+*/			
 		}
 		else {
 			stepCountGuideImage.style.visibility = "hidden";
+/*			
+			stepCountStatusDiv.style.visibility = "visible";
+			stepCountStatusShadowDiv.style.visibility = "visible";		
+*/			
 		}			
 		
 		//added by Mike, 20230115
@@ -2151,14 +2184,22 @@ function toggleStepCountGuide() {
 function toggleHowToPlayGuide() {
 	if (bHasPressedStart) {
 		var howToPlayGuideImage = document.getElementById("howToPlayGuideImageId");
+		var stepCountStatusDiv = document.getElementById("stepCountStatusDivId");
+		var stepCountStatusShadowDiv = document.getElementById("stepCountStatusShadowDivId");
 		
 		//alert("dito");		
 			
 		if (howToPlayGuideImage.style.visibility=="hidden") {
 			howToPlayGuideImage.style.visibility = "visible";
+			
+			stepCountStatusDiv.style.visibility = "hidden";
+			stepCountStatusShadowDiv.style.visibility = "hidden";
 		}
 		else {
 			howToPlayGuideImage.style.visibility = "hidden";
+
+			stepCountStatusDiv.style.visibility = "visible";
+			stepCountStatusShadowDiv.style.visibility = "visible";
 		}			
 	}
 }
@@ -2242,6 +2283,13 @@ function toggleFullScreen() {
   if (bHasPressedStart) { 
  	if (!bHasViewedHowToPlayGuide) {
 		bHasViewedHowToPlayGuide=true;
+		
+		var stepCountStatusDiv = document.getElementById("stepCountStatusDivId");
+		var stepCountStatusShadowDiv = document.getElementById("stepCountStatusShadowDivId");		
+		
+		stepCountStatusDiv.style.visibility = "visible";
+		stepCountStatusShadowDiv.style.visibility = "visible";
+		
 		return;
 	}
   }
@@ -2810,6 +2858,7 @@ function miniGamePuzzleUpdate() {
 		titleImage.style.visibility="visible";
 	}
 
+/*
 	//edited by Mike, 20221129
 	if (bHasPressedStart) {
 		//added by Mike, 20221130
@@ -2829,13 +2878,6 @@ function miniGamePuzzleUpdate() {
 			//added by Mike, 20221213
 			stepCountStatusDiv.style.visibility = "visible";
 			stepCountStatusShadowDiv.style.visibility = "visible";
-
-/*
-			//removed by Mike, 20230128			
-			//added by Mike, 20230128
-			//TO-DO: -put: in mobile
-			stepCountStatusDiv.style.fontSize = "32px"; //42px 
-			stepCountStatusShadowDiv.style.fontSize = "32px"; //42px 	*/		
 		}
 		//added by Mike, 20221129
 		else {
@@ -2858,11 +2900,63 @@ function miniGamePuzzleUpdate() {
 	if (bHasPressedStart) {
 		if (!bHasViewedHowToPlayGuide) {	
 			howToPlayGuideImage.style.visibility = "visible"; 
+
+			stepCountStatusDiv.style.visibility = "hidden"; 
+			stepCountStatusShadowDiv.style.visibility = "hidden"; 	
 		}
 		else {
 			//removed by Mike, 20221129
 			//bIsInitAutoGeneratePuzzleFromEnd=true;
 			howToPlayGuideImage.style.visibility = "hidden"; 
+		}
+	}
+*/
+
+
+	
+	//added by Mike, 20221129	
+	var howToPlayGuideImage = document.getElementById("howToPlayGuideImageId");	
+	//howToPlayGuide.style.visibility="hidden";
+	
+	var iHowToPlayGuideImageWidth = (howToPlayGuideImage.clientWidth);
+	var iHowToPlayGuideImageHeight = (howToPlayGuideImage.clientHeight);	
+		
+	var stepCountStatusDiv = document.getElementById("stepCountStatusDivId");
+	var stepCountStatusShadowDiv = document.getElementById("stepCountStatusShadowDivId");	
+	
+	if (bHasPressedStart) {
+		//added by Mike, 20221130
+		//var titleImage = document.getElementById("titleImageId");	
+		titleImage.style.visibility="hidden";
+		
+		bHasViewedTitle=true;
+	
+	 	if (bHasViewedHowToPlayGuide) {	
+			controllerGuideButton.style.visibility = "visible"; 
+			controllerGuideMiniImage.style.visibility = "visible"; 
+
+			//added by Mike, 20230113
+			stepCountGuideButton.style.visibility = "visible"; 
+			//removed by Mike, 20230710
+			//stepCountGuideMiniImage.style.visibility = "visible"; 
+
+/*
+			//added by Mike, 20221213
+			stepCountStatusDiv.style.visibility = "visible";
+			stepCountStatusShadowDiv.style.visibility = "visible";
+*/
+			
+			howToPlayGuideImage.style.visibility = "hidden"; 
+		}
+		//added by Mike, 20221129
+		else {
+			controllerGuideMiniImage.style.visibility = "hidden"; 
+/*
+			//added by Mike, 20221213
+			stepCountStatusDiv.style.visibility = "hidden";
+			stepCountStatusShadowDiv.style.visibility = "hidden";
+*/			
+			howToPlayGuideImage.style.visibility = "visible"; 
 		}
 	}
 
@@ -4460,7 +4554,7 @@ function onLoad() {
 		//if using EDGE browser;
 		//observed: shaking on EDGE browser via desktop,
 		//caused by bIsMobile=true;
-		if (navigator.userAgent.includes("Edg")) {
+		if (navigator.userAgent.includes("Edge")) { //Edg
 			bIsMobile=false;			
 		}	
 	}
@@ -5383,10 +5477,10 @@ alert("iButtonHeight"+iButtonHeight);
 
 
 <!-- added by Mike, 20230115; add: display leaderboard -->
-	<img id="stepCountGuideImageId" class="ImageStepCount" src="<?php echo base_url('assets/images/blank.png');?>">	
+	<img id="stepCountGuideImageId" class="ImageStepCount" src="<?php echo base_url('assets/images/blank.png?lastmod=20241213T1501');?>">	
 
-<!-- added by Mike, 20230113 -->
-<button id="stepCountGuideButtonId" class="ButtonStepCountGuide" onClick="toggleStepCountGuide()">
+<!-- added by Mike, 20241213; from 20230113; toggleStepCountGuide() -->
+<button id="stepCountGuideButtonId" class="ButtonStepCountGuide" onClick="">
 </button>		
 
 	<img id="stepCountGuideMiniImageId" class="ImageMiniStepCount" src="<?php echo base_url('assets/images/miniStepCountGuide.png');?>">	
