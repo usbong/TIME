@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20241213; from 20241209
+' @date updated: 20241217; from 20241213
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -256,7 +256,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 							/*opacity: 50%;*/
 
-							font-size: 4em; /*32px;*//*42px;*/							
+							font-size: 2em; /*32px;*//*42px;*/							
 							font-weight: bold;
 
 							
@@ -287,7 +287,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 							/*opacity: 50%;*/
 
-							font-size: 4em; /*32px;*//*42px;*/							
+							font-size: 2em; /*32px;*//*42px;*/							
 							font-weight: bold;
 							
 /* //edited by Mike, 20230130							
@@ -3062,7 +3062,10 @@ function miniGamePuzzleUpdate() {
 	//removed by Mike, 20221210
 	//myCanvasContext.fillRect(0, 0, iStageMaxWidth, iStageMaxHeight);	
 
+	//added by Mike, 20241217
+	//bIsUsingAppleMac=true;
 
+/*
 	//added by Mike, 20230106
 	if ((!bIsMobile) || (bIsUsingAppleMac)) {
 //	if (!bIsMobile) {
@@ -3099,6 +3102,36 @@ function miniGamePuzzleUpdate() {
 			bHasSetMaxWidthHeight=true;
 		}		
 	}
+*/
+	if (!bHasSetMaxWidthHeight) {	
+		iStageMaxWidth=iStageMaxWidth/2; 
+		iStageMaxHeight=iStageMaxHeight/2;	
+		
+		iTitleImageWidth = iTitleImageWidth/2;
+		iTitleImageHeight = iTitleImageHeight/2;				
+
+//	alert(myCanvas.style.width);
+		myCanvas.style.width = iDefaultCanvasWidth/2 +"px"; //"300px"; 
+		myCanvas.style.height = iDefaultCanvasHeight/2 +"px";
+		
+		imgPuzzle.style.width = iDefaultCanvasWidth/2 +"px"; 
+		imgPuzzle.style.height = iDefaultCanvasHeight/2 +"px"; 
+		
+		controllerGuideImage.style.width = iDefaultCanvasWidth/2 +"px"; 
+		controllerGuideImage.style.height = iDefaultCanvasHeight/2 +"px"; 
+
+		//added by Mike, 20230115
+		stepCountGuideImage.style.width = iDefaultCanvasWidth/2 +"px"; 
+		stepCountGuideImage.style.height = iDefaultCanvasHeight/2 +"px"; 
+
+		howToPlayGuideImage.style.width = iDefaultCanvasWidth/2 +"px"; 
+		howToPlayGuideImage.style.height = iDefaultCanvasHeight/2 +"px"; 
+		
+		titleImage.style.width=iStageMaxWidth;
+		titleImage.style.height=iStageMaxHeight;
+		
+		bHasSetMaxWidthHeight=true;
+	}		
 	
 	var iControllerGuideImageWidth = (controllerGuideImage.clientWidth);
 	var iControllerGuideImageHeight = (controllerGuideImage.clientHeight);	
@@ -3760,7 +3793,9 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 			//note: did not anymore add the y-axis 
 			if (stepCountStatusDiv.getBoundingClientRect().x<=iTopRightPuzzleTilePosX+iPuzzleTileWidth) {
 			
-				stepCountGuideMiniImage.style.visibility="visible";
+				//removed by Mike, 20241217
+				//stepCountGuideMiniImage.style.visibility="visible";
+				
 				stepCountGuideButton.style.visibility="visible";
 				
 				//stepCountStatusDiv.style.visibility="hidden";
