@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20241217; from 20241213
+' @date updated: 20241218; from 20241217
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -274,7 +274,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							/* put above image tiles;
 								below step count button
 							*/							
-							z-index: 90; /*4;*/
+							z-index: 8; /*90;*/
 						}	
 						
 						div.DivStepCountStatusShadow
@@ -305,7 +305,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							/* put above image tiles;
 								below step count button
 							*/							
-							z-index: 90; /*4;*/
+							z-index: 8; /*90;*/
 						}												
 						
 						div.DivTextEnter
@@ -1146,10 +1146,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 							width: 640px;
 							height: 576px;	
-					
-							
-							/* //added by Mike, 20221104 */
-							z-index: 10;									
+												
+							z-index: 10;		
 						}						
 
 
@@ -1714,8 +1712,8 @@ border: none;
 const iStageMaxWidth=160*2; //160;
 const iStageMaxHeight=144*2; //144;
 */
-var iStageMaxWidth=160*4; //160;
-var iStageMaxHeight=144*4; //144;
+var iStageMaxWidth=160*4; //640
+var iStageMaxHeight=144*4; //576
 
 //added by Mike, 20230106
 const iDefaultCanvasWidth=640;
@@ -1892,7 +1890,7 @@ var arrayCountMovementStep= [];
 
 var bIsInitAutoGeneratePuzzleFromEnd=false;
 var iDelayAnimationCountMovementStep=0;
-const iDelayAnimationCountMovementStepMax=6;
+var iDelayAnimationCountMovementStepMax=6;
 
 //added by Mike, 20221129
 var iPrevDirection=0;
@@ -1968,6 +1966,8 @@ var bHasViewedControllerGuide=false;
 
 //added by Mike, 20221129
 var bHasViewedHowToPlayGuide=false;
+
+var bIsHowToPlayGuideDisplayed=false;
 
 //added by Mike, 20221123
 var bIsActionKeyPressed=false;
@@ -2280,6 +2280,8 @@ function toggleFullScreen() {
 
   //added by Mike, 20221129
   //put this before bHasPressedStart=true;
+ 
+/* 
   if (bHasPressedStart) { 
  	if (!bHasViewedHowToPlayGuide) {
 		bHasViewedHowToPlayGuide=true;
@@ -2293,9 +2295,53 @@ function toggleFullScreen() {
 		return;
 	}
   }
+*/
+  var titleImage = document.getElementById("titleImageId");	
+  var howToPlayGuideImage = document.getElementById("howToPlayGuideImageId");	
+
+  //bIsPuzzleDone=true;
+  if (bIsPuzzleDone) {
+      titleImage.style.visibility="hidden";
+	  howToPlayGuideImage.style.visibility = "hidden";
+	  window.location.href = "";
+	  return;
+  }
 	
+  if (!bHasViewedTitle) {
+    titleImage.style.visibility="hidden";
+    bHasViewedTitle=true;	
+  }
+ 
+  
+  if (bHasPressedStart) { 
+ 	if (!bHasViewedHowToPlayGuide) {
+	  bHasViewedHowToPlayGuide=true;
+    }
+	else {
+	  if (bIsInitAutoGeneratePuzzleFromEnd) {
+		iDelayAnimationCountMovementStepMax=0;
+		howToPlayGuideImage.style.visibility = "hidden"; 
+		bIsHowToPlayGuideDisplayed=false;
+		return;
+	  }
+	}
+  }
+
+//  if (!bHasViewedHowToPlayGuide) {
+  if (!bIsHowToPlayGuideDisplayed) {
+	  howToPlayGuideImage.style.visibility = "visible"; 
+	  bIsHowToPlayGuideDisplayed=true;
+  }
+  else {
+	  howToPlayGuideImage.style.visibility = "hidden"; 
+	  bIsHowToPlayGuideDisplayed=false;
+  }
+  
   //added by Mike, 20221114	
   bHasPressedStart=true;
+
+
+/*
   
   //added by Mike, 20221129
   var textEnterDiv = document.getElementById("textEnterDivId");
@@ -2317,11 +2363,11 @@ function toggleFullScreen() {
 			document.documentElement.requestFullscreen();
 		}
 
-/* //removed by Mike, 20230819
-		document.getElementById("myAudioId").play();
-		bIsAudioPlaying=true;
-				//alert("hallo");
-*/
+//////removed by Mike, 20230819
+////		document.getElementById("myAudioId").play();
+////		bIsAudioPlaying=true;
+////				//alert("hallo");
+
 	  } else if (document.exitFullscreen) {
 		//added by Mike, 20221020
 		//pauseAudio();
@@ -2335,11 +2381,10 @@ function toggleFullScreen() {
   }
   else {
 	  if (!bIsAudioPlaying) {
-/* //removed by Mike, 20230819
-//			alert("play");
-		document.getElementById("myAudioId").play();		  
-		bIsAudioPlaying=true;
-*/
+//// //removed by Mike, 20230819
+//////			alert("play");
+////		document.getElementById("myAudioId").play();		  
+////		bIsAudioPlaying=true;
       }
 	  else {
 //			alert("pause");
@@ -2347,6 +2392,7 @@ function toggleFullScreen() {
 		bIsAudioPlaying=false;
 	  }
   }
+*/  
 }
 
 document.addEventListener("keydown", (e) => {
@@ -2787,8 +2833,6 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 	imgPuzzle.style.top = (iVerticalOffsetInnerScreen+0)+"px";
 	imgPuzzle.style.left = (iHorizontalOffset+0)+"px";
 
-
-
 }
 
 function miniGamePuzzleUpdate() {
@@ -2924,7 +2968,9 @@ function miniGamePuzzleUpdate() {
 	var stepCountStatusDiv = document.getElementById("stepCountStatusDivId");
 	var stepCountStatusShadowDiv = document.getElementById("stepCountStatusShadowDivId");	
 	
+/*	
 	if (bHasPressedStart) {
+		
 		//added by Mike, 20221130
 		//var titleImage = document.getElementById("titleImageId");	
 		titleImage.style.visibility="hidden";
@@ -2940,25 +2986,24 @@ function miniGamePuzzleUpdate() {
 			//removed by Mike, 20230710
 			//stepCountGuideMiniImage.style.visibility = "visible"; 
 
-/*
-			//added by Mike, 20221213
-			stepCountStatusDiv.style.visibility = "visible";
-			stepCountStatusShadowDiv.style.visibility = "visible";
-*/
+////			//added by Mike, 20221213
+////			stepCountStatusDiv.style.visibility = "visible";
+////			stepCountStatusShadowDiv.style.visibility = "visible";
 			
 			howToPlayGuideImage.style.visibility = "hidden"; 
 		}
 		//added by Mike, 20221129
 		else {
 			controllerGuideMiniImage.style.visibility = "hidden"; 
-/*
-			//added by Mike, 20221213
-			stepCountStatusDiv.style.visibility = "hidden";
-			stepCountStatusShadowDiv.style.visibility = "hidden";
-*/			
+
+////			//added by Mike, 20221213
+////			stepCountStatusDiv.style.visibility = "hidden";
+////			stepCountStatusShadowDiv.style.visibility = "hidden";
+			
 			howToPlayGuideImage.style.visibility = "visible"; 
 		}
 	}
+*/
 
 
 /*
@@ -3108,7 +3153,7 @@ function miniGamePuzzleUpdate() {
 		iStageMaxHeight=iStageMaxHeight/2;	
 		
 		iTitleImageWidth = iTitleImageWidth/2;
-		iTitleImageHeight = iTitleImageHeight/2;				
+		iTitleImageHeight = iTitleImageHeight/2;			
 
 //	alert(myCanvas.style.width);
 		myCanvas.style.width = iDefaultCanvasWidth/2 +"px"; //"300px"; 
@@ -3259,8 +3304,8 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 		//added by Mike, 20221129
 		if (bHasViewedHowToPlayGuide) {	
 			//edited by Mike, 20221124
-			//if (bIsInitAutoGeneratePuzzleFromEnd) {	
-			if ((bIsInitAutoGeneratePuzzleFromEnd) && (!bHasDefeatedMonster)) {	
+			if (bIsInitAutoGeneratePuzzleFromEnd) {	
+			//if ((bIsInitAutoGeneratePuzzleFromEnd) && (!bHasDefeatedMonster)) {	
 			
 				textStatusDiv.style.visibility="visible";
 			}
@@ -3764,7 +3809,12 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 		//added by Mike, 20221129
 		if (bHasViewedHowToPlayGuide) {	
 			if (bIsInitAutoGeneratePuzzleFromEnd) {
-				if (iDelayAnimationCountMovementStep==iDelayAnimationCountMovementStepMax) 	
+/*
+				iDelayAnimationCountMovementStep=0;
+				iDelayAnimationCountMovementStepMax=0;
+*/
+				//if (iDelayAnimationCountMovementStep==iDelayAnimationCountMovementStepMax) 	
+				if (iDelayAnimationCountMovementStep>=iDelayAnimationCountMovementStepMax) 	
 				{
 					autoGeneratePuzzleFromEnd();
 					iDelayAnimationCountMovementStep=0;
@@ -3772,6 +3822,8 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 				else {
 					iDelayAnimationCountMovementStep++;
 				}
+
+				//autoGeneratePuzzleFromEnd();
 			}
 			
 		
@@ -3823,9 +3875,10 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 	//var iButtonCenterNeutralKeyWidth = buttonLeverCenterNeutralKey.getBoundingClientRect().width;	
 	var iButtonHeight = buttonUpKey.getBoundingClientRect().height;
 
-
+/*
 	//if (!document.fullscreenElement) {	
 	if ((!bIsMobile) || (bIsUsingAppleMac)) {
+*/		
 		buttonUpKey.style.visibility = "hidden";		
 		buttonLeftKey.style.visibility = "hidden";
 		buttonRightKey.style.visibility = "hidden";
@@ -3841,8 +3894,10 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 		buttonLetterKKey.style.visibility = "hidden";
 		
 		buttonRightLeverCenterNeutralKey.style.visibility = "hidden";
+/*		
 	}
 	else {
+		
 		//edited by Mike, 20221108; edited by Mike, 20230111;
 		//TO-DO: -reverify: when iPAD starts @PORTRAIT;
 		//--> size not smaller for portrait; button positions incorrect;
@@ -3862,10 +3917,10 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 			//note: CHANGE in orientation
 			if (iCurrentAppleWebKitInnerWidth!=window.innerWidth) {
 				iCurrentAppleWebKitInnerWidth=window.innerWidth;
-/*				
-				screen.width=iCurrentAppleWebKitInnerWidth;
-				alert(screen.width);
-*/				
+				
+////				screen.width=iCurrentAppleWebKitInnerWidth;
+////				alert(screen.width);
+				
 				iAppleWebKitInnerWidthOffset=iCurrentAppleWebKitInnerWidth-screen.width;
 				
 				if (iAppleWebKitInnerWidthOffset<0) {
@@ -3943,8 +3998,9 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 
 		buttonLetterKKey.style.left = iAppleWebKitInnerWidthOffset+(screen.width)-iButtonWidth*2+"px";
 		buttonLetterKKey.style.top =  iVerticalOffset+iButtonHeight*2+"px"; //iStageMaxHeight+iButtonHeight*2+"px";
-		buttonLetterKKey.style.visibility = "visible";
+		buttonLetterKKey.style.visibility = "visible";		
 	}
+*/		
 
 						
 	//added by Mike, 20221111
@@ -4415,7 +4471,9 @@ function keyPressUp(iKey, event) {
 //answer by: smmehrab, 20200709T2330; edited 20200711T0355
 function handleGesture() {
 	//added by Mike, 20221030; edited by Mike, 20221108
+/*	
 	if ((document.fullscreenElement) && (!bIsUsingAppleMac)){
+*/		
 		if (iTouchEndX < iTouchStartX) {
 			//console.log('Swiped Left');
 			//alert("Swiped Left");
@@ -4453,7 +4511,9 @@ function handleGesture() {
 			arrayKeyPressed[iKEY_W]=false;		
 			arrayKeyPressed[iKEY_S]=false;
 		}
+/*		
 	}
+*/	
 }
 
 //added by Mike, 20221121
@@ -4539,285 +4599,7 @@ function initPuzzleEnd() {
 	reset();		
 }
 
-//added by Mike, 20220822
-function onLoad() {
-	//added by Mike, 2022113
-	//keyphrase: identify machine and computer browser
-
-	//added by Mike, 20221108
-	//alert(navigator.userAgent);
-
-	//added by Mike, 20220910
-	//reference: https://stackoverflow.com/questions/6666907/how-to-detect-a-mobile-device-with-javascript; last accessed: 20220910
-	//answer by: Baraa, 20141026T2059
-	//edited by Mike, 20221108
-//	if (/Mobile|Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
-	if (/Mobile|Android|webOS|iPhone|iPad|iPod|AppleWebKit|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
-
-//		alert("detected: Mobile Browser!");
-		
-		//added by Mike, 20220925
-		bIsMobile=true;
-		
-		//added by Mike, 20221108
-		if (navigator.userAgent.includes("AppleWebKit")) {
-			bIsUsingAppleWebKit=true;
-			//added by Mike, 20221109
-			bIsUsingAppleMac=false; //default
-		}
-		
-		//added by Mike, 20221113
-		//notes: "AppleWebKit" to exist even with "Android"
-		if (navigator.userAgent.includes("Android")) {
-			bIsUsingAppleWebKit=false;
-		}		
-
-		//added by Mike, 20221113
-		//example: Linux x86_64 (desktop)
-		if (navigator.userAgent.includes("Linux x")) {		
-			bIsMobile=false;
-		}		
-
-		//note: iPAD and MacBookPro OS : Mac OS X
-		//adds: to be re-classified as iPAD via TOUCH command
-		if ((navigator.userAgent.includes("Macintosh")) || navigator.userAgent.includes("Mac")) {
-			bIsUsingAppleMac=true;
-		}		
-		
-		//added by Mike, 20230111
-		//note: TO-DO: -add: touch/mouse click ACTION COMMANDS
-		//if using EDGE browser;
-		//observed: shaking on EDGE browser via desktop,
-		//caused by bIsMobile=true;
-		if (navigator.userAgent.includes("Edge")) { //Edg
-			bIsMobile=false;			
-		}	
-	}
-	
-	//added by Mike, 20221106
-	iTileBgCount=0;
-
-	for (iRowCount=0; iRowCount<iRowCountMax; iRowCount++) {		
-		for (iColumnCount=0; iColumnCount<iColumnCountMax; iColumnCount++) {
-
-		//alert(iTileBgCount);
-			arrayPuzzleTilePos[iRowCount][iColumnCount]=iTileBgCount;
-
-			arrayPuzzleTileCountId[iTileBgCount] = document.getElementById("puzzleTileImageIdBg"+iTileBgCount);
-
-			arrayPuzzleTileCountId[iTileBgCount].style.visibility="hidden";
-			
-				//added by Mike, 20221106
-				//reference: https://www.w3schools.com/tags/tag_img.asp;
-				//last accessed: 20221105
-				//count			
-				//edited by Mike, 20221106				//arrayPuzzleTileCountId[iTileBgCount].alt=(iTileBgCount+1)+"";
-
-				arrayPuzzleTileCountId[iTileBgCount].alt=(iTileBgCount+1)+"";
-				
-				//added by Mike, 20221106
-				arrayPuzzleTileCountId[iTileBgCount].className="Image32x32Tile";	
-		
-			iTileBgCount++;
-		}
-	}
-
-	//added by Mike, 20221122
-	var controllerGuideImage = document.getElementById("controllerGuideImageId");			
-	controllerGuideImage.style.visibility = "hidden"; //hidden
-
-	//added by Mike, 20230115
-	var stepCountGuideImage = document.getElementById("stepCountGuideImageId");			
-	stepCountGuideImage.style.visibility = "hidden"; //hidden
-
-
-	
-	//reference: https://stackoverflow.com/questions/4917664/detect-viewport-orientation-if-orientation-is-portrait-display-alert-message-ad; last accessed: 20220910
-	//answer by: Jatin, 20120731T0711;
-	//edited by Tisho, 20120731T0730
-	//add: listener to detect orientation change
-	window.addEventListener("orientationchange", function() {
-	  //orientation number (in degrees) : 90 and -90 for landscape; 0 for portrait
-	  //edited by Mike, 20220911
-	  //alert(window.orientation);
-			
-		//added by Mike, 20220910; edited by Mike, 20220911	
-		var myBody = document.getElementById("myBodyId");
-
-		//reference: https://stackoverflow.com/questions/4917664/detect-viewport-orientation-if-orientation-is-portrait-display-alert-message-ad; last accessed: 20220910
-		//answer by: crmpicco, 20130515T1414;
-		//edited by: posit labs, 20150929T1708
-		//if ((window.orientation==0) ||
-/*		
-		if ((screen.orientation==0) ||
-			(window.matchMedia("(orientation: portrait)").matches)) {
-*/				
-		if (screen.orientation==0) {
-		  //alert("detected: PORTRAIT mode");
-		   myBody.className='bodyPortraitMode';
-		}
-		else {//if (window.matchMedia("(orientation: landscape)").matches) {
-		   //alert("detected: LANDSCAPE mode");	   	   
-		   myBody.className='bodyLandscapeMode';
-		}			  
-
-		//tempAlert("close",1000);　//1sec
-		//edited by Mike, 20220914
-		//tempAlert("",1000);　//1sec
-		tempAlert("",200);　//1/5sec		
-				
-		//TO-DO: -add: auto-update: object positions after CHANGE in orientation 
-	}, false);
-
-	//added by Mike, 20221118
-	imgPuzzle = document.getElementById("puzzleImageId");
-
-/* //removed by Mike, 20230115
-	//added by Mike, 20220904	
-	//TO-DO: -add: init; where: set initial positions, et cetera
-	var monsterTile = document.getElementById("monsterTileImageId");
-	monsterTile.style.left = screen.width/2 +"px"; //"100px";
-	monsterTile.style.top = "0px"; //"100px";
-
-	//edited by Mike, 20221120; from 20221118
-	monsterTile.style.visibility="hidden"; //visible
-*/
-
-	document.body.onkeydown = function(e){
-	//alert("e.keyCode: "+e.keyCode);
-		
-		//added by Mike, 20221108; edited by Mike, 20221115
-		switch (iCurrentMiniGame) {
-			case MINI_GAME_PUZZLE:
-				if (bIsInitAutoGeneratePuzzleFromEnd) {
-					return;
-				}		
-				break;
-			case MINI_GAME_ACTION:
-				break;						
-		}
-			
-		//added by Mike, 20221121
-		bIsActionKeyPressed=false;					
-				
-		//OK; //note: unicode keycode, where: key d : 100?
-		//note: auto-accepts keyhold; however, with noticeable delay 
-		//solved: via bKeyDownRight = false; et cetera
-		if (e.keyCode==68) { //key d
-	//			alert("dito");
-			//humanTile.style.left =  iHumanTileX+iHumanStepX+"px";				
-			//edited by Mike, 20220823
-			//bKeyDownRight=true;
-			arrayKeyPressed[iKEY_D]=true;			
-		}
-		else if (e.keyCode==65) { //key a			
-			//edited by Mike, 20220823
-			//humanTile.style.left =  iHumanTileX-iHumanStepX+"px";				
-			arrayKeyPressed[iKEY_A]=true;			
-		}
-		
-		//added by Mike, 20220822
-		if (e.keyCode==87) { //key w		
-			//edited by Mike, 20220823
-			//humanTile.style.top =  iHumanTileY-iHumanStepY+"px";				
-			arrayKeyPressed[iKEY_W]=true;			
-		}
-		else if (e.keyCode==83) { //key s
-			//edited by Mike, 20220823
-			//humanTile.style.top =  iHumanTileY+iHumanStepY+"px";				
-			arrayKeyPressed[iKEY_S]=true;			
-		}
-
-		//added by Mike, 20221101		
-		//notes: RIGHT-SIDE BUTTONS to already accept 
-		//both capital and small letters
-
-		//RIGHT-SIDE BUTTONS
-		if (e.keyCode==73) { //key i
-			arrayKeyPressed[iKEY_I]=true;		
-			
-			//added by Mike, 20221121
-			bIsActionKeyPressed=true;	
-		}
-		else if (e.keyCode==75) { //key k			
-			arrayKeyPressed[iKEY_K]=true;			
-
-			//added by Mike, 20221121
-			bIsActionKeyPressed=true;	
-		}
-		
-		if (e.keyCode==74) { //key j		
-			arrayKeyPressed[iKEY_J]=true;			
-
-			//added by Mike, 20221121
-			bIsActionKeyPressed=true;	
-		}
-		else if (e.keyCode==76) { //key l
-			arrayKeyPressed[iKEY_L]=true;			
-
-			//added by Mike, 20221121
-			bIsActionKeyPressed=true;
-		}				
-	}
-
-	//added by Mike, 20220822
-	document.body.onkeyup = function(e){
-		//alert("KEYUP; e.keyCode: "+e.keyCode);
-		if (e.keyCode==68) { //key d
-			//edited by Mike, 20220823
-			//bKeyDownRight=false;
-			arrayKeyPressed[iKEY_D]=false;						
-		}
-		else if (e.keyCode==65) { //key a			
-			arrayKeyPressed[iKEY_A]=false;			
-		}
-
-		//added by Mike, 20220823
-		if (e.keyCode==87) { //key w			
-			arrayKeyPressed[iKEY_W]=false;			
-		}
-		else if (e.keyCode==83) { //key s			
-			arrayKeyPressed[iKEY_S]=false;			
-		}
-		
-		//added by Mike, 20221101
-		//RIGHT-SIDE BUTTONS
-		if (e.keyCode==73) { //key i
-			arrayKeyPressed[iKEY_I]=false;		
-			
-			//added by Mike, 20221121
-			bIsActionKeyPressed=false;	
-		}
-		else if (e.keyCode==75) { //key k			
-			arrayKeyPressed[iKEY_K]=false;			
-
-			//added by Mike, 20221121
-			bIsActionKeyPressed=false;	
-		}
-		
-		if (e.keyCode==74) { //key j		
-			arrayKeyPressed[iKEY_J]=false;			
-
-			//added by Mike, 20221121
-			bIsActionKeyPressed=false;
-		}
-		else if (e.keyCode==76) { //key l
-			arrayKeyPressed[iKEY_L]=false;			
-
-			//added by Mike, 20221121
-			bIsActionKeyPressed=false;	
-		}		
-	}	
-	
-	//added by Mike, 20221110
-	//reference: https://stackoverflow.com/questions/70827887/detect-click-vs-touch-in-javascript;
-	//last accessed: 20221110
-	//answer by:  Jacob, 20220124T0110
-	document.body.addEventListener('pointerdown', (event) => {
-		//reference: https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pointerType;
-		//last accessed: 20221122
-		switch(event.pointerType) {
-			case 'mouse':			
+function processInput(iXPos, iYPos) {
 				if (bIsUsingAppleWebKit) {
 				  bIsUsingAppleMac=true;
 				}
@@ -4844,12 +4626,13 @@ function onLoad() {
 				
 				//added by Mike, 20230121
 				//TO-DO: put in reusable function
-
+/*
 				//note: ZOOM function causes position ERROR via screenX
 				var iXPos = event.clientX;//screenX;
 
 				//note: screenY includes BROWSER address bar, et cetera;
 				var iYPos = event.pageY; //screenY;
+*/				
 /*
 				alert("iXPos: "+iXPos);
 				alert("iYPos: "+iYPos);		
@@ -5091,7 +4874,8 @@ iTargetTileBgCount=iTileBgCountOfEmptyTile;
 			}			
 		}
 
-		
+	}
+  }
 		
 /*
 		arrayPuzzleTileCountId[iTileBgCount].style.left = iHorizontalOffset+iOffsetWidth+iPuzzleTileWidth*iColumnCount+iBorderOffset*iColumnCount+"px";
@@ -5099,12 +4883,310 @@ iTargetTileBgCount=iTileBgCountOfEmptyTile;
 //		arrayPuzzleTileCountId[iTileBgCount].style.top = iVerticalOffset+iPuzzleTileHeight*iColumnCount+"px";
 		arrayPuzzleTileCountId[iTileBgCount].style.top = 0+iOffsetHeight+iPuzzleTileHeight*iRowCount+iBorderOffset*iRowCount+"px";			
 */		
+}
+
+//added by Mike, 20220822
+function onLoad() {
+	//added by Mike, 2022113
+	//keyphrase: identify machine and computer browser
+
+	//added by Mike, 20221108
+	//alert(navigator.userAgent);
+
+	//added by Mike, 20220910
+	//reference: https://stackoverflow.com/questions/6666907/how-to-detect-a-mobile-device-with-javascript; last accessed: 20220910
+	//answer by: Baraa, 20141026T2059
+	//edited by Mike, 20221108
+//	if (/Mobile|Android|webOS|iPhone|iPad|iPod|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+	if (/Mobile|Android|webOS|iPhone|iPad|iPod|AppleWebKit|BlackBerry|BB|PlayBook|IEMobile|Windows Phone|Kindle|Silk|Opera Mini/i.test(navigator.userAgent)) {
+
+//		alert("detected: Mobile Browser!");
+		
+		//added by Mike, 20220925
+		bIsMobile=true;
+		
+		//added by Mike, 20221108
+		if (navigator.userAgent.includes("AppleWebKit")) {
+			bIsUsingAppleWebKit=true;
+			//added by Mike, 20221109
+			bIsUsingAppleMac=false; //default
+		}
+		
+		//added by Mike, 20221113
+		//notes: "AppleWebKit" to exist even with "Android"
+		if (navigator.userAgent.includes("Android")) {
+			bIsUsingAppleWebKit=false;
+		}		
+
+		//added by Mike, 20221113
+		//example: Linux x86_64 (desktop)
+		if (navigator.userAgent.includes("Linux x")) {		
+			bIsMobile=false;
+		}		
+
+		//note: iPAD and MacBookPro OS : Mac OS X
+		//adds: to be re-classified as iPAD via TOUCH command
+		if ((navigator.userAgent.includes("Macintosh")) || navigator.userAgent.includes("Mac")) {
+			bIsUsingAppleMac=true;
+		}		
+		
+		//added by Mike, 20230111
+		//note: TO-DO: -add: touch/mouse click ACTION COMMANDS
+		//if using EDGE browser;
+		//observed: shaking on EDGE browser via desktop,
+		//caused by bIsMobile=true;
+		if (navigator.userAgent.includes("Edge")) { //Edg
+			bIsMobile=false;			
+		}	
+	}
+	
+	//added by Mike, 20221106
+	iTileBgCount=0;
+
+	for (iRowCount=0; iRowCount<iRowCountMax; iRowCount++) {		
+		for (iColumnCount=0; iColumnCount<iColumnCountMax; iColumnCount++) {
+
+		//alert(iTileBgCount);
+			arrayPuzzleTilePos[iRowCount][iColumnCount]=iTileBgCount;
+
+			arrayPuzzleTileCountId[iTileBgCount] = document.getElementById("puzzleTileImageIdBg"+iTileBgCount);
+
+			arrayPuzzleTileCountId[iTileBgCount].style.visibility="hidden";
+			
+				//added by Mike, 20221106
+				//reference: https://www.w3schools.com/tags/tag_img.asp;
+				//last accessed: 20221105
+				//count			
+				//edited by Mike, 20221106				//arrayPuzzleTileCountId[iTileBgCount].alt=(iTileBgCount+1)+"";
+
+				arrayPuzzleTileCountId[iTileBgCount].alt=(iTileBgCount+1)+"";
+				
+				//added by Mike, 20221106
+				arrayPuzzleTileCountId[iTileBgCount].className="Image32x32Tile";	
+		
+			iTileBgCount++;
 		}
 	}
+
+	//added by Mike, 20221122
+	var controllerGuideImage = document.getElementById("controllerGuideImageId");			
+	controllerGuideImage.style.visibility = "hidden"; //hidden
+
+	//added by Mike, 20230115
+	var stepCountGuideImage = document.getElementById("stepCountGuideImageId");			
+	stepCountGuideImage.style.visibility = "hidden"; //hidden
+
+
+	//reference: https://stackoverflow.com/questions/4917664/detect-viewport-orientation-if-orientation-is-portrait-display-alert-message-ad; last accessed: 20220910
+	//answer by: Jatin, 20120731T0711;
+	//edited by Tisho, 20120731T0730
+	//add: listener to detect orientation change
+	window.addEventListener("orientationchange", function() {
+	  //orientation number (in degrees) : 90 and -90 for landscape; 0 for portrait
+	  //edited by Mike, 20220911
+	  //alert(window.orientation);
+			
+		//added by Mike, 20220910; edited by Mike, 20220911	
+		var myBody = document.getElementById("myBodyId");
+
+		//reference: https://stackoverflow.com/questions/4917664/detect-viewport-orientation-if-orientation-is-portrait-display-alert-message-ad; last accessed: 20220910
+		//answer by: crmpicco, 20130515T1414;
+		//edited by: posit labs, 20150929T1708
+		//if ((window.orientation==0) ||
+/*		
+		if ((screen.orientation==0) ||
+			(window.matchMedia("(orientation: portrait)").matches)) {
+*/				
+		if (screen.orientation==0) {
+		  //alert("detected: PORTRAIT mode");
+		   myBody.className='bodyPortraitMode';
+		}
+		else {//if (window.matchMedia("(orientation: landscape)").matches) {
+		   //alert("detected: LANDSCAPE mode");	   	   
+		   myBody.className='bodyLandscapeMode';
+		}			  
+
+		//tempAlert("close",1000);　//1sec
+		//edited by Mike, 20220914
+		//tempAlert("",1000);　//1sec
+		tempAlert("",200);　//1/5sec		
+				
+		//TO-DO: -add: auto-update: object positions after CHANGE in orientation 
+	}, false);
+
+	//added by Mike, 20221118
+	imgPuzzle = document.getElementById("puzzleImageId");
+
+/* //removed by Mike, 20230115
+	//added by Mike, 20220904	
+	//TO-DO: -add: init; where: set initial positions, et cetera
+	var monsterTile = document.getElementById("monsterTileImageId");
+	monsterTile.style.left = screen.width/2 +"px"; //"100px";
+	monsterTile.style.top = "0px"; //"100px";
+
+	//edited by Mike, 20221120; from 20221118
+	monsterTile.style.visibility="hidden"; //visible
+*/
+
+	document.body.onkeydown = function(e){
+	//alert("e.keyCode: "+e.keyCode);
 		
-		
-										
+		//added by Mike, 20221108; edited by Mike, 20221115
+		switch (iCurrentMiniGame) {
+			case MINI_GAME_PUZZLE:
+				if (bIsInitAutoGeneratePuzzleFromEnd) {
+					return;
+				}		
 				break;
+			case MINI_GAME_ACTION:
+				break;						
+		}
+			
+		//added by Mike, 20221121
+		bIsActionKeyPressed=false;					
+				
+		//OK; //note: unicode keycode, where: key d : 100?
+		//note: auto-accepts keyhold; however, with noticeable delay 
+		//solved: via bKeyDownRight = false; et cetera
+		if (e.keyCode==68) { //key d
+	//			alert("dito");
+			//humanTile.style.left =  iHumanTileX+iHumanStepX+"px";				
+			//edited by Mike, 20220823
+			//bKeyDownRight=true;
+			arrayKeyPressed[iKEY_D]=true;			
+		}
+		else if (e.keyCode==65) { //key a			
+			//edited by Mike, 20220823
+			//humanTile.style.left =  iHumanTileX-iHumanStepX+"px";				
+			arrayKeyPressed[iKEY_A]=true;			
+		}
+		
+		//added by Mike, 20220822
+		if (e.keyCode==87) { //key w		
+			//edited by Mike, 20220823
+			//humanTile.style.top =  iHumanTileY-iHumanStepY+"px";				
+			arrayKeyPressed[iKEY_W]=true;			
+		}
+		else if (e.keyCode==83) { //key s
+			//edited by Mike, 20220823
+			//humanTile.style.top =  iHumanTileY+iHumanStepY+"px";				
+			arrayKeyPressed[iKEY_S]=true;			
+		}
+
+		//added by Mike, 20221101		
+		//notes: RIGHT-SIDE BUTTONS to already accept 
+		//both capital and small letters
+
+		//RIGHT-SIDE BUTTONS
+		if (e.keyCode==73) { //key i
+			arrayKeyPressed[iKEY_I]=true;		
+			
+			//added by Mike, 20221121
+			bIsActionKeyPressed=true;	
+		}
+		else if (e.keyCode==75) { //key k			
+			arrayKeyPressed[iKEY_K]=true;			
+
+			//added by Mike, 20221121
+			bIsActionKeyPressed=true;	
+		}
+		
+		if (e.keyCode==74) { //key j		
+			arrayKeyPressed[iKEY_J]=true;			
+
+			//added by Mike, 20221121
+			bIsActionKeyPressed=true;	
+		}
+		else if (e.keyCode==76) { //key l
+			arrayKeyPressed[iKEY_L]=true;			
+
+			//added by Mike, 20221121
+			bIsActionKeyPressed=true;
+		}				
+	}
+
+	//added by Mike, 20220822
+	document.body.onkeyup = function(e){
+		//alert("KEYUP; e.keyCode: "+e.keyCode);
+		if (e.keyCode==68) { //key d
+			//edited by Mike, 20220823
+			//bKeyDownRight=false;
+			arrayKeyPressed[iKEY_D]=false;						
+		}
+		else if (e.keyCode==65) { //key a			
+			arrayKeyPressed[iKEY_A]=false;			
+		}
+
+		//added by Mike, 20220823
+		if (e.keyCode==87) { //key w			
+			arrayKeyPressed[iKEY_W]=false;			
+		}
+		else if (e.keyCode==83) { //key s			
+			arrayKeyPressed[iKEY_S]=false;			
+		}
+		
+		//added by Mike, 20221101
+		//RIGHT-SIDE BUTTONS
+		if (e.keyCode==73) { //key i
+			arrayKeyPressed[iKEY_I]=false;		
+			
+			//added by Mike, 20221121
+			bIsActionKeyPressed=false;	
+		}
+		else if (e.keyCode==75) { //key k			
+			arrayKeyPressed[iKEY_K]=false;			
+
+			//added by Mike, 20221121
+			bIsActionKeyPressed=false;	
+		}
+		
+		if (e.keyCode==74) { //key j		
+			arrayKeyPressed[iKEY_J]=false;			
+
+			//added by Mike, 20221121
+			bIsActionKeyPressed=false;
+		}
+		else if (e.keyCode==76) { //key l
+			arrayKeyPressed[iKEY_L]=false;			
+
+			//added by Mike, 20221121
+			bIsActionKeyPressed=false;	
+		}		
+	}	
+	
+	//added by Mike, 20221110
+	//reference: https://stackoverflow.com/questions/70827887/detect-click-vs-touch-in-javascript;
+	//last accessed: 20221110
+	//answer by:  Jacob, 20220124T0110
+	document.body.addEventListener('pointerdown', (event) => {
+		//reference: https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pointerType;
+		//last accessed: 20221122
+		switch(event.pointerType) {
+			case 'touch':			
+				//TODO: -verify: this
+				if (bIsUsingAppleWebKit) {
+				  //note: NOT yet set
+				  if (bIsUsingAppleMac) {
+					toggleFullScreen();
+				  }
+
+				  bIsUsingAppleMac=false;
+				  bIsMobile=true;
+				  
+				  bHasSetMaxWidthHeight=true;
+				}
+				//apply also 'mouse' instructions
+			case 'mouse':	
+			
+				//note: ZOOM function causes position ERROR via screenX
+				var iXPos = event.clientX;//screenX;
+
+				//note: screenY includes BROWSER address bar, et cetera;
+				var iYPos = event.pageY; //screenY;
+			
+				processInput(iXPos,iYPos);										
+				break;
+/*				
 			case 'touch':
 			    //alert("TOUCH");		  
 			    if (bIsUsingAppleWebKit) {
@@ -5121,15 +5203,28 @@ iTargetTileBgCount=iTileBgCountOfEmptyTile;
 				  bHasSetMaxWidthHeight=true;
 				}
 				break;				
+*/				
 		}
 
 	});
 
-	
 	//added by Mike, 20221029
 	//reference: https://stackoverflow.com/questions/62823062/adding-a-simple-left-right-swipe-gesture/62825217#62825217;
 	//answer by: smmehrab, 20200709T2330; edited 20200711T0355
 	document.body.addEventListener('touchstart', function (event) {
+		iEventChangedTouchCount = event.changedTouches.length;
+		
+		for (iCount=0; iCount<iEventChangedTouchCount; iCount++) {
+			//note: ZOOM function causes position ERROR via screenX
+			var iXPos = event.changedTouches[iCount].clientX;//screenX;
+
+			//note: screenY includes BROWSER address bar, et cetera;
+			var iYPos = event.changedTouches[iCount].pageY; //screenY;
+		}
+				
+		processInput(iXPos,iYPos);
+	});
+/*	
 		
 		iEventChangedTouchCount = event.changedTouches.length;
 		
@@ -5138,9 +5233,6 @@ iTargetTileBgCount=iTileBgCountOfEmptyTile;
 		//added by Mike, 20221121
 		if (iCurrentMiniGame==MINI_GAME_PUZZLE) {
 			if (bHasPressedStart) {
-/* //removed by Mike, 20230121			
-				var monsterTile = document.getElementById("monsterTileImageId");
-*/				
 				//edited by Mike, 20221121
 				//note: ZOOM function causes position ERROR via screenX
 				var iXPos = event.changedTouches[iCount].clientX;//screenX;
@@ -5149,38 +5241,12 @@ iTargetTileBgCount=iTileBgCountOfEmptyTile;
 				var iYPos = event.changedTouches[iCount].pageY; //screenY;
 
 				//alert(iYPos);
-/*
-				alert("iXPos: "+iXPos);
-				alert("iYPos: "+iYPos);
-*/
 
-	//TO-DO: -reuse: this part
-/* //removed by Mike, 20230121			
 
-				if (isPointIntersectingRect(iXPos, iYPos, monsterTile)) {
-					//added by Mike, 20221127
-					//TO-DO: -put: in function to be reusable
-						var myAudioEffect = document.getElementById("myAudioEffectId");
-
-						myAudioEffect.setAttribute("src", getBaseURL()+sAudioEffectActionStart);
-
-						//edited by Mike, 20221126
-						//fMyAudioEffectVolume=0.2;					
-						fMyAudioEffectVolume=0.4;						
-						myAudioEffect.volume=fMyAudioEffectVolume;
-						myAudioEffect.loop=false;
-						myAudioEffect.play();
-
-					
-					changeMiniGame(MINI_GAME_ACTION);
-				}
-*/				
-				
 			}
 		}
 		
-		
-		
+			
 			if (event.changedTouches[iCount].screenX<screen.width/2) {
 			}
 			else {
@@ -5189,10 +5255,6 @@ iTargetTileBgCount=iTileBgCountOfEmptyTile;
 		
 		//alert("hallo");
 		
-/*		
-			iTouchStartX = event.changedTouches[0].screenX;
-			iTouchStartY = event.changedTouches[0].screenY;		
-*/
 			iTouchStartX = event.changedTouches[iCount].screenX;
 			iTouchStartY = event.changedTouches[iCount].screenY;		
 
@@ -5213,10 +5275,6 @@ iTargetTileBgCount=iTileBgCountOfEmptyTile;
 			else {
 				return;
 			}
-/*
-			iTouchEndX = event.changedTouches[0].screenX;
-			iTouchEndY = event.changedTouches[0].screenY;
-*/
 			iTouchEndX = event.changedTouches[iCount].screenX;
 			iTouchEndY = event.changedTouches[iCount].screenY;
 
@@ -5253,10 +5311,6 @@ iTargetTileBgCount=iTileBgCountOfEmptyTile;
 			iPrevTouchStartX=iTouchStartX;
 			iPrevTouchStartY=iTouchStartY;
 
-/*
-			iTouchStartX = event.changedTouches[0].screenX;
-			iTouchStartY = event.changedTouches[0].screenY;		
-*/
 			iTouchStartX = event.changedTouches[iCount].screenX;
 			iTouchStartY = event.changedTouches[iCount].screenY;		
 
@@ -5267,11 +5321,6 @@ iTargetTileBgCount=iTileBgCountOfEmptyTile;
 			
 			//added by Mike, 20221030; removed by Mike, 20221030
 			//iTouchStartCount=0;
-
-	/*
-			if ((iTouchStartX!=iPrevTouchStartX) ||
-				(iTouchStartY!=iPrevTouchStartY)) {
-	*/
 			
 			//added by Mike, 20221031
 			var buttonRightKey = document.getElementById("rightKeyId");
@@ -5286,10 +5335,6 @@ iTargetTileBgCount=iTileBgCountOfEmptyTile;
 			//swiped left
 			if (iTouchStartX<iPrevTouchStartX) {				
 	//				alert("dito");
-	/*			//movement stopped
-				iTouchEndX=iTouchStartX;
-				iTouchEndY=iTouchStartY;
-	*/
 
 				//if initial movement to RIGHT
 				//and swiped to LEFT (opposite direction)
@@ -5316,10 +5361,6 @@ iTargetTileBgCount=iTileBgCountOfEmptyTile;
 					if (iDistanceXAxis<=iButtonWidth/6) {
 						arrayKeyPressed[iKEY_A]=false;
 						arrayKeyPressed[iKEY_D]=false;	
-/*
-alert("iDistanceXAxis"+iDistanceXAxis);			
-alert("iButtonWidth"+iButtonWidth);			
-*/
 			
 					}
 					else {						
@@ -5328,13 +5369,6 @@ alert("iButtonWidth"+iButtonWidth);
 
 						iTouchStartCount=0;			
 					}
-
-/* //removed by Mike, 20221031
-					arrayKeyPressed[iKEY_A]=true;
-					arrayKeyPressed[iKEY_D]=false;
-
-					iTouchStartCount=0;			
-*/
 				}
 			}
 			//swiped right
@@ -5374,7 +5408,7 @@ alert("iButtonWidth"+iButtonWidth);
 			
 			//added by Mike, 20221030
 			//swiped up
-			/*else*/ if (iTouchStartY < iPrevTouchStartY) {
+			if (iTouchStartY < iPrevTouchStartY) {
 								
 				//if initial movement to DOWN
 				//and swiped to UP (opposite direction)
@@ -5389,13 +5423,6 @@ alert("iButtonWidth"+iButtonWidth);
 //					iTouchStartX=iPrevTouchStartX;
 					iTouchStartY=iPrevTouchStartY;
 					
-/* //edited by Mike, 20221031					
-					arrayKeyPressed[iKEY_W]=true;		
-					arrayKeyPressed[iKEY_S]=false;		
-
-					iTouchStartCount=0;			
-*/
-
 					//added by Mike, 20221031
 					//swiped to UP
 					//distance get in y-axis
@@ -5409,10 +5436,6 @@ alert("iButtonWidth"+iButtonWidth);
 					if (iDistanceYAxis<=iButtonHeight/6) {
 						arrayKeyPressed[iKEY_W]=false;		
 						arrayKeyPressed[iKEY_S]=false;		
-/*
-alert("iDistanceYAxis"+iDistanceYAxis);			
-alert("iButtonHeight"+iButtonHeight);			
-*/
 			
 					}
 					else {						
@@ -5462,7 +5485,7 @@ alert("iButtonHeight"+iButtonHeight);
 //		}
 
 	}, false);
-	
+*/	
 
 	//added by Mike, 20221113
 	initPuzzleTileTextValueContainer();
