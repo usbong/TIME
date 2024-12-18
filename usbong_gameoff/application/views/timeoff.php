@@ -5173,6 +5173,7 @@ function onLoad() {
 		//reference: https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pointerType;
 		//last accessed: 20221122
 		switch(event.pointerType) {
+/*			
 			case 'touch':			
 				//TODO: -verify: this
 				if (bIsUsingAppleWebKit) {
@@ -5186,6 +5187,7 @@ function onLoad() {
 				  
 				  bHasSetMaxWidthHeight=true;
 				}
+*/				
 				//apply also 'mouse' instructions
 			case 'mouse':	
 			
