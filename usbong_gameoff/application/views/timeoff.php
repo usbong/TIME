@@ -2097,7 +2097,11 @@ function toggleControllerGuide() {
 		var stepCountGuideImage = document.getElementById("stepCountGuideImageId");			
 		var stepCountGuideButton = document.getElementById("stepCountGuideButtonId");
 
-				
+		stepCountGuideImage.style.visibility = "hidden";
+		stepCountGuideButton.blur();
+		stepCountGuideButton.style.visibility = "hidden";		
+
+/*				
 		if (controllerGuideImage.style.visibility=="hidden") {
 			controllerGuideImage.style.visibility = "visible";
 			
@@ -2116,6 +2120,8 @@ function toggleControllerGuide() {
 
 			stepCountGuideImage.style.visibility = "hidden";					
 		}			
+*/		
+		
 /*		
 //added by Mike, 20230115
 //------		
@@ -2872,6 +2878,11 @@ function miniGamePuzzleUpdate() {
 //	controllerGuideMiniImage.style.visibility = "visible"; 
 		
 	var stepCountGuideButton = document.getElementById("stepCountGuideButtonId");	
+
+	stepCountGuideMiniImage.visibility = "hidden";
+	stepCountGuideImage.style.visibility = "hidden";
+	stepCountGuideButton.style.visibility = "hidden";	
+	stepCountGuideButton.blur();
 		
 	
 	//added by Mike, 20230128
