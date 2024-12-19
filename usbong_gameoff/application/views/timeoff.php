@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20241218; from 20241217
+' @date updated: 20241218; from 20241218
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -2284,6 +2284,8 @@ function removeFromPuzzleStageExcessTiles() {
 //last accessed: 20220825
 function toggleFullScreen() {		
 
+//alert("HALLO");
+
   //added by Mike, 20221129
   //put this before bHasPressedStart=true;
  
@@ -2319,20 +2321,33 @@ function toggleFullScreen() {
   }
  
   
-  if (bHasPressedStart) { 
+  if (bHasViewedTitle) { 
  	if (!bHasViewedHowToPlayGuide) {
-	  bHasViewedHowToPlayGuide=true;
+	  bHasViewedHowToPlayGuide=true;	  
+	  howToPlayGuideImage.style.visibility = "visible"; 
+	  return;
     }
 	else {
-	  if (bIsInitAutoGeneratePuzzleFromEnd) {
-		iDelayAnimationCountMovementStepMax=0;
-		howToPlayGuideImage.style.visibility = "hidden"; 
-		bIsHowToPlayGuideDisplayed=false;
-		return;
+	//alert("DITO");	
+      howToPlayGuideImage.style.visibility = "hidden"; 
+  
+	  if (bHasPressedStart) {
+		  if (bIsInitAutoGeneratePuzzleFromEnd) {
+			//alert(">>>>>>> DITO");	
+
+			iDelayAnimationCountMovementStepMax=0;
+			howToPlayGuideImage.style.visibility = "hidden"; 
+			bIsHowToPlayGuideDisplayed=false;
+			return;
+		  }
 	  }
+
+	  //added by Mike, 20221114	
+	  bHasPressedStart=true;	  
 	}
   }
 
+/*
 //  if (!bHasViewedHowToPlayGuide) {
   if (!bIsHowToPlayGuideDisplayed) {
 	  howToPlayGuideImage.style.visibility = "visible"; 
@@ -2342,9 +2357,8 @@ function toggleFullScreen() {
 	  howToPlayGuideImage.style.visibility = "hidden"; 
 	  bIsHowToPlayGuideDisplayed=false;
   }
-  
-  //added by Mike, 20221114	
-  bHasPressedStart=true;
+*/  
+
 
 
 /*
@@ -2805,14 +2819,14 @@ function miniGameLeaderboardUpdate() {
 	imgPuzzle.style.zIndex=0; //added by Mike, 20221118
 	
 	
-	
+/*	
 	//added by Mike, 20220912	
 	var pauseLink = document.getElementById("pauseLinkId");
 	var iPauseLinkHeight = (pauseLink.clientHeight);//+1; + "px";
 	var iPauseLinkWidth = (pauseLink.clientWidth);//+1; + "px"
 
 	//		alert("screen.height: "+screen.height); //533
-
+*/
 
 
 	//reference: https://www.w3schools.com/tags/canvas_fillrect.asp; 
@@ -3098,11 +3112,12 @@ function miniGamePuzzleUpdate() {
 	//added by Mike, 20221019
 	var buttonRightLeverCenterNeutralKey = document.getElementById("rightLeverCenterNeutralKeyId");
 	
-
+/*
 	//added by Mike, 20220912	
 	var pauseLink = document.getElementById("pauseLinkId");
 	var iPauseLinkHeight = (pauseLink.clientHeight);//+1; + "px";
 	var iPauseLinkWidth = (pauseLink.clientWidth);//+1; + "px"
+*/
 
 	//		alert("screen.height: "+screen.height); //533
 
@@ -3267,10 +3282,12 @@ myCanvas.style.top = (iVerticalOffsetInnerScreen+0)+"px"; //iVerticalOffset+
 	stepCountStatusShadowDiv.style.left = iHorizontalOffset+iStageMaxWidth-iStepCountStatusShadowDivWidth+iStepCountStatusShadowOffset+"px";
 	stepCountStatusShadowDiv.style.top= (0)+"px";	
 
+/*
 	//edited by Mike, 20221012
 	pauseLink.style.left = 0+iHorizontalOffset+iStageMaxWidth/2 -iPauseLinkWidth/2 +"px";
 	pauseLink.style.top = 0+iStageMaxHeight +"px"; 
 	pauseLink.style.visibility="visible";	  
+*/
 
 	//edited by Mike, 20221129; from 20221121
 //	if (!bHasPressedStart) {
@@ -4388,7 +4405,8 @@ function tempAlert(msg,duration)
 
 	//alert(humanTile.style.left);
 */
-	
+
+/*	
 	//added by Mike, 20221006
 	var pauseLink = document.getElementById("pauseLinkId");
 	var iPauseLinkHeight = (pauseLink.clientHeight);//+1; + "px";
@@ -4403,6 +4421,7 @@ function tempAlert(msg,duration)
 	//edited by Mike, 20221007
 	//pauseLink.style.top = 0+iStageMaxHeight/2 +"px"; 
 	pauseLink.style.top = 0+iStageMaxHeight +"px"; 
+*/
 	
 	//notes: noticeable delay in CHANGE in position via repaint setting, et cetera	
 	myUpdateFunction();
@@ -4611,29 +4630,33 @@ function initPuzzleEnd() {
 }
 
 function processInput(iXPos, iYPos) {
-				if (bIsUsingAppleWebKit) {
-				  bIsUsingAppleMac=true;
-				}
+		if (bIsUsingAppleWebKit) {
+		  bIsUsingAppleMac=true;
+		}
+		
+		toggleFullScreen();
+		
+		//added by Mike, 20230710
+		if (!bHasViewedTitle) {
+			return;
+		}
+		//added by Mike, 20230710				
+		if (bIsInitAutoGeneratePuzzleFromEnd) {
+			return;
+		}
+		//added by Mike, 20230710				
+		if (bIsPuzzleDone) {
+			return;
+		}
+/*				
+		//added by Mike, 20230802
+		var stepCountGuideImage = document.getElementById("stepCountGuideImageId");			
+		//alert("dito");					
+		if (stepCountGuideImage.style.visibility=="visible") {
+			return;
+		}
+*/				
 				
-				//added by Mike, 20230710
-				if (!bHasViewedTitle) {
-					return;
-				}
-				//added by Mike, 20230710				
-				if (bIsInitAutoGeneratePuzzleFromEnd) {
-					return;
-				}
-				//added by Mike, 20230710				
-				if (bIsPuzzleDone) {
-					return;
-				}
-				
-				//added by Mike, 20230802
-				var stepCountGuideImage = document.getElementById("stepCountGuideImageId");			
-				//alert("dito");					
-				if (stepCountGuideImage.style.visibility=="visible") {
-					return;
-				}
 				
 				//added by Mike, 20230121
 				//TO-DO: put in reusable function
@@ -5173,8 +5196,8 @@ function onLoad() {
 		//reference: https://developer.mozilla.org/en-US/docs/Web/API/PointerEvent/pointerType;
 		//last accessed: 20221122
 		switch(event.pointerType) {
-/*			
-			case 'touch':			
+/*
+			case 'touch':
 				//TODO: -verify: this
 				if (bIsUsingAppleWebKit) {
 				  //note: NOT yet set
@@ -5187,7 +5210,7 @@ function onLoad() {
 				  
 				  bHasSetMaxWidthHeight=true;
 				}
-*/				
+*/
 				//apply also 'mouse' instructions
 			case 'mouse':	
 			
@@ -5529,6 +5552,7 @@ function onLoad() {
 //edited by: BenMorel, 20131209T1511
 -->
 <!-- href="/flashStage"; href="#" //Full Screen Mode -->
+
 <a id="pauseLinkId" class="pauseLink" onClick="toggleFullScreen()"><u>START</u></a>
 
 <!-- edited by Mike, 20221119; from 20221105; mtPinatubo20150115T1415.jpg -->
