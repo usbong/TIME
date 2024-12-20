@@ -227,7 +227,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 							/*opacity: 50%;*/
 
-							font-size: 16px;
+							font-size: 2em; /*2em;*/ 							
+							
 							font-weight: bold;
 
 /* //edited by Mike, 20230130							
@@ -256,7 +257,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 							/*opacity: 50%;*/
 
-							font-size: 2em; /*32px;*//*42px;*/							
+							font-size: 4em; /*2em;*/ 							
 							font-weight: bold;
 
 							
@@ -287,7 +288,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 
 							/*opacity: 50%;*/
 
-							font-size: 2em; /*32px;*//*42px;*/							
+							font-size: 4em; /*2em;*/ 							
 							font-weight: bold;
 							
 /* //edited by Mike, 20230130							
@@ -1041,8 +1042,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 */							
 							opacity: 60%;
 
-  							/*clip: rect(0px,64px,64px,0px);*/
-																								visibility: hidden;
+																														visibility: hidden;
 														
 							/* //removed by Mike, 20221127
 							transform: scale(0.5,0.8);	
@@ -1285,8 +1285,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						    width: 128px;
 						    height: 128px;
 */
+/*
 						    width: 256px;
 						    height: 256px;							
+*/
+						    width: 512px;
+						    height: 512px;							
 
 							object-fit: contain;
 	
@@ -1294,7 +1298,10 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /*
   							clip: rect(0px,32px,32px,0px);
 */
+/*
  							clip: rect(0px,64px,64px,0px);
+*/
+ 							clip: rect(0px,128px,128px,0px);
 	
 							background-color: transparent;
 							border: none;
@@ -1334,8 +1341,12 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						    width: 128px;
 						    height: 128px;
 */
+/*
 						    width: 256px;
-						    height: 256px;							    
+						    height: 256px;							
+*/
+						    width: 512px;
+						    height: 512px;								    
 						    
 							object-fit: contain;
 
@@ -1344,7 +1355,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 /*
   							clip: rect(0px,32px,32px,0px);
 */
+/*
  							clip: rect(0px,64px,64px,0px);
+*/
+ 							clip: rect(0px,128px,128px,0px);
+
 	
 /* //removed by Mike, 20221112
 							width: 32px;
@@ -1389,8 +1404,12 @@ edited by Mike, 20230111
 							width: 27px;
 							height: 27px;
 */
+/*
 							width: 58px;
 							height: 58px;
+*/
+							width: 116px;
+							height: 116px;
 
 							background-color: transparent;
 							color: #222222;
@@ -1398,11 +1417,17 @@ edited by Mike, 20230111
 							font-weight: bold;
 							font-size: 146%; /*18px;*/
 
-							text-align: center;							
+							text-align: center;		
+/*							
 							line-height: 32px;
 
 							border: 3px solid #ff0000;
 							border-radius: 3px;
+*/
+							line-height: 64px;
+
+							border: 6px solid #ff0000;
+							border-radius: 6px;
 
 							visibility: hidden;
 
@@ -1419,8 +1444,12 @@ edited by Mike, 20230111
 							width: 27px;
 							height: 27px;
 */
+/*
 							width: 58px;
 							height: 58px;
+*/
+							width: 116px;
+							height: 116px;
 
 							background-color: transparent;
 							color: #222222;
@@ -1428,11 +1457,17 @@ edited by Mike, 20230111
 							font-weight: bold;
 							font-size: 146%; /*18px;*/
 
-							text-align: center;							
+							text-align: center;			
+/*							
 							line-height: 32px;
 
 							border: 3px solid #ffffff;
 							border-radius: 3px;
+*/
+							line-height: 64px;
+
+							border: 6px solid #ffffff;
+							border-radius: 6px;
 
 							visibility: hidden;
 
@@ -1450,17 +1485,27 @@ edited by Mike, 20230111
 							width: 27px;
 							height: 27px;
 */
+/*
 							width: 58px;
 							height: 58px;
+*/
+							width: 116px;
+							height: 116px;
 
 							background-color: #000000; /*#ffffff;*/
 							color: #222222;
 
 							text-align: center;
+/*							
 							line-height: 32px;
 						
 							border: 3px solid #ffffff; /*#ff0000;*/
 							border-radius: 3px;
+*/
+							line-height: 64px;
+						
+							border: 6px solid #ffffff; /*#ff0000;*/
+							border-radius: 6px;
 
 							margin: 0px;
 							padding: 0px;
@@ -1476,15 +1521,24 @@ edited by Mike, 20230111
 						    width: 128px;
 						    height: 128px;
 */
+/*
 						    width: 256px;
-						    height: 256px;	
+						    height: 256px;							
+*/
+						    width: 512px;
+						    height: 512px;		
+							
+							
 							object-fit: contain;
 														
 							/* //added by Mike, 20221112; edited by Mike, 20230111 */
 /*
   							clip: rect(0px,32px,32px,0px);
 */
+/*
  							clip: rect(0px,64px,64px,0px);
+*/
+ 							clip: rect(0px,128px,128px,0px);
 
 	
 /* //removed by Mike, 20221112
@@ -1501,15 +1555,11 @@ border: none;
 							color: #222222;
 
 							text-align: center;
+/*
 							line-height: 32px;							
-
-							/*padding-top: 0.1875%;*/ /*6px;*/
-							
-/* //note: with clip rect border is put on entire sprite image */
-/* //removed by Mike, 20221112
-							border: 3px solid #ff0000;
-							border-radius: 3px;
 */
+							line-height: 64px;							
+
 							margin: 0px; /*1px;*/	
 							padding: 0px;	
 
@@ -1605,7 +1655,11 @@ border: none;
 						add: auto-identify IF mobile*/
 						.Image64x64Tile {
 							position: absolute;
+/*
   							clip: rect(0px,64px,64px,0px);
+
+*/ 							clip: rect(0px,128px,128px,0px);
+
 							
 							/* //added by Mike, 20221104 
 								reverified: this
@@ -1615,7 +1669,11 @@ border: none;
 						
 						.Image64x64TileFrame1 {
 							position: absolute;
+/*							
   							clip: rect(0px,64px,64px,0px);
+*/
+  							clip: rect(0px,128px,128px,0px);
+
 
 							/* //added by Mike, 20220904; removed by Mike, 20220904
 								TO-DO: -verify: @set vertex, e.g. center */
@@ -1629,13 +1687,22 @@ border: none;
 						.Image64x64TileFrame2 {
 							position: absolute;
   							/*clip: rect(0px,128px,64px,64px);*/
+
+/*
   							clip: rect(0px,64px,64px,0px);
-							object-position: -64px; /*TO-DO: -add: current position*/
+							object-position: -64px;
+*/							
+  							clip: rect(0px,128px,128px,0px);
+							object-position: -128px;
+							
 						}
 						
 						.Image64x64TileBackground {
 							position: absolute;
+/*							
   							clip: rect(0px,64px,64px,0px);					
+*/							
+  							clip: rect(0px,128px,128px,0px);					
 						}
 						
 						.Image32x32TileFrame1 {
@@ -1644,8 +1711,10 @@ border: none;
 /*
   							clip: rect(0px,32px,32px,0px);
 */
+/*
  							clip: rect(0px,64px,64px,0px);
-
+*/
+ 							clip: rect(0px,128px,128px,0px);
 						}
 
 						.Image32x32TileFrame2 {
@@ -1656,7 +1725,10 @@ border: none;
 /*
   							clip: rect(0px,32px,32px,0px);
 */
+/*
  							clip: rect(0px,64px,64px,0px);
+*/
+ 							clip: rect(0px,128px,128px,0px);
 
 /* //removed by Mike, 20221116							
 							object-position: -32px;
@@ -1720,8 +1792,8 @@ var iStageMaxHeight=144*4; //576
 const iDefaultCanvasWidth=640;
 const iDefaultCanvasHeight=576;
 */
-var iDefaultCanvasWidth=640;//640*2;
-var iDefaultCanvasHeight=576;//576*2;
+var iDefaultCanvasWidth=640*2;//640;
+var iDefaultCanvasHeight=576*2;//576;
 
 var iStageMaxWidth=iDefaultCanvasWidth;//160*4; //640
 var iStageMaxHeight=iDefaultCanvasHeight;//144*4; //576
@@ -1788,6 +1860,7 @@ var iStepCountStatus=0;
 let iHumanTileX = iStageMaxWidth/2;
 let iHumanTileY = iStageMaxHeight/2;	
 */
+/*
 let iHumanTileX = 0;
 let iHumanTileY = 0;
 
@@ -1801,6 +1874,7 @@ const iImgMonsterTileHeight=64; //32;
 //added by Mike, 20221126
 var monsterTileYOffset=0;
 const defaultMonsterTileYOffset=0;
+*/
 
 //added by Mike, 20220925
 //note: for CONTROLLER BUTTONS
@@ -1982,9 +2056,8 @@ var bHasHitMonster=false;
 var bHasDefeatedMonster=false;
 var bHasDefeatedHuman=false; //added by Mike, 20221127
 
-//added by Mike, 20230123
-var iPuzzleTileWidth=64;
-var iPuzzleTileHeight=64;
+var iPuzzleTileWidth=128;//64;
+var iPuzzleTileHeight=128;//64;
 
 //added by Mike, 20230123
 const iPuzzleTileTotalWidthMax=iPuzzleTileWidth*iColumnCountMax;
@@ -1994,6 +2067,7 @@ var iBorderOffset=0;
 var iOffsetWidth=0;
 var iOffsetHeight=0;
 	  
+/*	  
 //added by Mike, 20220829
 const iHumanTileAnimationCountMax=6; //12;//20; //6;
 var iHumanTileAnimationCount=0;	  
@@ -2014,8 +2088,9 @@ iHumanStepX=2; //5;
 iHumanStepY=2; //5;
 
 //added by Mike, 20221121
-iMiniPuzzleWidth=64;
-iMiniPuzzleHeight=64;
+iMiniPuzzleWidth=128;//64;
+iMiniPuzzleHeight=128;//64;
+*/
 
 //added by Mike, 20221029
 iTouchStartX=0;
@@ -2475,7 +2550,10 @@ function autoUpdatePuzzleTileImage() {
 /* //edited by Mike, 20230111			
 			arrayPuzzleTileCountId[iTileBgCount].style.objectPosition = "-96px -96px";
 */
-			arrayPuzzleTileCountId[iTileBgCount].style.objectPosition = "-192px -192px";
+
+//			arrayPuzzleTileCountId[iTileBgCount].style.objectPosition = "-192px -192px";
+			//arrayPuzzleTileCountId[iTileBgCount].style.objectPosition = "-384px -384px";
+			arrayPuzzleTileCountId[iTileBgCount].style.objectPosition = "-"+iPuzzleTileWidth*3+"px -"+iPuzzleTileHeight*3+"px";
 			
 				
 			}
@@ -2491,9 +2569,12 @@ function autoUpdatePuzzleTileImage() {
 				//x, y
 				arrayPuzzleTileCountId[iTileBgCount].style.objectPosition = "-" + iColumnCount*32 + "px -" + iRowCount*32 + "px";
 */
-				arrayPuzzleTileCountId[iTileBgCount].style.objectPosition = "-" + iColumnCount*64 + "px -" + iRowCount*64 + "px";
 
-
+//				arrayPuzzleTileCountId[iTileBgCount].style.objectPosition = "-" + iColumnCount*64 + "px -" + iRowCount*64 + "px";
+				//arrayPuzzleTileCountId[iTileBgCount].style.objectPosition = "-" + iColumnCount*128 + "px -" + iRowCount*128 + "px";
+				
+				arrayPuzzleTileCountId[iTileBgCount].style.objectPosition = "-" + iColumnCount*iPuzzleTileWidth + "px -" + iRowCount*iPuzzleTileHeight + "px";
+				
 			}
 				
 			iTileBgCount++;
@@ -3941,7 +4022,8 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 /*		
 	}
 	else {
-		
+*/		
+/*
 		//edited by Mike, 20221108; edited by Mike, 20230111;
 		//TO-DO: -reverify: when iPAD starts @PORTRAIT;
 		//--> size not smaller for portrait; button positions incorrect;
@@ -3993,8 +4075,9 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 				iVerticalOffset=(screen.height/2-buttonUpKey.clientHeight); 
 			}				
 		}
+*/		
 	
-		
+/*		
 		buttonUpKey.style.left = (0)+iButtonWidth*1+"px";
 		buttonUpKey.style.top =  iVerticalOffset+"px"; //iStageMaxHeight+"px";
 		buttonUpKey.style.visibility = "visible";
@@ -4988,29 +5071,7 @@ function onLoad() {
 		if (navigator.userAgent.includes("Edge")) { //Edg
 			bIsMobile=false;			
 		}	
-
-		//if iPad
-		if ((bIsMobile)&&(bIsUsingAppleMac)) {
-/*			
-			var myBody = document.getElementById("myBodyId");
-			////myBody.style.transform = "translate("+iDefaultCanvasWidth+"px,"+iDefaultCanvasHeight+"px)";	
-			
-			iTransitionScale=1.5;		
-			myBody.style.transform = "scale("+iTransitionScale+","+iTransitionScale+")";
-			myBody.style.transformOrigin = "40% 0%"; 
-
-			//output; error in collision detection with tiles
-*/			
-
-			//window.location.href = "http://192.168.10.99/usbong_gameoff/index.php/Timeoff/initLarge";
-			
-			//alert(window.location.hostname); //example: 192.168.10.99
-			//alert(window.location.pathname); //example: /usbong_gameoff/index.php/Timeoff/
-			
-			window.location.href = window.location.pathname+"/initLarge";
-			
-			return;
-		}
+		
 		
 	}
 	
