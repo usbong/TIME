@@ -1,5 +1,5 @@
 <!--
-' Copyright 2020~2024 USBONG
+' Copyright 2020~2025 USBONG
 '
 ' Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except in compliance with the License. You ' may obtain a copy of the License at
 '
@@ -10,7 +10,8 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20241220; from 20241218
+' @date updated: 20250701; from 20241220
+' @website: http://www.usbong.ph
 '
 ' Note: re-used computer instructions mainly from the following:
 '	1) Usbong Knowledge Management System (KMS);
@@ -4804,7 +4805,12 @@ function processInput(iXPos, iYPos) {
 				//from CENTER
 				//IF intends to move to LEFT						
 				if (iTileBgCount==iTileBgCountOfEmptyTile-1) {
-					if (iColumnCount>-1) {					
+					if (iColumnCount>-1) {
+						//added by Mike, 20250701
+						//alert ("iColumnCount: "+iColumnCount);					
+						if (iColumnCount==3) { //if moving to the right-most column
+							return;
+						}
 					}
 					else {
 						return;
@@ -4812,7 +4818,12 @@ function processInput(iXPos, iYPos) {
 				}
 				//IF intends to move to RIGHT
 				else if (iTileBgCount==iTileBgCountOfEmptyTile+1) {
-					if (iColumnCount<iColumnCountMax) {					
+					if (iColumnCount<iColumnCountMax) {		
+						//added by Mike, 20250701
+						//alert ("iColumnCount: "+iColumnCount);
+						if (iColumnCount==0) { //if moving to the left-most column
+							return;
+						}
 					}
 					else {
 						return;
