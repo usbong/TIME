@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20250701; from 20241220
+' @date updated: 20250703; from 20250701
 ' @website: http://www.usbong.ph
 '
 ' Note: re-used computer instructions mainly from the following:
@@ -1907,6 +1907,11 @@ var iPrevDirection=0;
 var iDelayAnimationCountEnter=0;
 const iDelayAnimationCountEnterMax=10;
 
+//added by Mike, 20250703
+var iCongratsRestartDelayCount=0;
+const iCongratsRestartDelayCountMax=300;//100;
+var bHasPressedRestartPuzzleDone=false;
+
 //added by Mike, 20221121
 var iDelayCountToNextLevel=0;
 const iDelayCountToNextLevelMax=100;
@@ -2317,10 +2322,22 @@ function toggleFullScreen() {
 
   //bIsPuzzleDone=true;
   if (bIsPuzzleDone) {
-      titleImage.style.visibility="hidden";
-	  howToPlayGuideImage.style.visibility = "hidden";
-	  window.location.href = "";
-	  return;
+	  //edited by Mike, 20250703
+	  //alert("DITO!!");
+	  if (iCongratsRestartDelayCount==iCongratsRestartDelayCountMax) {
+		  //if (bHasPressedRestartPuzzleDone) {
+			  titleImage.style.visibility="hidden";
+			  howToPlayGuideImage.style.visibility = "hidden";
+			  window.location.href = "";
+			  
+			  return;
+		  //}
+	  }
+
+	  if (!bHasPressedRestartPuzzleDone) {
+		  bHasPressedRestartPuzzleDone=true;
+		  iCongratsRestartDelayCount=iCongratsRestartDelayCountMax;
+	  }
   }
 	
   if (!bHasViewedTitle) {
@@ -4054,10 +4071,12 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 		//autoVerifyPuzzleIfAtEnd();		
 		
 		bIsPuzzleDone = isAutoVerifiedPuzzleDone();
+		
+		//added by Mike, 20250703
+		//bIsPuzzleDone=true;
 				
 		if (bIsPuzzleDone) {
 			//alert("Done!");
-			
 			
 			var sText = "CONGRATULATIONS!";
 
@@ -4085,6 +4104,15 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 			else {				
 				myAudio.pause();
 			}
+			
+			//added by Mike, 20250703
+			if (iCongratsRestartDelayCount<iCongratsRestartDelayCountMax) {
+				iCongratsRestartDelayCount++;
+			}
+			else {
+				iCongratsRestartDelayCount=iCongratsRestartDelayCountMax;
+			}			
+		
 		
 /* //removed by Mike, 20221230; TO-DO: -add: LEADERBOARD MINI GAME SCREEN
 			if (iDelayCountToNextLevel>=iDelayCountToNextLevelMax) {
@@ -4584,6 +4612,11 @@ function reset() {
 	//added by Mike, 20221124
 	iDelayAnimationCountEnter=0;
 	
+	//added by Mike, 20250703
+	iCongratsRestartDelayCount=0;
+	bHasPressedRestartPuzzleDone=false;
+
+/*	//removed by Mike, 20250703	
 	//added by Mike, 20221127	
 	if (!bHasDefeatedMonster) {
 		bHasDefeatedMonster=false;
@@ -4599,6 +4632,7 @@ function reset() {
 		iNoKeyPressCount=0;
 		bIsExecutingDestroyHuman=false;
 	}	
+*/	
 	
 	for (iCount=0; iCount<iTotalKeyCount; iCount++) {
 		arrayKeyPressed[iCount]=false;
