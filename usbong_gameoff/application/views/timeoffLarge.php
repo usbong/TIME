@@ -1175,8 +1175,8 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 						.ImageMiniControllerLarge {
 							position: absolute;
 
-							width: 128px;
-						    height: 128px;
+							width: 64px;
+						    height: 64px;
 
 							object-fit: contain;
 
@@ -2647,30 +2647,33 @@ function executeEndingAnimation() {
 	
 	puzzleTileImageTargetBorder.style.visibility = "hidden";
 
-	if (iEndingAnimationDelayCount<iEndingAnimationDelayCountMax) {
-		iEndingAnimationDelayCount++;
-		return;
-		
-	}
-	else {
-		iEndingAnimationDelayCount=0;
-	}
+	if (!bIsExecuteEndingAnimationDone) {
 
-	iTileBgCount=0;
+		if (iEndingAnimationDelayCount<iEndingAnimationDelayCountMax) {
+			iEndingAnimationDelayCount++;
+			return;
+			
+		}
+		else {
+			iEndingAnimationDelayCount=0;
+		}
 
-	for (iRowCount=0; iRowCount<iRowCountMax; iRowCount++) {
-		for (iColumnCount=0; iColumnCount<iColumnCountMax; iColumnCount++) {
-/*
-			alert("iTileBgCount: "+iTileBgCount);
-			alert("iTargetTileBgCount: "+iTargetTileBgCount);
-*/
-			if (arrayPuzzleTileCountId[iTileBgCount].style.visibility!="hidden") {
-				arrayPuzzleTileCountId[iTileBgCount].style.visibility="hidden";					
-				return false;
-			}				
+		iTileBgCount=0;
 
-			iTileBgCount++;
-		}			
+		for (iRowCount=0; iRowCount<iRowCountMax; iRowCount++) {
+			for (iColumnCount=0; iColumnCount<iColumnCountMax; iColumnCount++) {
+	/*
+				alert("iTileBgCount: "+iTileBgCount);
+				alert("iTargetTileBgCount: "+iTargetTileBgCount);
+	*/
+				if (arrayPuzzleTileCountId[iTileBgCount].style.visibility!="hidden") {
+					arrayPuzzleTileCountId[iTileBgCount].style.visibility="hidden";					
+					return false;
+				}				
+
+				iTileBgCount++;
+			}			
+		}
 	}
 	
 	//alert("DITO!!");
