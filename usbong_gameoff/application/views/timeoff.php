@@ -10,7 +10,7 @@
 ' @company: USBONG
 ' @author: SYSON, MICHAEL B.
 ' @date created: 20200306
-' @date updated: 20250703; from 20250701
+' @date updated: 20250704; from 20250703
 ' @website: http://www.usbong.ph
 '
 ' Note: re-used computer instructions mainly from the following:
@@ -1912,6 +1912,11 @@ var iCongratsRestartDelayCount=0;
 const iCongratsRestartDelayCountMax=300;//100;
 var bHasPressedRestartPuzzleDone=false;
 
+//added by Mike, 20250704
+var bIsExecuteEndingAnimationDone=false; 
+var iEndingAnimationDelayCount=0;
+const iEndingAnimationDelayCountMax=15;
+
 //added by Mike, 20221121
 var iDelayCountToNextLevel=0;
 const iDelayCountToNextLevelMax=100;
@@ -2322,6 +2327,11 @@ function toggleFullScreen() {
 
   //bIsPuzzleDone=true;
   if (bIsPuzzleDone) {
+	  //added by Mike, 20250704
+	  if (!bIsExecuteEndingAnimationDone) {
+		  return;
+	  }
+	  
 	  //edited by Mike, 20250703
 	  //alert("DITO!!");
 	  if (iCongratsRestartDelayCount==iCongratsRestartDelayCountMax) {
@@ -2544,6 +2554,51 @@ function isAutoVerifiedPuzzleDone() {
 		//alert("DONE!");
 		return true;
 	}	
+}
+
+//added by Mike, 20250704
+function executeEndingAnimation() {
+	var textStatusDiv = document.getElementById("textStatusDivId");
+	
+	var starPuzzleTileImage = document.getElementById("starPuzzleTileImageIdBg");
+	var puzzleTileImageTargetBorder = document.getElementById("divPuzzleTileImageTargetBorderId");
+	
+	puzzleTileImageTargetBorder.style.visibility = "hidden";
+
+	if (iEndingAnimationDelayCount<iEndingAnimationDelayCountMax) {
+		iEndingAnimationDelayCount++;
+		return;
+		
+	}
+	else {
+		iEndingAnimationDelayCount=0;
+	}
+
+	iTileBgCount=0;
+
+	for (iRowCount=0; iRowCount<iRowCountMax; iRowCount++) {
+		for (iColumnCount=0; iColumnCount<iColumnCountMax; iColumnCount++) {
+/*
+			alert("iTileBgCount: "+iTileBgCount);
+			alert("iTargetTileBgCount: "+iTargetTileBgCount);
+*/
+			if (arrayPuzzleTileCountId[iTileBgCount].style.visibility!="hidden") {
+				arrayPuzzleTileCountId[iTileBgCount].style.visibility="hidden";					
+				return false;
+			}				
+
+			iTileBgCount++;
+		}			
+	}
+	
+	//alert("DITO!!");
+	bIsExecuteEndingAnimationDone=true;
+	
+	starPuzzleTileImage.style.left=arrayPuzzleTileCountId[iTileBgCountMax-1].style.left;
+	starPuzzleTileImage.style.top=arrayPuzzleTileCountId[iTileBgCountMax-1].style.top;	
+	starPuzzleTileImage.style.visibility="visible";
+	
+	return true;
 }
 
 //added by Mike, 20221108
@@ -3584,15 +3639,15 @@ arrayPuzzleTileCountId[iTileBgCount].setAttribute("src", getBaseURL()+sImagePuzz
 
 		//edited by Mike, 20221127	//arrayPuzzleTileCountId[iTileBgCount].style.visibility="visible";	
 		if (bHasPressedStart) {
-			arrayPuzzleTileCountId[iTileBgCount].style.visibility="visible";
-		}		
-		
-		
-		//added by Mike, 20221121
-		if (bIsPuzzleDone) {			
-			for (iCount=0; iCount<iTotalKeyCount; iCount++) {
-				//set to FALSE all pressed keys
-				arrayKeyPressed[iCount]=false;
+			//edited by Mike, 20250704; from 20221121
+			if (!bIsPuzzleDone) {
+				arrayPuzzleTileCountId[iTileBgCount].style.visibility="visible";
+			}
+			else {
+				for (iCount=0; iCount<iTotalKeyCount; iCount++) {
+					//set to FALSE all pressed keys
+					arrayKeyPressed[iCount]=false;
+				}
 			}
 		}
 		
@@ -4078,7 +4133,7 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 		if (bIsPuzzleDone) {
 			//alert("Done!");
 			
-			var sText = "CONGRATULATIONS!";
+			var sText = "CONGRATULATIONS!!"; //edited 20250704
 
 			//alert(sText.length);
 			var iTextStatusDivWidth = (textStatusDiv.clientWidth);
@@ -4087,7 +4142,9 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 			textStatusDiv.innerHTML = sText;
 
 			textStatusDiv.style.left = 0+iHorizontalOffset+iStageMaxWidth/2 -iTextStatusDivWidth/2 +"px";
-			textStatusDiv.style.top = 0+iStageMaxHeight-iTextStatusDivHeight*1.5+"px"; 
+			//edited by Mike, 20250704
+			//textStatusDiv.style.top = 0+iStageMaxHeight-iTextStatusDivHeight*1.5+"px"; 
+			textStatusDiv.style.top = 0+iStageMaxHeight/2-iTextStatusDivHeight*2+"px"; 
 			
 			textStatusDiv.style.visibility="visible";
 			
@@ -4104,7 +4161,11 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 			else {				
 				myAudio.pause();
 			}
-			
+
+			//added by Mike, 20250704			
+			executeEndingAnimation()
+						
+/*			
 			//added by Mike, 20250703
 			if (iCongratsRestartDelayCount<iCongratsRestartDelayCountMax) {
 				iCongratsRestartDelayCount++;
@@ -4112,6 +4173,7 @@ arrayPuzzleTileCountId[iTileBgCount].className="Image32x32TileSpace";
 			else {
 				iCongratsRestartDelayCount=iCongratsRestartDelayCountMax;
 			}			
+*/
 		
 		
 /* //removed by Mike, 20221230; TO-DO: -add: LEADERBOARD MINI GAME SCREEN
@@ -4615,6 +4677,7 @@ function reset() {
 	//added by Mike, 20250703
 	iCongratsRestartDelayCount=0;
 	bHasPressedRestartPuzzleDone=false;
+	bIsExecuteEndingAnimationDone=false; //20250704
 
 /*	//removed by Mike, 20250703	
 	//added by Mike, 20221127	
@@ -5678,6 +5741,8 @@ function onLoad() {
 	
 	<div id="textStatusDivId" class="DivTextStatus">CONGRATULATIONS!</div>
 	<div id="textEnterDivId" class="DivTextEnter">PRESS ENTER</div>
+	
+	<img id="starPuzzleTileImageIdBg" class="ImageMiniController" onerror="" src="<?php echo base_url('assets/images/favicon.png?lastmod=20250704');?>" alt="" title="">
 			
 <?php 
 	$iRowCountMax=4; 
