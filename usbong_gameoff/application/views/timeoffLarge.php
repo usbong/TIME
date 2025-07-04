@@ -1172,11 +1172,11 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 							z-index: 10;									
 						}	
 
-						.ImageMiniController {
+						.ImageMiniControllerLarge {
 							position: absolute;
 
-							width: 32px;
-						    height: 32px;
+							width: 128px;
+						    height: 128px;
 
 							object-fit: contain;
 
@@ -5804,7 +5804,7 @@ function onLoad() {
 	<div id="textStatusDivId" class="DivTextStatus">CONGRATULATIONS!</div>
 	<div id="textEnterDivId" class="DivTextEnter">PRESS ENTER</div>
 
-	<img id="starPuzzleTileImageIdBg" class="ImageMiniController" onerror="" src="<?php echo base_url('assets/images/faviconLarge.png?lastmod=20250704');?>" alt="" title="">
+	<img id="starPuzzleTileImageIdBg" class="ImageMiniControllerLarge" onerror="" src="<?php echo base_url('assets/images/faviconLarge.png?lastmod=20250704');?>" alt="" title="">
 			
 <?php 
 	$iRowCountMax=4; 
